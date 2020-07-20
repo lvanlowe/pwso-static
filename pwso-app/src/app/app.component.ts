@@ -44,4 +44,9 @@ export class AppComponent implements OnInit {
     // this.store.pipe(select(isAdminRole)).subscribe(data => (this.isAdmin = data));
 
   }
+
+  onButtonClick() {
+    this.title = 'Hello from Kendo UI!';
+  }
+
 }

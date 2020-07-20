@@ -10,6 +10,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { NgrxAutoEntityModule } from '@briebug/ngrx-auto-entity';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
@@ -23,6 +27,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     NgrxAutoEntityModule.forRoot(),
+    ButtonsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
