@@ -40,11 +40,11 @@ export class AppComponent implements OnInit {
 
     this.items[0].selected = true;
 
-    this.userInfo = {identityProvider: 'facebook', userDetails: 'Van', userId: 'b6c7c7ed83484c0c9b0c43d0c5302b20', userRoles: ["usher", "deacon", "anonymous", "authenticated"] };
-    this.store.dispatch(new CreateSuccess(UserInfo, this.userInfo));
-    this.store.dispatch(new SelectByKey(UserInfo, this.userInfo.userId ));
+    // this.userInfo = {identityProvider: 'facebook', userDetails: 'Van', userId: 'b6c7c7ed83484c0c9b0c43d0c5302b20', userRoles: ["usher", "deacon", "anonymous", "authenticated"] };
+    // this.store.dispatch(new CreateSuccess(UserInfo, this.userInfo));
+    // this.store.dispatch(new SelectByKey(UserInfo, this.userInfo.userId ));
 
-    // // this.userInfo = await this.getUserInfo();
+    this.userInfo = await this.getUserInfo();
 
     this.checkUser();
 
@@ -104,14 +104,14 @@ export class AppComponent implements OnInit {
   }
 
   goAuth(provider: string) {
-    // const { pathname } = window.location;
-    // const redirect = `post_login_redirect_uri=${pathname}`;
-    // const url = `/.auth/login/${provider}?${redirect}`;
-    // window.location.href = url;
+    const { pathname } = window.location;
+    const redirect = `post_login_redirect_uri=${pathname}`;
+    const url = `/.auth/login/${provider}?${redirect}`;
+    window.location.href = url;
 
-    this.userInfo = {identityProvider: 'facebook', userDetails: 'Van', userId: 'b6c7c7ed83484c0c9b0c43d0c5302b20', userRoles: ["usher", "deacon", "anonymous", "authenticated"] };
-    this.store.dispatch(new CreateSuccess(UserInfo, this.userInfo));
-    this.store.dispatch(new SelectByKey(UserInfo, this.userInfo.userId ));
+    // this.userInfo = {identityProvider: 'facebook', userDetails: 'Van', userId: 'b6c7c7ed83484c0c9b0c43d0c5302b20', userRoles: ["usher", "deacon", "anonymous", "authenticated"] };
+    // this.store.dispatch(new CreateSuccess(UserInfo, this.userInfo));
+    // this.store.dispatch(new SelectByKey(UserInfo, this.userInfo.userId ));
 
     this.checkUser();
   }
