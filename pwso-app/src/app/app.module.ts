@@ -13,6 +13,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './sports/registration/registration.component';
+import { LayoutModule } from '@progress/kendo-angular-layout';
+import { TooltipModule } from '@progress/kendo-angular-tooltip';
+
+
 
 
 
@@ -31,6 +35,8 @@ import { RegistrationComponent } from './sports/registration/registration.compon
     NgrxAutoEntityModule.forRoot(),
     ButtonsModule,
     BrowserAnimationsModule,
+    LayoutModule,
+    TooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
