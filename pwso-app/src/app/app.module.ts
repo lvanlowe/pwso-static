@@ -12,13 +12,15 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegistrationComponent } from './sports/registration/registration.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
