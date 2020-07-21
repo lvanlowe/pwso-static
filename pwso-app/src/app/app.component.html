@@ -1,6 +1,29 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<h1>{{title}}</h1>
-
-<button kendoButton (click)="onButtonClick()" [primary]="true">My Kendo UI Button</button>
+<div class="custom-toolbar">
+  <button
+      kendoButton
+      icon="layout"
+      look="flat"
+  >
+      <span class="mail-box">PWSO PCA Web App</span>
+  </button>
+  <div *ngIf="!canLogin && !canLogout">
+    <kendo-buttongroup [selection]="'single'">
+      <button kendoButton [toggleable]="true" (click)="goAuth('facebook')">
+        Facebook
+      </button>
+      <button kendoButton [toggleable]="true" (click)="goAuth('google')">
+        Google
+      </button>
+      <button kendoButton [toggleable]="true" (click)="goAuth('twitter')">
+        Twitter
+      </button>
+    </kendo-buttongroup>
+  </div>
+  <div *ngIf="canLogin || canLogout">
+    <button kendoButton (click)="onLogon()">{{logButtonText}}</button>
+    <span>{{greeting}}</span>
+  </div>
+</div>
 
 <router-outlet></router-outlet>
