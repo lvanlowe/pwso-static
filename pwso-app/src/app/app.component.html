@@ -1,12 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="custom-toolbar">
-  <button
+  <div kendoTooltip >
+    <button
       kendoButton
       icon="layout"
       look="flat"
-  >
+      class="k-button" title="Check to see menu"
+      (click)="drawer.toggle()"
+    >
       <span class="mail-box">Prince William Special Olympics Web App</span>
-  </button>
+    </button>
+  </div>
+
   <div *ngIf="!canLogin && !canLogout">
     <kendo-buttongroup [selection]="'single'">
       <button kendoButton [toggleable]="true" (click)="goAuth('facebook')">
@@ -25,5 +30,23 @@
     <span>{{greeting}}</span>
   </div>
 </div>
+<kendo-drawer-container>
+  <kendo-drawer #drawer
+      [items]="items"
+      [width]="100"
+      [mode]="'push'"
+      [(expanded)]="expanded"
+      [mini]="true"
+  >
+      <ng-template kendoDrawerItemTemplate let-item>
+        <!-- <span class="k-icon item-icon {{ item.icon }}"></span> -->
+          <div class="k-drawer-link" [routerLink]="item.path">
+              <span>{{ item.text }}</span>
+          </div>
+      </ng-template>
+  </kendo-drawer>
 
-<router-outlet></router-outlet>
+  <kendo-drawer-content>
+      <router-outlet></router-outlet>
+  </kendo-drawer-content>
+</kendo-drawer-container>
