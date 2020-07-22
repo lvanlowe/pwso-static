@@ -16,6 +16,8 @@ import { RegistrationComponent } from './sports/registration/registration.compon
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { TooltipModule } from '@progress/kendo-angular-tooltip';
 import { SportPickerComponent } from './sports/sport-picker/sport-picker.component';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+
 
 
 
@@ -39,6 +41,7 @@ import { SportPickerComponent } from './sports/sport-picker/sport-picker.compone
     BrowserAnimationsModule,
     LayoutModule,
     TooltipModule,
+    DropDownsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
