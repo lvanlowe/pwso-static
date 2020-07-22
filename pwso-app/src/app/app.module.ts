@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './sports/registration/registration.component';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { TooltipModule } from '@progress/kendo-angular-tooltip';
+import { SportPickerComponent } from './sports/sport-picker/sport-picker.component';
 
 
 
@@ -24,7 +25,8 @@ import { TooltipModule } from '@progress/kendo-angular-tooltip';
   declarations: [
     AppComponent,
     DashboardComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    SportPickerComponent
   ],
   imports: [
     BrowserModule,
