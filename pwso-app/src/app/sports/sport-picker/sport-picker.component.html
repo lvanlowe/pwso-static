@@ -1,1 +1,11 @@
-<p>sport-picker works!</p>
+<div>
+  <p>{{instruction}}</p>
+  <kendo-combobox [data]="sportList"
+  [textField]="'name'"
+  [valueField]="'id'"
+  [value]="selectedValue"
+  [placeholder]="'Select A Sport'"
+  (selectionChange)="selectionChange($event)"
+>
+  </kendo-combobox>
+</div>
