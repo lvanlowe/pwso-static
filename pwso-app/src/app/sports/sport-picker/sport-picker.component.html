@@ -1,11 +1,23 @@
 <div>
   <p>{{instruction}}</p>
-  <kendo-combobox [data]="sportList"
-  [textField]="'name'"
-  [valueField]="'id'"
-  [value]="selectedValue"
-  [placeholder]="'Select A Sport'"
-  (selectionChange)="selectionChange($event)"
->
-  </kendo-combobox>
+  <form [formGroup]="sportPickerForm">
+    <kendo-combobox
+
+    [data]="sportList"
+    [textField]="'name'"
+    [valueField]="'id'"
+    [value]="selectedValue"
+    [placeholder]="'Select A Sport'"
+
+    (selectionChange)="selectionChange($event)"
+    formControlName="name"
+  >
+    </kendo-combobox>
+    <div *ngIf="canContinue">
+      <button kendoButton>
+        Continue
+      </button>
+    </div>
+  </form>
+
 </div>
