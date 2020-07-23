@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\.github",
+    "\\.github\\workflows"
   ],
+  "SelectedNode": "\\.github\\workflows\\azure-static-web-apps-kind-pond-0c47f270f.yml",
   "PreviewInSolutionExplorer": false
 }

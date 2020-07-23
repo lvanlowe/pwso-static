@@ -17,6 +17,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
 import { TooltipModule } from '@progress/kendo-angular-tooltip';
 import { SportPickerComponent } from './sports/sport-picker/sport-picker.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -39,6 +40,7 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
     NgrxAutoEntityModule.forRoot(),
     ButtonsModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     LayoutModule,
     TooltipModule,
     DropDownsModule,
