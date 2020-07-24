@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+  canDisplay = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  showScreen(canShow) {
+    this.canDisplay = true;
   }
 
 }

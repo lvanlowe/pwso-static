@@ -14,7 +14,7 @@
   >
     </kendo-combobox>
     <div *ngIf="canContinue">
-      <button kendoButton>
+      <button kendoButton (click)= "clickContinue()">
         Continue
       </button>
     </div>

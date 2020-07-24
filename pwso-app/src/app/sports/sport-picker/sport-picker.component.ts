@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Sport } from 'src/app/models/sport';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-sport-picker',
@@ -9,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SportPickerComponent implements OnInit {
 
+  @Output() sportSelected = new EventEmitter();
+
   constructor(private formBuilder: FormBuilder) { }
 
     sportList: Array<Sport>;
@@ -16,6 +19,7 @@ export class SportPickerComponent implements OnInit {
     selectedValue: number;
     sportPickerForm: FormGroup;
     canContinue: boolean;
+
 
   ngOnInit() {
 
@@ -62,5 +66,9 @@ export class SportPickerComponent implements OnInit {
     } else {
       this.canContinue = false;
     }
+  }
+
+  clickContinue(){
+    this.sportSelected.emit(this.canContinue);
   }
 }
