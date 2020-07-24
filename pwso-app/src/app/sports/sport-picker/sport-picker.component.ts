@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Sport } from 'src/app/models/sport';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Program } from 'src/app/models/program';
+import { collectExternalReferences } from '@angular/compiler';
 
 
 @Component({
@@ -15,10 +17,13 @@ export class SportPickerComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
     sportList: Array<Sport>;
+    programList: Array<Program>;
     instruction: string;
-    selectedValue: number;
+    selectedProgram: Program;
+    selectedSport: Sport;
     sportPickerForm: FormGroup;
     canContinue: boolean;
+    showProgram = false;
 
 
   ngOnInit() {
@@ -33,6 +38,11 @@ export class SportPickerComponent implements OnInit {
       { id: 5 , name: 'Floor Hockey', canRegister: false, hasUniform: true, isTeamSport: true},
     ];
 
+    this.programList = [
+      {id: 1, name: 'Woodbrige', sportid: 4 },
+      {id: 2, name: 'Gainesville', sportid: 4 },
+    ]
+
     this.buildPickerForm(this.formBuilder);
     console.log(this.sportPickerForm.valid);
     this.sportPickerForm.valueChanges.subscribe(value => this.enableContinueButton);
@@ -42,18 +52,33 @@ export class SportPickerComponent implements OnInit {
   buildPickerForm(formBuilder: FormBuilder) {
     this.sportPickerForm = formBuilder.group(
       {
-        name: [null, [Validators.required]]
+        sport: [null, [Validators.required]],
+        program: [null, [Validators.required]]
       }
     );
 
   }
 
-  public selectionChange(value: any): void {
+  public selectionSport(value: any): void {
     console.log('selectionChange', value);
-    this.instruction = 'Press "Continue" button to continue registraion';
-    const sportName = this.sportPickerForm.get('name');
+    console.log(this.selectedSport);
+    this.instruction = 'Select a Program / Location';
+    const sportName = this.sportPickerForm.get('sport');
     sportName.setValue(value);
+    this.selectedProgram = null;
+    this.showProgram = true;
     console.log(sportName.value);
+    console.log(this.sportPickerForm.valid);
+    this.enableContinueButton();
+  }
+
+  public selectionProgram(value: any): void {
+    console.log('selectionChange', value);
+    console.log(this.selectedProgram);
+    this.instruction = 'Press "Continue" button to continue registraion';
+    const programName = this.sportPickerForm.get('program');
+    programName.setValue(value);
+    console.log(programName.value);
     console.log(this.sportPickerForm.valid);
     this.enableContinueButton();
   }
@@ -70,5 +95,8 @@ export class SportPickerComponent implements OnInit {
 
   clickContinue(){
     this.sportSelected.emit(this.canContinue);
+    this.sportPickerForm.controls['sport'].disable();
+    this.sportPickerForm.controls['program'].disable();
+    this.canContinue = false;
   }
 }

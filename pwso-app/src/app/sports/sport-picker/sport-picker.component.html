@@ -6,13 +6,29 @@
     [data]="sportList"
     [textField]="'name'"
     [valueField]="'id'"
-    [value]="selectedValue"
+    [value]="selectedSport"
     [placeholder]="'Select A Sport'"
 
-    (selectionChange)="selectionChange($event)"
-    formControlName="name"
+    (selectionChange)="selectionSport($event)"
+    formControlName="sport"
   >
     </kendo-combobox>
+
+    <div *ngIf="showProgram">
+      <kendo-combobox
+
+      [data]="programList"
+      [textField]="'name'"
+      [valueField]="'id'"
+      [(value)]="selectedProgram"
+      [placeholder]="'Select A Program / Location'"
+
+      (selectionChange)="selectionProgram($event)"
+      formControlName="program"
+    >
+      </kendo-combobox>
+    </div>
+
     <div *ngIf="canContinue">
       <button kendoButton (click)= "clickContinue()">
         Continue
