@@ -24,6 +24,8 @@ export class SportPickerComponent implements OnInit {
     sportPickerForm: FormGroup;
     canContinue: boolean;
     showProgram = false;
+    canCancel = false;
+    sportName: any;
 
 
   ngOnInit() {
@@ -57,25 +59,46 @@ export class SportPickerComponent implements OnInit {
       }
     );
 
+    this.sportName = this.sportPickerForm.get('sport');
+
   }
 
-  public selectionSport(value: any): void {
-    console.log('selectionChange', value);
-    console.log(this.selectedSport);
+  public selectionSport(value: Sport): void {
+    // console.log('selectionChange', value);
+    // console.log(this.selectedSport);
+    this.sportName.setValue(value);
+    this.canCancel = true;
+    if (this.getProgramsForSport(value.id) !== 1) {
+      console.log('show program');
+      this.setUpForProgramSelection();
+    } else {
+      console.log('not show program');
+      this.setProgram();
+    }
+
+    // console.log(this.sportName.value);
+    // console.log(this.sportPickerForm.valid);
+    this.enableContinueButton();
+  }
+
+  public getProgramsForSport(value: number): number {
+    return this.programList.length;
+  }
+
+  private setUpForProgramSelection() {
     this.instruction = 'Select a Program / Location';
-    const sportName = this.sportPickerForm.get('sport');
-    sportName.setValue(value);
     this.selectedProgram = null;
     this.showProgram = true;
-    console.log(sportName.value);
-    console.log(this.sportPickerForm.valid);
-    this.enableContinueButton();
+  }
+
+  public setProgram(){
+    this.selectedProgram = this.programList[0];
+    this.showProgram = false;
   }
 
   public selectionProgram(value: any): void {
     console.log('selectionChange', value);
     console.log(this.selectedProgram);
-    this.instruction = 'Press "Continue" button to continue registraion';
     const programName = this.sportPickerForm.get('program');
     programName.setValue(value);
     console.log(programName.value);
@@ -87,16 +110,37 @@ export class SportPickerComponent implements OnInit {
     console.log(this.sportPickerForm.valid);
 
     if (this.sportPickerForm.valid  && !this.sportPickerForm.errors) {
+      this.instruction = 'Press "Continue" button to continue registraion';
       this.canContinue = true;
     } else {
       this.canContinue = false;
     }
   }
 
-  clickContinue(){
+  clickContinue() {
     this.sportSelected.emit(this.canContinue);
-    this.sportPickerForm.controls['sport'].disable();
-    this.sportPickerForm.controls['program'].disable();
+    this.disableControls();
     this.canContinue = false;
   }
+
+  public disableControls() {
+    this.sportPickerForm.controls['sport'].disable();
+    this.sportPickerForm.controls['program'].disable();
+  }
+
+  public enableControls() {
+    this.sportPickerForm.controls['sport'].enable();
+    this.sportPickerForm.controls['program'].enable();
+  }
+
+  public  clickCancel() {
+    this.enableControls();
+    this.showProgram = false;
+    this.selectedSport = null;
+    this.canContinue = false;
+    this.canCancel = false;
+    this.sportName.setValue(null);
+    this.sportSelected.emit(this.canContinue);
+  }
+
 }
