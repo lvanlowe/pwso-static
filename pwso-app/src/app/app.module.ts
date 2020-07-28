@@ -18,6 +18,9 @@ import { TooltipModule } from '@progress/kendo-angular-tooltip';
 import { SportPickerComponent } from './sports/sport-picker/sport-picker.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Sport } from './models/sport';
+import { SportService } from './services/sport.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -34,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     StoreModule.forRoot(appReducer, { metaReducers: appMetaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
@@ -45,7 +49,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TooltipModule,
     DropDownsModule,
   ],
-  providers: [],
+  providers: [{ provide: Sport, useClass: SportService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

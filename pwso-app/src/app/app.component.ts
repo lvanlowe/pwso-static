@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from './state/app.state';
 import { UserInfo } from './models/user-info';
-import { CreateSuccess, SelectByKey, Clear } from '@briebug/ngrx-auto-entity';
+import { CreateSuccess, SelectByKey, Clear, LoadAll } from '@briebug/ngrx-auto-entity';
+import { Sport } from './models/sport';
 
 @Component({
   selector: 'app-root',
@@ -55,6 +56,9 @@ export class AppComponent implements OnInit {
     // **********
 
     this.checkUser();
+
+    this.store.dispatch(new LoadAll(Sport));
+
 
     // // this.userInfos = [{identityProvider: 'facebook', userDetails: 'Van', userId: 'b6c7c7ed83484c0c9b0c43d0c5302b20', userRoles: ["usher", "deacon", "anonymous", "authenticated"] }];
     // this.store.dispatch(new LoadAll(Deacon));
