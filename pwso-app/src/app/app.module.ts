@@ -21,6 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Sport } from './models/sport';
 import { SportService } from './services/sport.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Program } from './models/program';
+import { ProgramService } from './services/program.service';
 
 
 
@@ -49,7 +51,10 @@ import { HttpClientModule } from '@angular/common/http';
     TooltipModule,
     DropDownsModule,
   ],
-  providers: [{ provide: Sport, useClass: SportService }],
+  providers: [
+    { provide: Sport, useClass: SportService },
+    { provide: Program, useClass: ProgramService },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
