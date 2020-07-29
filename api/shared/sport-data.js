@@ -5,6 +5,10 @@ const data = {
         { id: 3 , name: 'Bocce', canRegister: true, hasUniform: false, isTeamSport: false},
         { id: 4 , name: 'Basketball', canRegister: false, hasUniform: true, isTeamSport: true},
         { id: 5 , name: 'Floor Hockey', canRegister: false, hasUniform: true, isTeamSport: true},
+        { id: 6 , name: 'Powerlifting', canRegister: false, hasUniform: false, isTeamSport: false},
+        { id: 7 , name: 'Aquatics', canRegister: false, hasUniform: false, isTeamSport: false},
+        { id: 8 , name: 'Track', canRegister: true, hasUniform: true, isTeamSport: false},
+        { id: 9 , name: 'Tennis', canRegister: true, hasUniform: false, isTeamSport: false},
     ]
 };
 

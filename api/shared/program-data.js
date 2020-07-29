@@ -1,7 +1,18 @@
 const data = {
     programs: [
-        {id: 1, name: 'Woodbrige', sportid: 4 },
-        {id: 2, name: 'Gainesville', sportid: 4 },
+        {id: 1, name: 'Manassas', sportid: 1 },
+        {id: 2, name: 'Woodbridge', sportid: 1 },
+        {id: 3, name: 'Woodbridge', sportid: 2 },
+        {id: 4, name: 'Woodbridge', sportid: 3 },
+        {id: 5, name: 'Gainesville', sportid: 4 },
+        {id: 6, name: 'Woodbridge', sportid: 4 },
+        {id: 7, name: 'Manassas', sportid: 5 },
+        {id: 8, name: 'Woodbridge', sportid: 6 },
+        {id: 9, name: 'Colgan', sportid: 7 },
+        {id: 10, name: 'Manassas', sportid: 7 },
+        {id: 11, name: 'Woodbridge', sportid: 8 },
+        {id: 12, name: 'Gainesville', sportid: 8 },
+        {id: 13, name: 'Colgan', sportid: 9 },
     ]
 };
 
