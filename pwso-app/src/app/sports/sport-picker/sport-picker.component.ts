@@ -3,6 +3,12 @@ import { Sport } from 'src/app/models/sport';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Program } from 'src/app/models/program';
 import { collectExternalReferences } from '@angular/compiler';
+import { Observable } from 'rxjs';
+import { allSports, availableSports } from 'src/app/state/sport.state';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
+import { SelectByKey } from '@briebug/ngrx-auto-entity';
+import { allProgram } from 'src/app/state/program.state';
 
 
 @Component({
@@ -14,10 +20,11 @@ export class SportPickerComponent implements OnInit {
 
   @Output() sportSelected = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
-    sportList: Array<Sport>;
+    sportList$: Observable<Sport[]>;
     programList: Array<Program>;
+    programList$: Observable<Program[]>;
     instruction: string;
     selectedProgram: Program;
     selectedSport: Sport;
@@ -32,19 +39,12 @@ export class SportPickerComponent implements OnInit {
 
     this.instruction = 'Select a sport for registration';
 
-    this.sportList = [
-      { id: 1 , name: 'Bowling', canRegister: false, hasUniform: false, isTeamSport: false},
-      { id: 2 , name: 'Soccer', canRegister: true, hasUniform: true, isTeamSport: true},
-      { id: 3 , name: 'Bocce', canRegister: true, hasUniform: false, isTeamSport: false},
-      { id: 4 , name: 'Basketball', canRegister: false, hasUniform: true, isTeamSport: true},
-      { id: 5 , name: 'Floor Hockey', canRegister: false, hasUniform: true, isTeamSport: true},
-    ];
-
     this.programList = [
       {id: 1, name: 'Woodbrige', sportid: 4 },
       {id: 2, name: 'Gainesville', sportid: 4 },
     ]
 
+    this.sportList$ = this.store.pipe(select(availableSports));
     this.buildPickerForm(this.formBuilder);
     console.log(this.sportPickerForm.valid);
     this.sportPickerForm.valueChanges.subscribe(value => this.enableContinueButton);
@@ -67,6 +67,8 @@ export class SportPickerComponent implements OnInit {
     // console.log('selectionChange', value);
     // console.log(this.selectedSport);
     this.sportName.setValue(value);
+    this.store.dispatch(new SelectByKey(Sport, value.id ));
+    this.programList$ = this.store.pipe(select(allProgram));
     this.canCancel = true;
     if (this.getProgramsForSport(value.id) !== 1) {
       console.log('show program');
@@ -96,10 +98,11 @@ export class SportPickerComponent implements OnInit {
     this.showProgram = false;
   }
 
-  public selectionProgram(value: any): void {
+  public selectionProgram(value: Program): void {
     console.log('selectionChange', value);
     console.log(this.selectedProgram);
     const programName = this.sportPickerForm.get('program');
+    this.store.dispatch(new SelectByKey(Program, value.id ));
     programName.setValue(value);
     console.log(programName.value);
     console.log(this.sportPickerForm.valid);

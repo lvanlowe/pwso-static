@@ -3,7 +3,7 @@
   <form [formGroup]="sportPickerForm">
     <kendo-combobox
 
-    [data]="sportList"
+    [data]="sportList$ | async"
     [textField]="'name'"
     [valueField]="'id'"
     [value]="selectedSport"
@@ -17,7 +17,7 @@
     <div *ngIf="showProgram">
       <kendo-combobox
 
-      [data]="programList"
+      [data]="programList$ | async"
       [textField]="'name'"
       [valueField]="'id'"
       [(value)]="selectedProgram"
