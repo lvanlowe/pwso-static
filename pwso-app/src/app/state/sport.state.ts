@@ -5,7 +5,8 @@ import { createSelector } from '@ngrx/store';
 export const { initialState, selectors} = buildState(Sport);
 
 export const {
-  selectAll: allSports
+  selectAll: allSports,
+  selectCurrentEntityKey: currentSportid
 } = selectors;
 
 export function sportReducer(state = initialState): IEntityState<Sport> {

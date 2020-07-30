@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 import { allSports, availableSports } from 'src/app/state/sport.state';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
-import { SelectByKey } from '@briebug/ngrx-auto-entity';
-import { allProgram } from 'src/app/state/program.state';
+import { SelectByKey, Deselect } from '@briebug/ngrx-auto-entity';
+import { availablePrograms, allPrograms, availableProgramsCount } from 'src/app/state/program.state';
 
 
 @Component({
@@ -33,6 +33,7 @@ export class SportPickerComponent implements OnInit {
     showProgram = false;
     canCancel = false;
     sportName: any;
+    programName: any;
 
 
   ngOnInit() {
@@ -60,7 +61,7 @@ export class SportPickerComponent implements OnInit {
     );
 
     this.sportName = this.sportPickerForm.get('sport');
-
+    this.programName = this.sportPickerForm.get('program');
   }
 
   public selectionSport(value: Sport): void {
@@ -68,7 +69,7 @@ export class SportPickerComponent implements OnInit {
     // console.log(this.selectedSport);
     this.sportName.setValue(value);
     this.store.dispatch(new SelectByKey(Sport, value.id ));
-    this.programList$ = this.store.pipe(select(allProgram));
+    this.programList$  = this.store.pipe(select(availablePrograms));
     this.canCancel = true;
     if (this.getProgramsForSport(value.id) !== 1) {
       console.log('show program');
@@ -84,7 +85,10 @@ export class SportPickerComponent implements OnInit {
   }
 
   public getProgramsForSport(value: number): number {
-    return this.programList.length;
+    let count: number;
+    this.store.pipe(select(availableProgramsCount))
+    .subscribe(data => count = data);
+    return count;
   }
 
   private setUpForProgramSelection() {
@@ -94,17 +98,20 @@ export class SportPickerComponent implements OnInit {
   }
 
   public setProgram(){
-    this.selectedProgram = this.programList[0];
+    this.programList$.subscribe(programs => this.selectedProgram = programs[0]);
+    console.log('one program');
+    console.log(this.selectedProgram);
+    this.programName.setValue(this.selectedProgram.id);
+    this.store.dispatch(new SelectByKey(Program, this.selectedProgram.id) );
     this.showProgram = false;
   }
 
   public selectionProgram(value: Program): void {
     console.log('selectionChange', value);
     console.log(this.selectedProgram);
-    const programName = this.sportPickerForm.get('program');
     this.store.dispatch(new SelectByKey(Program, value.id ));
-    programName.setValue(value);
-    console.log(programName.value);
+    this.programName.setValue(value);
+    console.log(this.programName.value);
     console.log(this.sportPickerForm.valid);
     this.enableContinueButton();
   }
@@ -140,9 +147,14 @@ export class SportPickerComponent implements OnInit {
     this.enableControls();
     this.showProgram = false;
     this.selectedSport = null;
+    this.selectedProgram = null;
     this.canContinue = false;
     this.canCancel = false;
     this.sportName.setValue(null);
+    this.programName.setValue(null);
+    this.store.dispatch(new Deselect(Program));
+    this.store.dispatch(new Deselect(Sport));
+    this.instruction = 'Select a sport for registration';
     this.sportSelected.emit(this.canContinue);
   }
 
