@@ -2,13 +2,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Sport } from 'src/app/models/sport';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Program } from 'src/app/models/program';
-import { collectExternalReferences } from '@angular/compiler';
 import { Observable } from 'rxjs';
-import { allSports, availableSports } from 'src/app/state/sport.state';
+import { availableSports } from 'src/app/state/sport.state';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { SelectByKey, Deselect } from '@briebug/ngrx-auto-entity';
-import { availablePrograms, allPrograms, availableProgramsCount } from 'src/app/state/program.state';
+import { availablePrograms, availableProgramsCount } from 'src/app/state/program.state';
 
 
 @Component({
@@ -23,7 +22,6 @@ export class SportPickerComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
     sportList$: Observable<Sport[]>;
-    programList: Array<Program>;
     programList$: Observable<Program[]>;
     instruction: string;
     selectedProgram: Program;
@@ -39,17 +37,11 @@ export class SportPickerComponent implements OnInit {
   ngOnInit() {
 
     this.instruction = 'Select a sport for registration';
-
-    this.programList = [
-      {id: 1, name: 'Woodbrige', sportid: 4 },
-      {id: 2, name: 'Gainesville', sportid: 4 },
-    ]
-
     this.sportList$ = this.store.pipe(select(availableSports));
     this.buildPickerForm(this.formBuilder);
     console.log(this.sportPickerForm.valid);
     this.sportPickerForm.valueChanges.subscribe(value => this.enableContinueButton);
-    // this.selectedValue = 2;
+
   }
 
   buildPickerForm(formBuilder: FormBuilder) {
@@ -134,13 +126,13 @@ export class SportPickerComponent implements OnInit {
   }
 
   public disableControls() {
-    this.sportPickerForm.controls['sport'].disable();
-    this.sportPickerForm.controls['program'].disable();
+    this.sportPickerForm.controls.sport.disable();
+    this.sportPickerForm.controls.program.disable();
   }
 
   public enableControls() {
-    this.sportPickerForm.controls['sport'].enable();
-    this.sportPickerForm.controls['program'].enable();
+    this.sportPickerForm.controls.sport.enable();
+    this.sportPickerForm.controls.program.enable();
   }
 
   public  clickCancel() {
