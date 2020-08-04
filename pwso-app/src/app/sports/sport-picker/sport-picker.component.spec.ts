@@ -2,19 +2,24 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SportPickerComponent } from './sport-picker.component';
 import { Sport } from 'src/app/models/sport';
+import { of } from 'rxjs';
 
 describe('SportPickerComponent', () => {
   let component: SportPickerComponent;
   let mockFormBuilder;
+  let mockStore;
   let selectedSport: Sport;
 
 
 
   beforeEach(() => {
     mockFormBuilder = jasmine.createSpyObj('formBuilder', ['group']);
-    component = new SportPickerComponent(mockFormBuilder);
+    mockStore = jasmine.createSpyObj('store', ['dispatch', 'pipe']);
+    component = new SportPickerComponent(mockFormBuilder, mockStore);
     const mockSportName = jasmine.createSpyObj('sportName', ['setValue']);
     component.sportName = mockSportName;
+    const mockProgramName = jasmine.createSpyObj('programName', ['setValue']);
+    component.programName = mockProgramName;
   });
 
   it('should create', () => {
@@ -26,8 +31,8 @@ describe('SportPickerComponent', () => {
     beforeEach(() => {
       spyOn(component, 'enableContinueButton').and.returnValue(null);
       spyOn(component, 'getProgramsForSport').and.returnValue(3);
-      selectedSport = {id: 1, canRegister: true, hasUniform: false, isTeamSport: false, name: 'Bowling'}
-    });
+      selectedSport = {id: 1, canRegister: true, hasUniform: false, isTeamSport: false, name: 'Bowling'};
+   });
 
     it('should display comtinue instructions', () => {
       component.selectionSport(selectedSport);
@@ -61,23 +66,18 @@ describe('SportPickerComponent', () => {
       const mockSportName = jasmine.createSpyObj('sportName', ['setValue']);
       spyOn(component, 'enableContinueButton').and.returnValue(null);
       spyOn(component, 'getProgramsForSport').and.returnValue(1);
+      spyOn(component, 'setProgram').and.returnValue(null);
       component.sportName = mockSportName;
       selectedSport = {id: 1, canRegister: true, hasUniform: false, isTeamSport: false, name: 'Bowling'};
-      component.programList = [{id: 1, name: 'Woodbrige', sportid: 4 }]
+      // component.programList = [{id: 1, name: 'Woodbrige', sportid: 4 }]
+
+
     });
 
-    it('should set selected Progam to be not null', () => {
+    it('should call setProgram', () => {
       component.selectionSport(selectedSport);
 
-      expect(component.selectedProgram).toEqual(component.programList[0]);
-    });
-
-    it('should set not to show Program Dropdown', () => {
-      component.showProgram = true;
-
-      component.selectionSport(selectedSport);
-
-      expect(component.showProgram).toBeFalsy();
+      expect(component.setProgram).toHaveBeenCalled();
     });
 
   });
@@ -132,6 +132,12 @@ describe('SportPickerComponent', () => {
       expect(component.selectedSport).toBeNull();
     });
 
+    it('should have unselect programs', () => {
+      component.clickCancel();
+
+      expect(component.selectedProgram).toBeNull();
+    });
+
     it('should have can continue to be false', () => {
       component.clickCancel();
 
@@ -143,5 +149,41 @@ describe('SportPickerComponent', () => {
 
       expect(component.canCancel).toBeFalsy();
     });
+
+    it('should hide program dropdown', () => {
+      component.clickCancel();
+
+      expect(component.showProgram).toBeFalsy();
+    });
+
+    it('should display initial instructions', () => {
+      component.clickCancel();
+
+      expect(component.instruction).toEqual('Select a sport for registration');
+    });
+  });
+
+  describe('when settingt the Program dropdown', () => {
+
+    beforeEach(() => {
+      const mockSportName = jasmine.createSpyObj('sportName', ['setValue']);
+      spyOn(component, 'enableContinueButton').and.returnValue(null);
+      spyOn(component, 'getProgramsForSport').and.returnValue(1);
+      // spyOn(component, 'setProgram').and.returnValue(null);
+      component.sportName = mockSportName;
+      selectedSport = {id: 1, canRegister: true, hasUniform: false, isTeamSport: false, name: 'Bowling'};
+      component.programList$ = of([{id: 1, name: 'Woodbrige', sportid: 4 }])
+
+
+    });
+
+    it('should set not to show Program Dropdown', () => {
+      component.showProgram = true;
+
+      component.setProgram();
+
+      expect(component.showProgram).toBeFalsy();
+    });
+
   });
 });
