@@ -23,6 +23,12 @@ import { SportService } from './services/sport.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Program } from './models/program';
 import { ProgramService } from './services/program.service';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { LabelModule } from '@progress/kendo-angular-label';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+
+
+
 
 
 
@@ -50,6 +56,9 @@ import { ProgramService } from './services/program.service';
     LayoutModule,
     TooltipModule,
     DropDownsModule,
+    InputsModule,
+    LabelModule,
+    DateInputsModule,
   ],
   providers: [
     { provide: Sport, useClass: SportService },
