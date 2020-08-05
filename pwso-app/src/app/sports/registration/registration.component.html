@@ -1,3 +1,98 @@
 
 <app-sport-picker (sportSelected) = 'showScreen($event)'> </app-sport-picker>
-<div *ngIf="canDisplay">registration works!</div>
+
+<div *ngIf="canDisplay" class="example-wrap">
+  <form class="k-form" [formGroup]="registrationForm">
+      <fieldset class="k-form-fieldset">
+          <legend class="k-form-legend">Enter Athlete Information</legend>
+
+          <kendo-formfield>
+              <kendo-label [for]="firstName" text="First Name"></kendo-label>
+              <input formControlName="firstName" kendoTextBox #firstName/>
+
+              <kendo-formhint>Athlete first name</kendo-formhint>
+              <kendo-formerror>Error: First name is required</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+              <kendo-label [for]="lastName" text="Last Name"></kendo-label>
+              <input formControlName="lastName" kendoTextBox #lastName required/>
+
+              <kendo-formhint>Athlete last name</kendo-formhint>
+              <kendo-formerror>Error: Last name is required</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+            <kendo-label [for]="nickName" text="Nick Name" [optional]="true"></kendo-label>
+            <input formControlName="nickName" kendoTextBox #nickName/>
+
+            <kendo-formhint>Athlete nick name</kendo-formhint>
+        </kendo-formfield>
+
+          <kendo-formfield>
+              <kendo-label [for]="size" [optional]="true" text="Jersey Size"></kendo-label>
+              <kendo-dropdownlist #size formControlName="size" [data]="listItems">
+              </kendo-dropdownlist>
+              <kendo-formhint>Athletes Jersey Size</kendo-formhint>
+          </kendo-formfield>
+
+
+          <kendo-formfield>
+              <kendo-label [for]="email1" text="Email"></kendo-label>
+              <input formControlName="email1" kendoTextBox #email1/>
+
+              <kendo-formhint>email for athlete correspondance</kendo-formhint>
+              <kendo-formerror>Error: Not valid email format</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+            <kendo-label [for]="email2" text="Email"></kendo-label>
+            <input formControlName="email2" kendoTextBox #email2/>
+
+            <kendo-formhint>email for athlete correspondance</kendo-formhint>
+            <kendo-formerror>Error: Not valid email format</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label [for]="email3" text="Email"></kendo-label>
+          <input formControlName="email3" kendoTextBox #email3/>
+
+          <kendo-formhint>email for athlete correspondance</kendo-formhint>
+          <kendo-formerror>Error: Not valid email format</kendo-formerror>
+      </kendo-formfield>
+
+      <div class="wrap">
+        <kendo-formfield>
+          <kendo-label [for]="phone1" text="Phone"></kendo-label>
+          <kendo-maskedtextbox formControlName="phone1" [mask]=mask #phone1></kendo-maskedtextbox>
+
+          <kendo-formhint>email for athlete correspondance</kendo-formhint>
+          <kendo-formerror>Error: Not valid email format</kendo-formerror>
+
+      </kendo-formfield>
+      <kendo-formfield>
+        <kendo-label [for]="phone1Type"  text="phone type"></kendo-label>
+        <kendo-dropdownlist #phone1Type formControlName="phone1Type" [data]="phoneTypes">
+        </kendo-dropdownlist>
+    </kendo-formfield>
+
+    <kendo-formfield>
+      <div class="k-checkbox-wrap">
+          <input #acceptNews type="checkbox" kendoCheckBox formControlName="acceptNews"/>
+          <kendo-label [for]="acceptNews" class="k-checkbox-label" text="I want to receive text"></kendo-label>
+      </div>
+
+      <kendo-formhint>You will receive text for last minute events</kendo-formhint>
+  </kendo-formfield>
+      </div>
+
+
+
+
+          <div class="k-form-buttons">
+              <button class="k-button k-primary" (click)="submitForm()">Submit</button>
+              <button class="k-button" (click)="clearForm()">Clear</button>
+          </div>
+      </fieldset>
+  </form>
+</div>
