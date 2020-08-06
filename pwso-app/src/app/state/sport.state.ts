@@ -6,7 +6,8 @@ export const { initialState, selectors} = buildState(Sport);
 
 export const {
   selectAll: allSports,
-  selectCurrentEntityKey: currentSportid
+  selectCurrentEntityKey: currentSportid,
+  selectCurrentEntity: currentSport,
 } = selectors;
 
 export function sportReducer(state = initialState): IEntityState<Sport> {
@@ -17,5 +18,16 @@ export const availableSports = createSelector(
   allSports,
   (sports) => {
     return sports.filter(s => s.canRegister === true);
+  }
+);
+
+export const currentSportHasUniforms = createSelector(
+  currentSport,
+  (sport) => {
+    if (sport) {
+    return sport.hasUniform;
+  } else {
+      return false;
+    }
   }
 );

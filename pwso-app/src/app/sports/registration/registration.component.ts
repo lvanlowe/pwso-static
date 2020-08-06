@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
+import { currentSportHasUniforms } from 'src/app/state/sport.state';
 
 @Component({
   selector: 'app-registration',
@@ -10,6 +11,8 @@ import { AppState } from 'src/app/state/app.state';
 })
 export class RegistrationComponent implements OnInit {
   canDisplay = false;
+  hasUniforms = false;
+  canSubmit = false;
   registrationForm: FormGroup;
   public listItems: Array<string> = ['Small', 'Medium', 'Large', 'X-Large', 'XXL'];
   public phoneTypes: Array<string> = ['home', 'mobile', 'other'];
@@ -20,6 +23,21 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.buildRegistrationForm(this.formBuilder);
+    this.registrationForm.markAsPristine();
+    this.store.pipe(select(currentSportHasUniforms))
+      .subscribe(hasUniforms => {
+          console.log('check uniforms');
+          this.hasUniforms = hasUniforms;
+          if (hasUniforms) {
+            this.registrationForm.controls.size.setValidators([Validators.required]);
+          }
+        });
+
+    this.registrationForm.valueChanges
+    .subscribe(value => {
+        console.log('form changed');
+        this.checkForm();
+    });
   }
 
 
@@ -54,9 +72,19 @@ export class RegistrationComponent implements OnInit {
     this.canDisplay = canShow;
   }
 
-  clearForm() {
-
+  checkForm() {
+    if (this.registrationForm.valid && !this.registrationForm.errors) {
+      this.canSubmit = true;
+    } else {
+      this.canSubmit = false;
+    }
   }
 
-  submitForm() {}
+  clearForm() {
+    this.registrationForm.reset();
+  }
+
+  submitForm() {
+
+  }
 }
