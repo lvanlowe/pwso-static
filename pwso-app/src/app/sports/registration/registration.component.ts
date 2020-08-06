@@ -11,10 +11,10 @@ import { AppState } from 'src/app/state/app.state';
 export class RegistrationComponent implements OnInit {
   canDisplay = false;
   registrationForm: FormGroup;
-  public listItems: Array<string> = ["X-Small", "Small", "Medium", "Large", "X-Large", "2X-Large"];
+  public listItems: Array<string> = ['Small', 'Medium', 'Large', 'X-Large', 'XXL'];
   public phoneTypes: Array<string> = ['home', 'mobile', 'other'];
 
-  public mask = '(999) 000-0000';
+  public mask = '(000) 000-0000';
 
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
@@ -32,13 +32,18 @@ export class RegistrationComponent implements OnInit {
         lastName: new FormControl('', Validators.required),
         nickName: new FormControl(),
         size: new FormControl(),
-        email1: new FormControl('', Validators.email),
+        email1: new FormControl('', [Validators.email, Validators.required]),
         email2: new FormControl('', Validators.email),
         email3: new FormControl('', Validators.email),
-        phone1: new FormControl(),
-        phone1Type: new FormControl(),
-        acceptNews: new FormControl()
-
+        phone1: new FormControl('', Validators.required),
+        phone1Type: new FormControl('', Validators.required),
+        canText1: new FormControl(),
+        phone2: new FormControl(),
+        phone2Type: new FormControl(),
+        canText2: new FormControl(),
+        phone3: new FormControl(),
+        phone3Type: new FormControl(),
+        canText3: new FormControl()
       }
     );
 
