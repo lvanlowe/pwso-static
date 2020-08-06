@@ -12,7 +12,7 @@ import { currentSportHasUniforms } from 'src/app/state/sport.state';
 export class RegistrationComponent implements OnInit {
   canDisplay = false;
   hasUniforms = false;
-  canSubmit = false;
+  canSubmit = true;
   registrationForm: FormGroup;
   public listItems: Array<string> = ['Small', 'Medium', 'Large', 'X-Large', 'XXL'];
   public phoneTypes: Array<string> = ['home', 'mobile', 'other'];
@@ -73,11 +73,11 @@ export class RegistrationComponent implements OnInit {
   }
 
   checkForm() {
-    if (this.registrationForm.valid && !this.registrationForm.errors) {
-      this.canSubmit = true;
-    } else {
-      this.canSubmit = false;
-    }
+    // if (this.registrationForm.valid && !this.registrationForm.errors) {
+    //   this.canSubmit = true;
+    // } else {
+    //   this.canSubmit = false;
+    // }
   }
 
   clearForm() {
@@ -85,6 +85,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   submitForm() {
-
+    this.registrationForm.markAllAsTouched();
   }
 }
