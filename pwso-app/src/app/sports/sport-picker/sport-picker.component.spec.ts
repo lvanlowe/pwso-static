@@ -101,6 +101,13 @@ describe('SportPickerComponent', () => {
       expect(component.disableControls).toHaveBeenCalled();
     });
 
+
+    it('should disply registration message', () => {
+      component.clickContinue();
+
+      expect(component.instruction).toBe('Press "Submit" button to complete registration');
+    });
+
   });
 
   describe('when cancel button is clicked', () => {

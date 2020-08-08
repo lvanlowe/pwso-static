@@ -1,45 +1,62 @@
-<div>
-  <p>{{instruction}}</p>
-  <form [formGroup]="sportPickerForm">
-    <kendo-combobox
+<div class="example-wrap">
 
-    [data]="sportList$ | async"
-    [textField]="'name'"
-    [valueField]="'id'"
-    [value]="selectedSport"
-    [placeholder]="'Select A Sport'"
+  <form class="k-form" [formGroup]="sportPickerForm">
+    <fieldset class="k-form-fieldset">
+      <legend class="k-form-legend">{{instruction}}</legend>
+      <kendo-formfield>
+        <kendo-label [for]="sport" text="Sport"></kendo-label>
+        <kendo-combobox
 
-    (selectionChange)="selectionSport($event)"
-    formControlName="sport"
-  >
-    </kendo-combobox>
+        [data]="sportList$ | async"
+        [textField]="'name'"
+        [valueField]="'id'"
+        [value]="selectedSport"
+        [placeholder]="'Select A Sport'"
+        #sport
+        (selectionChange)="selectionSport($event)"
+        formControlName="sport"
+      >
+        </kendo-combobox>
+        <kendo-formhint>Special Olympics Sport</kendo-formhint>
+        <kendo-formerror>Error: Sport is required</kendo-formerror>
+      </kendo-formfield>
+      <kendo-formfield *ngIf="showProgram">
+        <kendo-label [for]="program" text="Program / Location"></kendo-label>
+        <kendo-combobox
 
-    <div *ngIf="showProgram">
-      <kendo-combobox
+        [data]="programList$ | async"
+        [textField]="'name'"
+        [valueField]="'id'"
+        [(value)]="selectedProgram"
+        [placeholder]="'Select A Program / Location'"
 
-      [data]="programList$ | async"
-      [textField]="'name'"
-      [valueField]="'id'"
-      [(value)]="selectedProgram"
-      [placeholder]="'Select A Program / Location'"
-
-      (selectionChange)="selectionProgram($event)"
-      formControlName="program"
-    >
-      </kendo-combobox>
+        (selectionChange)="selectionProgram($event)"
+        formControlName="program"
+        #program
+      >
+        </kendo-combobox>
+        <kendo-formhint>Program / Location for Sport</kendo-formhint>
+        <kendo-formerror>Error: Program / Location is required for this Sport</kendo-formerror>
+      </kendo-formfield>
+      <div class="k-form-buttons">
+        <button class="k-button k-primary" [disabled]="!canContinue"  (click)="clickContinue()">Continue</button>
+        <button class="k-button" [disabled]="!canCancel"  (click)="clickCancel()">Cancel</button>
     </div>
+<!--
 
-    <div *ngIf="canContinue">
-      <button kendoButton (click)= "clickContinue()">
-        Continue
-      </button>
-    </div>
+      <div *ngIf="canContinue">
+        <button kendoButton (click)= "clickContinue()">
+          Continue
+        </button>
+      </div>
 
-    <div *ngIf="canCancel">
-      <button kendoButton (click)= "clickCancel()">
-        Cancel
-      </button>
-    </div>
+      <div *ngIf="canCancel">
+        <button kendoButton (click)= "clickCancel()">
+          Cancel
+        </button>
+      </div> -->
+    </fieldset>
+
   </form>
 
 </div>

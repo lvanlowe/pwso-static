@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Sport } from 'src/app/models/sport';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Program } from 'src/app/models/program';
 import { Observable } from 'rxjs';
 import { availableSports } from 'src/app/state/sport.state';
@@ -30,8 +30,6 @@ export class SportPickerComponent implements OnInit {
     canContinue: boolean;
     showProgram = false;
     canCancel = false;
-    sportName: any;
-    programName: any;
 
 
   ngOnInit() {
@@ -39,40 +37,28 @@ export class SportPickerComponent implements OnInit {
     this.instruction = 'Select a sport for registration';
     this.sportList$ = this.store.pipe(select(availableSports));
     this.buildPickerForm(this.formBuilder);
-    console.log(this.sportPickerForm.valid);
-    this.sportPickerForm.valueChanges.subscribe(value => this.enableContinueButton);
 
   }
 
   buildPickerForm(formBuilder: FormBuilder) {
     this.sportPickerForm = formBuilder.group(
       {
-        sport: [null, [Validators.required]],
-        program: [null, [Validators.required]]
+        sport: new FormControl(null, Validators.required),
+        program: new FormControl(null, Validators.required),
       }
     );
-
-    this.sportName = this.sportPickerForm.get('sport');
-    this.programName = this.sportPickerForm.get('program');
   }
 
   public selectionSport(value: Sport): void {
-    // console.log('selectionChange', value);
-    // console.log(this.selectedSport);
-    this.sportName.setValue(value);
+    this.sportPickerForm.controls.sport.setValue(value);
     this.store.dispatch(new SelectByKey(Sport, value.id ));
     this.programList$  = this.store.pipe(select(availablePrograms));
     this.canCancel = true;
     if (this.getProgramsForSport(value.id) !== 1) {
-      console.log('show program');
       this.setUpForProgramSelection();
     } else {
-      console.log('not show program');
       this.setProgram();
     }
-
-    // console.log(this.sportName.value);
-    // console.log(this.sportPickerForm.valid);
     this.enableContinueButton();
   }
 
@@ -91,26 +77,18 @@ export class SportPickerComponent implements OnInit {
 
   public setProgram(){
     this.programList$.subscribe(programs => this.selectedProgram = programs[0]);
-    console.log('one program');
-    console.log(this.selectedProgram);
-    this.programName.setValue(this.selectedProgram.id);
+    this.sportPickerForm.controls.program.setValue(this.selectedProgram);
     this.store.dispatch(new SelectByKey(Program, this.selectedProgram.id) );
     this.showProgram = false;
   }
 
   public selectionProgram(value: Program): void {
-    console.log('selectionChange', value);
-    console.log(this.selectedProgram);
     this.store.dispatch(new SelectByKey(Program, value.id ));
-    this.programName.setValue(value);
-    console.log(this.programName.value);
-    console.log(this.sportPickerForm.valid);
+    this.sportPickerForm.controls.program.setValue(value);
     this.enableContinueButton();
   }
 
   enableContinueButton() {
-    console.log(this.sportPickerForm.valid);
-
     if (this.sportPickerForm.valid  && !this.sportPickerForm.errors) {
       this.instruction = 'Press "Continue" button to continue registraion';
       this.canContinue = true;
@@ -123,6 +101,7 @@ export class SportPickerComponent implements OnInit {
     this.sportSelected.emit(this.canContinue);
     this.disableControls();
     this.canContinue = false;
+    this.instruction = 'Press "Continue" button to continue registraion';
   }
 
   public disableControls() {
@@ -142,8 +121,8 @@ export class SportPickerComponent implements OnInit {
     this.selectedProgram = null;
     this.canContinue = false;
     this.canCancel = false;
-    this.sportName.setValue(null);
-    this.programName.setValue(null);
+    this.sportPickerForm.controls.sport.setValue(null);
+    this.sportPickerForm.controls.program.setValue(null);
     this.store.dispatch(new Deselect(Program));
     this.store.dispatch(new Deselect(Sport));
     this.instruction = 'Select a sport for registration';
