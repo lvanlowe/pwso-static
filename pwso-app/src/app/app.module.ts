@@ -26,14 +26,8 @@ import { ProgramService } from './services/program.service';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
-
-
-
-
-
-
-
-
+import { Registrant } from './models/registrant';
+import { RegistrantService } from './services/registrant.service';
 
 @NgModule({
   declarations: [
@@ -63,6 +57,7 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
   providers: [
     { provide: Sport, useClass: SportService },
     { provide: Program, useClass: ProgramService },
+    { provide: Registrant, useClass: RegistrantService },
   ],
   bootstrap: [AppComponent]
 })
