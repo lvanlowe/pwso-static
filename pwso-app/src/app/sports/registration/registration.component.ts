@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { currentSportHasUniforms } from 'src/app/state/sport.state';
+import { Registrant } from 'src/app/models/registrant';
+import { Create } from '@briebug/ngrx-auto-entity';
 
 @Component({
   selector: 'app-registration',
@@ -13,6 +15,7 @@ export class RegistrationComponent implements OnInit {
   canDisplay = false;
   hasUniforms = false;
   canSubmit = true;
+  registrant: Registrant;
   registrationForm: FormGroup;
   public listItems: Array<string> = ['Small', 'Medium', 'Large', 'X-Large', 'XXL'];
   public phoneTypes: Array<string> = ['home', 'mobile', 'other'];
@@ -85,6 +88,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   submitForm() {
+    // this.registrant.firstName = this.registrationForm.controls.firstName.value;
+    // this.registrant.lastName = this.registrationForm.controls.lastName.value;
+    this.registrant = {...this.registrationForm.value};
     this.registrationForm.markAllAsTouched();
+    this.store.dispatch(new Create(Registrant, this.registrant));
   }
 }
