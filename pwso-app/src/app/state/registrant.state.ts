@@ -6,9 +6,9 @@ import { Registrant } from '../models/registrant';
 
 export const { initialState, selectors} = buildState(Registrant);
 
-// export const {
-//   selectAll: allPrograms
-// } = selectors;
+export const {
+  selectIsSaving: savingRegistrant,
+} = selectors;
 
 export function registrantReducer(state = initialState): IEntityState<Registrant> {
   return state;

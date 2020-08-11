@@ -5,6 +5,7 @@ import { AppState } from 'src/app/state/app.state';
 import { currentSportHasUniforms } from 'src/app/state/sport.state';
 import { Registrant } from 'src/app/models/registrant';
 import { Create } from '@briebug/ngrx-auto-entity';
+import { savingRegistrant } from 'src/app/state/registrant.state';
 
 @Component({
   selector: 'app-registration',
@@ -15,6 +16,7 @@ export class RegistrationComponent implements OnInit {
   canDisplay = false;
   hasUniforms = false;
   canSubmit = true;
+  isSaving: boolean;
   registrant: Registrant;
   registrationForm: FormGroup;
   public listItems: Array<string> = ['Small', 'Medium', 'Large', 'X-Large', 'XXL'];
@@ -35,7 +37,10 @@ export class RegistrationComponent implements OnInit {
             this.registrationForm.controls.size.setValidators([Validators.required]);
           }
         });
-
+    this.store.pipe(select(savingRegistrant))
+    .subscribe(saving => {
+        this.isSaving = saving;
+      });
     this.registrationForm.valueChanges
     .subscribe(value => {
         console.log('form changed');
