@@ -29,13 +29,15 @@ import { LabelModule } from '@progress/kendo-angular-label';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { Registrant } from './models/registrant';
 import { RegistrantService } from './services/registrant.service';
+import { RegistrationCompleteComponent } from './sports/registration-complete/registration-complete.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     RegistrationComponent,
-    SportPickerComponent
+    SportPickerComponent,
+    RegistrationCompleteComponent
   ],
   imports: [
     BrowserModule,

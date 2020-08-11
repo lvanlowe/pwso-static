@@ -1,4 +1,6 @@
-
+<div *ngIf="showCompletion">
+  <app-registration-complete></app-registration-complete>
+</div>
 <app-sport-picker (sportSelected) = 'showScreen($event)'> </app-sport-picker>
 
 <div *ngIf="canDisplay" class="example-wrap">
@@ -144,3 +146,5 @@
       </fieldset>
   </form>
 </div>
+
+

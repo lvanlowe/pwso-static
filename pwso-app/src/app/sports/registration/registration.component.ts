@@ -14,6 +14,7 @@ import { savingRegistrant } from 'src/app/state/registrant.state';
 })
 export class RegistrationComponent implements OnInit {
   canDisplay = false;
+  showCompletion = false;
   hasUniforms = false;
   canSubmit = true;
   isSaving: boolean;
@@ -76,8 +77,13 @@ export class RegistrationComponent implements OnInit {
     // this.sportName = this.registrationForm.get('sport');
     // this.programName = this.registrationForm.get('program');
   }
+
   showScreen(canShow) {
     this.canDisplay = canShow;
+  }
+
+  anotherRegistration(){
+    this.canDisplay = true;
   }
 
   checkForm() {
@@ -98,5 +104,7 @@ export class RegistrationComponent implements OnInit {
     this.registrant = {...this.registrationForm.value};
     this.registrationForm.markAllAsTouched();
     this.store.dispatch(new Create(Registrant, this.registrant));
+    this.canDisplay  = false;
+    this.showCompletion = true;
   }
 }
