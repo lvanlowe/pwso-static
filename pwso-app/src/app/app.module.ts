@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressBarModule, MatRadioModule, MatSliderModule} from '@angular/material'
 import { RegistrationComponent } from './sports/registration/registration.component';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { TooltipModule } from '@progress/kendo-angular-tooltip';
@@ -47,6 +48,9 @@ import { RegistrantService } from './services/registrant.service';
     ButtonsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
+    MatRadioModule,
+    MatSliderModule,
     LayoutModule,
     TooltipModule,
     DropDownsModule,
