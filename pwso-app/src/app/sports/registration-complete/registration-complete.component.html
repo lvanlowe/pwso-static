@@ -1,1 +1,14 @@
 <p>registration-complete works!</p>
+<div class="example-wrap">
+  <form class="k-form" [formGroup]="completionForm">
+    <fieldset class="k-form-fieldset">
+      <legend class="k-form-legend">Registration Complete</legend>
+      <textarea formControlName="message" kendoTextArea></textarea>
+      <div class="k-form-buttons">
+        <button class="k-button"  (click)="clickAnother()">Register Another</button>
+        <button class="k-button k-primary" (click)="clickFinish()">Finish</button>
+      </div>
+    </fieldset>
+  </form>
+
+</div>
