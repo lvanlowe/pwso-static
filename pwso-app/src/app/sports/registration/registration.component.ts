@@ -82,8 +82,8 @@ export class RegistrationComponent implements OnInit {
     this.canDisplay = canShow;
   }
 
-  anotherRegistration(){
-    this.canDisplay = true;
+  restart(refresh) {
+    this.showCompletion = false;
   }
 
   checkForm() {

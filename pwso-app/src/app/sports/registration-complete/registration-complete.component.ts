@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./registration-complete.component.scss']
 })
 export class RegistrationCompleteComponent implements OnInit {
+
+  @Output() registerAnother = new EventEmitter();
 
   completionForm: FormGroup;
   message: string;
@@ -29,7 +31,12 @@ export class RegistrationCompleteComponent implements OnInit {
     );
   }
 
-  clickAnother() {}
+  clickAnother() {
+    this.registerAnother.emit(true);
+  }
+
+  anotherRegistration() {
+  }
 
   clickFinish() {}
 }
