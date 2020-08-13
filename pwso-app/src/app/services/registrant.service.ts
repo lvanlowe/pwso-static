@@ -27,8 +27,19 @@ export class RegistrantService implements IAutoEntityService<Registrant> {
 
   create(entityInfo: IEntityInfo, entity: Registrant): Observable<Registrant> {
     return this.http.post<Registrant>(
-      `http://localhost:7071/api/registrants`,
-      entity
+
+    // ********* for testing
+    //
+    // `http://localhost:7071/api/registrants`,
+    // entity
+    //
+    // **********
+        // ********* for production
+    //
+    `/api/registrants`, entity
+    //
+    // **********
+
     );
   }
 

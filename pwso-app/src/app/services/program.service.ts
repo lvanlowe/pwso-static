@@ -20,7 +20,16 @@ export class ProgramService implements IAutoEntityService<Program> {
 
   loadAll(entityInfo: IEntityInfo): Observable<Program[]> {
     return this.http.get<Program[]>(
-      `http://localhost:7071/api/programs`
+    // ********* for testing
+    //
+    // `http://localhost:7071/api/programs`
+    //
+    // **********
+    // ********* for production
+    //
+    `/api/programs`
+    //
+    // **********
     );
   }
 

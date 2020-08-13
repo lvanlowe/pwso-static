@@ -20,7 +20,16 @@ export class SportService implements IAutoEntityService<Sport> {
 
   loadAll(entityInfo: IEntityInfo): Observable<Sport[]> {
     return this.http.get<Sport[]>(
-      `http://localhost:7071/api/sports`
+    // ********* for testing
+    //
+    // `http://localhost:7071/api/sports`
+    //
+    // **********
+    // ********* for production
+    //
+    `/api/sports`
+    //
+    // **********
     );
   }
 
