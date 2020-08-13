@@ -1,6 +1,15 @@
 {
   "ExpandedNodes": [
+<<<<<<< Updated upstream
     ""
   ],
+=======
+    "",
+    "\\.github",
+    "\\.github\\workflows",
+    "\\api"
+  ],
+  "SelectedNode": "\\api\\shared",
+>>>>>>> Stashed changes
   "PreviewInSolutionExplorer": false
 }
