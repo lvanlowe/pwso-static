@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-complete',
@@ -13,7 +14,7 @@ export class RegistrationCompleteComponent implements OnInit {
   completionForm: FormGroup;
   message: string;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.buildCompletionForm(this.formBuilder);
@@ -38,5 +39,7 @@ export class RegistrationCompleteComponent implements OnInit {
   anotherRegistration() {
   }
 
-  clickFinish() {}
+  clickFinish() {
+    this.router.navigate(['/dashboard']);
+  }
 }
