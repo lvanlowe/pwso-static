@@ -1,9 +1,9 @@
 <div *ngIf="showCompletion">
   <app-registration-complete (registerAnother) = 'restart($event)'></app-registration-complete>
 </div>
-<div *ngIf="!showCompletion">
+<div >
   <app-sport-picker (sportSelected) = 'showScreen($event)'> </app-sport-picker>
-
+</div>
   <div *ngIf="canDisplay" class="example-wrap">
     <form class="k-form" [formGroup]="registrationForm">
         <fieldset class="k-form-fieldset">
@@ -141,13 +141,13 @@
 
 
             <div class="k-form-buttons">
-                <button class="k-button k-primary" [disabled]="!canSubmit"  (click)="submitForm()">Submit</button>
+                <button class="k-button k-primary" [disabled]="!canRegister"  (click)="registerAthlete()">Register</button>
                 <button class="k-button" (click)="clearForm()">Clear</button>
             </div>
         </fieldset>
     </form>
   </div>
-</div>
+
 
 
 

@@ -16,7 +16,7 @@ export class RegistrationComponent implements OnInit {
   canDisplay = false;
   showCompletion = false;
   hasUniforms = false;
-  canSubmit = true;
+  canRegister = true;
   isSaving: boolean;
   registrant: Registrant;
   registrationForm: FormGroup;
@@ -74,8 +74,6 @@ export class RegistrationComponent implements OnInit {
       }
     );
 
-    // this.sportName = this.registrationForm.get('sport');
-    // this.programName = this.registrationForm.get('program');
   }
 
   showScreen(canShow) {
@@ -83,7 +81,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   restart(refresh) {
+    this.registrationForm.controls.firstName.setValue('');
+    this.registrationForm.controls.lastName.setValue('');
+    this.registrationForm.controls.nickName.setValue('');
+    this.registrationForm.controls.size.setValue('');
     this.showCompletion = false;
+    this.canDisplay = true;
   }
 
   checkForm() {
@@ -98,11 +101,11 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm.reset();
   }
 
-  submitForm() {
+  registerAthlete() {
     // this.registrant.firstName = this.registrationForm.controls.firstName.value;
     // this.registrant.lastName = this.registrationForm.controls.lastName.value;
-    this.registrant = {...this.registrationForm.value};
-    this.registrationForm.markAllAsTouched();
+    // this.registrant = {...this.registrationForm.value};
+    // this.registrationForm.markAllAsTouched();
     this.store.dispatch(new Create(Registrant, this.registrant));
     this.canDisplay  = false;
     this.showCompletion = true;
