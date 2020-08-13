@@ -1,1 +1,153 @@
-<p>registration works!</p>
+<div *ngIf="showCompletion">
+  <app-registration-complete (registerAnother) = 'restart($event)'></app-registration-complete>
+</div>
+<div >
+  <app-sport-picker (sportSelected) = 'showScreen($event)'> </app-sport-picker>
+</div>
+  <div *ngIf="canDisplay" class="example-wrap">
+    <form class="k-form" [formGroup]="registrationForm">
+        <fieldset class="k-form-fieldset">
+            <legend class="k-form-legend">Enter Athlete Information</legend>
+            <mat-progress-bar mode="query" *ngIf="isSaving"></mat-progress-bar>
+            <kendo-formfield>
+                <kendo-label [for]="firstName" text="First Name"></kendo-label>
+                <input formControlName="firstName" kendoTextBox #firstName/>
+
+                <kendo-formhint>Athlete first name</kendo-formhint>
+                <kendo-formerror>Error: First name is required</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="lastName" text="Last Name"></kendo-label>
+                <input formControlName="lastName" kendoTextBox #lastName required/>
+
+                <kendo-formhint>Athlete last name</kendo-formhint>
+                <kendo-formerror>Error: Last name is required</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+              <kendo-label [for]="nickName" text="Nick Name" [optional]="true"></kendo-label>
+              <input formControlName="nickName" kendoTextBox #nickName/>
+
+              <kendo-formhint>Athlete nick name</kendo-formhint>
+          </kendo-formfield>
+
+            <kendo-formfield *ngIf="hasUniforms">
+                <kendo-label [for]="size" text="Jersey Size"></kendo-label>
+                <kendo-dropdownlist #size formControlName="size" [data]="listItems">
+                </kendo-dropdownlist>
+                <kendo-formhint>Athletes Jersey Size</kendo-formhint>
+            </kendo-formfield>
+
+
+            <kendo-formfield>
+                <kendo-label [for]="email1" text="Email"></kendo-label>
+                <input formControlName="email1" kendoTextBox #email1/>
+
+                <kendo-formhint>email for athlete correspondance</kendo-formhint>
+                <kendo-formerror *ngIf="registrationForm.controls.email1.errors?.email">Error: Not valid email format</kendo-formerror>
+                <kendo-formerror *ngIf="registrationForm.controls.email1.errors?.required">Error: at least 1 email is required</kendo-formerror>
+
+            </kendo-formfield>
+
+            <kendo-formfield>
+              <kendo-label [for]="email2" text="Email" [optional]="true" ></kendo-label>
+              <input formControlName="email2" kendoTextBox #email2/>
+
+              <kendo-formhint>email for athlete correspondance</kendo-formhint>
+              <kendo-formerror>Error: Not valid email format</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+            <kendo-label [for]="email3" text="Email" [optional]="true" ></kendo-label>
+            <input formControlName="email3" kendoTextBox #email3/>
+
+            <kendo-formhint>email for athlete correspondance</kendo-formhint>
+            <kendo-formerror>Error: Not valid email format</kendo-formerror>
+        </kendo-formfield>
+
+      <div class="wrap">
+          <kendo-formfield>
+            <kendo-label [for]="phone1" text="Phone"></kendo-label>
+            <kendo-maskedtextbox formControlName="phone1" [mask]=mask #phone1></kendo-maskedtextbox>
+            <kendo-formhint>phone for athlete</kendo-formhint>
+            <kendo-formerror>Error: Not valid phone format</kendo-formerror>
+            <kendo-formerror *ngIf="registrationForm.controls.phone1.errors?.required">Error: at least 1 phone number is required</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+              <kendo-label [for]="phone1Type"  text="type"></kendo-label>
+              <kendo-dropdownlist #phone1Type formControlName="phone1Type" [data]="phoneTypes">
+              </kendo-dropdownlist>
+              <kendo-formerror>Error: type required when phone number entered</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+              <div class="k-checkbox-wrap">
+                  <kendo-label [for]="canText1" class="k-checkbox-label" text="I want to receive text"></kendo-label>
+                  <input #canText1 type="checkbox" kendoCheckBox formControlName="canText1"/>
+              </div>
+              <kendo-formhint>You will receive text for last minute events</kendo-formhint>
+          </kendo-formfield>
+      </div>
+
+      <div class="wrap">
+          <kendo-formfield>
+            <kendo-label [for]="phone2" text="Phone" [optional]="true" ></kendo-label>
+            <kendo-maskedtextbox formControlName="phone2" [mask]=mask #phone2></kendo-maskedtextbox>
+            <kendo-formhint>phone for athlete</kendo-formhint>
+            <kendo-formerror>Error: Not valid phone format</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+              <kendo-label [for]="phone2Type"  text="type"></kendo-label>
+              <kendo-dropdownlist #phone2Type formControlName="phone2Type" [data]="phoneTypes">
+              </kendo-dropdownlist>
+              <kendo-formerror>Error: type required when phone number entered</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+              <div class="k-checkbox-wrap">
+                  <kendo-label [for]="canText2" class="k-checkbox-label" text="I want to receive text"></kendo-label>
+                  <input #canText2 type="checkbox" kendoCheckBox formControlName="canText2"/>
+              </div>
+              <kendo-formhint>You will receive text for last minute events</kendo-formhint>
+          </kendo-formfield>
+      </div>
+
+      <div class="wrap">
+          <kendo-formfield>
+            <kendo-label [for]="phone3" text="Phone" [optional]="true" ></kendo-label>
+            <kendo-maskedtextbox formControlName="phone3" [mask]=mask #phone3></kendo-maskedtextbox>
+            <kendo-formhint>phone for athlete</kendo-formhint>
+            <kendo-formerror>Error: Not valid phone format</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+              <kendo-label [for]="phone3Type"  text="type"></kendo-label>
+              <kendo-dropdownlist #phone3Type formControlName="phone3Type" [data]="phoneTypes">
+              </kendo-dropdownlist>
+              <kendo-formerror>Error: type required when phone number entered</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+              <div class="k-checkbox-wrap">
+                  <kendo-label [for]="canText3" class="k-checkbox-label" text="I want to receive text"></kendo-label>
+                  <input #canText3 type="checkbox" kendoCheckBox formControlName="canText3"/>
+              </div>
+              <kendo-formhint>You will receive text for last minute events</kendo-formhint>
+          </kendo-formfield>
+      </div>
+
+
+            <div class="k-form-buttons">
+                <button class="k-button k-primary" [disabled]="!canRegister"  (click)="registerAthlete()">Register</button>
+                <button class="k-button" (click)="clearForm()">Clear</button>
+            </div>
+        </fieldset>
+    </form>
+  </div>
+
+
+
+

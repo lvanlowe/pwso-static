@@ -1,15 +1,9 @@
 {
   "ExpandedNodes": [
-<<<<<<< Updated upstream
-    ""
-  ],
-=======
     "",
     "\\.github",
-    "\\.github\\workflows",
-    "\\api"
+    "\\.github\\workflows"
   ],
-  "SelectedNode": "\\api\\shared",
->>>>>>> Stashed changes
+  "SelectedNode": "\\.github\\workflows\\azure-static-web-apps-kind-pond-0c47f270f.yml",
   "PreviewInSolutionExplorer": false
 }

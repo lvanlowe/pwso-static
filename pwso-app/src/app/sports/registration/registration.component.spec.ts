@@ -4,19 +4,15 @@ import { RegistrationComponent } from './registration.component';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
-  let fixture: ComponentFixture<RegistrationComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ RegistrationComponent ]
-    })
-    .compileComponents();
-  }));
+  let mockFormBuilder;
+  let mockStore;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegistrationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    mockFormBuilder = jasmine.createSpyObj('formBuilder', ['group']);
+    mockStore = jasmine.createSpyObj('store', ['dispatch', 'pipe']);
+
+    component = new RegistrationComponent(mockFormBuilder, mockStore);
+
   });
 
   it('should create', () => {
