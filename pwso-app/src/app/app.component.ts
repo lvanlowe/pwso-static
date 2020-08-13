@@ -6,6 +6,7 @@ import { UserInfo } from './models/user-info';
 import { CreateSuccess, SelectByKey, Clear, LoadAll } from '@briebug/ngrx-auto-entity';
 import { Sport } from './models/sport';
 import { Program } from './models/program';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   public canLogin = true;
   public canLogout = false;
   public isAdmin: boolean;
+  public isProduction: boolean;
   public logButtonText = 'Login';
   public greeting: string;
   testText: any;
@@ -40,6 +42,11 @@ export class AppComponent implements OnInit {
       });
     });
 
+    if (environment.production){
+      this.isProduction = true;
+    } else {
+      this.isProduction = false;
+    }
     this.items[0].selected = true;
 
     // ********* for testing
