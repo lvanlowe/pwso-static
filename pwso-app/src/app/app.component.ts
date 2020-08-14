@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 
 export class AppComponent implements OnInit {
   title = 'Prince William Special Olympics Web App';
-  public expanded = false;
+  public expanded = true;
   public selected = 'Deacons';
   public items: Array<any> = [];
   public canLogin = true;

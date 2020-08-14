@@ -10,26 +10,28 @@
     >
       <span class="mail-box">Prince William Special Olympics Web App</span>
     </button>
-    <span *ngIf="!isProduction">Tesing</span>
   </div>
 
-  <div *ngIf="!canLogin && !canLogout">
-    <kendo-buttongroup [selection]="'single'">
-      <button kendoButton [toggleable]="true" (click)="goAuth('facebook')">
-        Facebook
-      </button>
-      <button kendoButton [toggleable]="true" (click)="goAuth('google')">
-        Google
-      </button>
-      <button kendoButton [toggleable]="true" (click)="goAuth('twitter')">
-        Twitter
-      </button>
-    </kendo-buttongroup>
+  <div *ngIf=isProduction>
+    <div *ngIf="!canLogin && !canLogout">
+      <kendo-buttongroup [selection]="'single'">
+        <button kendoButton [toggleable]="true" (click)="goAuth('facebook')">
+          Facebook
+        </button>
+        <button kendoButton [toggleable]="true" (click)="goAuth('google')">
+          Google
+        </button>
+        <button kendoButton [toggleable]="true" (click)="goAuth('twitter')">
+          Twitter
+        </button>
+      </kendo-buttongroup>
+    </div>
+    <div *ngIf="canLogin || canLogout">
+      <button kendoButton (click)="onLogon()">{{logButtonText}}</button>
+      <span>{{greeting}}</span>
+    </div>
   </div>
-  <div *ngIf="canLogin || canLogout">
-    <button kendoButton (click)="onLogon()">{{logButtonText}}</button>
-    <span>{{greeting}}</span>
-  </div>
+
 </div>
 <kendo-drawer-container>
   <kendo-drawer #drawer
