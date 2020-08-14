@@ -8,6 +8,8 @@ export const {
   selectAll: allSports,
   selectCurrentEntityKey: currentSportid,
   selectCurrentEntity: currentSport,
+  selectLoadedAt: loadedSport,
+  selectIsLoading: loadingSport,
 } = selectors;
 
 export function sportReducer(state = initialState): IEntityState<Sport> {

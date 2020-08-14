@@ -3,6 +3,7 @@
   <form class="k-form" [formGroup]="sportPickerForm">
     <fieldset class="k-form-fieldset">
       <legend class="k-form-legend">{{instruction}}</legend>
+      <mat-progress-spinner mode="indeterminate" *ngIf="isLoadingSport || isLoadingProgram"></mat-progress-spinner>
       <kendo-formfield>
         <kendo-label [for]="sport" text="Sport"></kendo-label>
         <kendo-combobox

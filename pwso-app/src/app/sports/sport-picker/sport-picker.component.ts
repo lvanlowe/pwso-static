@@ -3,11 +3,11 @@ import { Sport } from 'src/app/models/sport';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Program } from 'src/app/models/program';
 import { Observable } from 'rxjs';
-import { availableSports } from 'src/app/state/sport.state';
+import { availableSports, loadedSport, loadingSport } from 'src/app/state/sport.state';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
-import { SelectByKey, Deselect } from '@briebug/ngrx-auto-entity';
-import { availablePrograms, availableProgramsCount } from 'src/app/state/program.state';
+import { SelectByKey, Deselect, LoadAll } from '@briebug/ngrx-auto-entity';
+import { availablePrograms, availableProgramsCount, loadedProgram, loadingProgram } from 'src/app/state/program.state';
 
 
 @Component({
@@ -30,6 +30,8 @@ export class SportPickerComponent implements OnInit {
     canContinue: boolean;
     showProgram = false;
     canCancel = false;
+    isLoadingSport = false;
+    isLoadingProgram = false;
 
 
   ngOnInit() {
@@ -37,7 +39,20 @@ export class SportPickerComponent implements OnInit {
     this.instruction = 'Select a sport for registration';
     this.sportList$ = this.store.pipe(select(availableSports));
     this.buildPickerForm(this.formBuilder);
-
+    this.store.pipe(select(loadedSport)).subscribe(loaded => {
+      if (!loaded) {
+        this.store.dispatch(new LoadAll(Sport));
+      }
+    });
+    this.store.pipe(select(loadedProgram)).subscribe(loaded => {
+      if (!loaded) {
+        this.store.dispatch(new LoadAll(Program));
+      }
+    });
+    this.store.pipe(select(loadingSport))
+      .subscribe(loading => {this.isLoadingSport = loading; });
+    this.store.pipe(select(loadingProgram))
+      .subscribe(loading => {this.isLoadingProgram = loading; });
   }
 
   buildPickerForm(formBuilder: FormBuilder) {

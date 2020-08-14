@@ -6,7 +6,9 @@ import { currentSportid } from './sport.state';
 export const { initialState, selectors} = buildState(Program);
 
 export const {
-  selectAll: allPrograms
+  selectAll: allPrograms,
+  selectLoadedAt: loadedProgram,
+  selectIsLoading: loadingProgram,
 } = selectors;
 
 export function programReducer(state = initialState): IEntityState<Program> {
