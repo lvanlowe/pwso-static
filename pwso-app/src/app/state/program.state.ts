@@ -9,6 +9,7 @@ export const {
   selectAll: allPrograms,
   selectLoadedAt: loadedProgram,
   selectIsLoading: loadingProgram,
+  selectCurrentEntity: currentProgram,
 } = selectors;
 
 export function programReducer(state = initialState): IEntityState<Program> {

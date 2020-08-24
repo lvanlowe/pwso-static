@@ -6,6 +6,8 @@ import { currentSportHasUniforms } from 'src/app/state/sport.state';
 import { Registrant } from 'src/app/models/registrant';
 import { Create } from '@briebug/ngrx-auto-entity';
 import { savingRegistrant } from 'src/app/state/registrant.state';
+import { currentProgram } from 'src/app/state/program.state';
+import { Program } from 'src/app/models/program';
 
 @Component({
   selector: 'app-registration',
@@ -19,11 +21,13 @@ export class RegistrationComponent implements OnInit {
   canRegister = true;
   isSaving: boolean;
   registrant: Registrant;
+  currentProgram: Program;
   registrationForm: FormGroup;
   public listItems: Array<string> = ['Small', 'Medium', 'Large', 'X-Large', 'XXL'];
   public phoneTypes: Array<string> = ['home', 'mobile', 'other'];
 
   public mask = '(000) 000-0000';
+  public opened = false;
 
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
@@ -106,8 +110,33 @@ export class RegistrationComponent implements OnInit {
     // this.registrant.lastName = this.registrationForm.controls.lastName.value;
     // this.registrant = {...this.registrationForm.value};
     // this.registrationForm.markAllAsTouched();
+
     this.store.dispatch(new Create(Registrant, this.registrant));
     this.canDisplay  = false;
     this.showCompletion = true;
+  }
+
+  public close(status) {
+    console.log(`Dialog result: ${status}`);
+    this.opened = false;
+    if (status === 'yes') {
+        this.registerAthlete();
+    }
+  }
+
+  public open() {
+    this.opened = true;
+  }
+
+  public checkForWaitList() {
+    this.store.pipe(select(currentProgram))
+    .subscribe(loading => {
+      this.currentProgram = loading;
+      if (this.currentProgram.isWaitlist === true ) {
+        this.opened = true;
+      } else {
+        this.registerAthlete();
+      }
+    });
   }
 }

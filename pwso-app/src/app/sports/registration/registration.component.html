@@ -141,10 +141,17 @@
 
 
             <div class="k-form-buttons">
-                <button class="k-button k-primary" [disabled]="!canRegister"  (click)="registerAthlete()">Register</button>
+                <button class="k-button k-primary" [disabled]="!canRegister"  (click)="checkForWaitList()">Register</button>
                 <button class="k-button" (click)="clearForm()">Clear</button>
             </div>
         </fieldset>
+        <kendo-dialog title="Please confirm" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+          <p style="margin: 30px; text-align: center;">Plese continue if you wish to have your athlete waitlisted?</p>
+          <kendo-dialog-actions>
+              <button kendoButton (click)="close('no')">No</button>
+              <button kendoButton (click)="close('yes')" primary="true">Yes</button>
+          </kendo-dialog-actions>
+      </kendo-dialog>
     </form>
   </div>
 
