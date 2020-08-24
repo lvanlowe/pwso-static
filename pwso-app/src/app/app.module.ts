@@ -30,6 +30,8 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { Registrant } from './models/registrant';
 import { RegistrantService } from './services/registrant.service';
 import { RegistrationCompleteComponent } from './sports/registration-complete/registration-complete.component';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { RegistrationCompleteComponent } from './sports/registration-complete/re
     InputsModule,
     LabelModule,
     DateInputsModule,
+    DialogsModule,
   ],
   providers: [
     { provide: Sport, useClass: SportService },
