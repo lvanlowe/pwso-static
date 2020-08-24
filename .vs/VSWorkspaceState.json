@@ -2,8 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\.github",
-    "\\.github\\workflows"
+    "\\.github\\workflows",
+    "\\api",
+    "\\pwso-app",
+    "\\pwso-app\\src",
+    "\\pwso-app\\src\\app",
+    "\\pwso-app\\src\\app\\sports",
+    "\\pwso-app\\src\\app\\sports\\registration"
   ],
-  "SelectedNode": "\\.github\\workflows\\azure-static-web-apps-kind-pond-0c47f270f.yml",
+  "SelectedNode": "\\pwso-app\\src\\app\\sports\\registration\\registration.component.html",
   "PreviewInSolutionExplorer": false
 }
