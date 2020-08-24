@@ -39,6 +39,7 @@
         <kendo-formhint>Program / Location for Sport</kendo-formhint>
         <kendo-formerror>Error: Program / Location is required for this Sport</kendo-formerror>
       </kendo-formfield>
+      <h4 *ngIf="isWaitlist"  style="color:crimson"><em>Waitlist Only</em></h4>
       <div class="k-form-buttons">
         <button class="k-button k-primary" [disabled]="!canContinue"  (click)="clickContinue()">Continue</button>
         <button class="k-button" [disabled]="!canCancel"  (click)="clickCancel()">Cancel</button>

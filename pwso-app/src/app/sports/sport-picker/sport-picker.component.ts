@@ -30,6 +30,7 @@ export class SportPickerComponent implements OnInit {
     canContinue: boolean;
     showProgram = false;
     canCancel = false;
+    isWaitlist = false;
     isLoadingSport = false;
     isLoadingProgram = false;
 
@@ -88,10 +89,12 @@ export class SportPickerComponent implements OnInit {
     this.instruction = 'Select a Program / Location';
     this.selectedProgram = null;
     this.showProgram = true;
+    this.isWaitlist = false;
   }
 
   public setProgram(){
-    this.programList$.subscribe(programs => this.selectedProgram = programs[0]);
+    this.programList$.subscribe(programs => {this.selectedProgram = programs[0]});
+    this.isWaitlist = this.selectedProgram.isWaitlist;
     this.sportPickerForm.controls.program.setValue(this.selectedProgram);
     this.store.dispatch(new SelectByKey(Program, this.selectedProgram.id) );
     this.showProgram = false;
@@ -99,6 +102,7 @@ export class SportPickerComponent implements OnInit {
 
   public selectionProgram(value: Program): void {
     this.store.dispatch(new SelectByKey(Program, value.id ));
+    this.isWaitlist = value.isWaitlist;
     this.sportPickerForm.controls.program.setValue(value);
     this.enableContinueButton();
   }

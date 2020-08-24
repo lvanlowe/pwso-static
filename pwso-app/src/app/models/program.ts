@@ -5,4 +5,5 @@ export class Program {
   name: string;
   sportid: number;
   year?: number;
+  isWaitlist?: boolean;
  }
