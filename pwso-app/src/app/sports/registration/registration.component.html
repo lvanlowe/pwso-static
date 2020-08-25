@@ -152,6 +152,13 @@
               <button kendoButton (click)="close('yes')" primary="true">Yes</button>
           </kendo-dialog-actions>
       </kendo-dialog>
+      <kendo-dialog title="Please confirm if you want no text" *ngIf="textOpened" (close)="textClose('cancel')" [minWidth]="250" [width]="450">
+        <p style="margin: 30px; text-align: center;">You have not signed up for text notification, seklect yes if you do not wish to get text notifications for ant=y last minute cancelations?</p>
+        <kendo-dialog-actions>
+            <button kendoButton (click)="textClose('no')">No</button>
+            <button kendoButton (click)="textClose('yes')" primary="true">Yes</button>
+        </kendo-dialog-actions>
+    </kendo-dialog>
     </form>
   </div>
 

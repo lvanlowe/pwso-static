@@ -27,7 +27,8 @@ export class RegistrationComponent implements OnInit {
   public phoneTypes: Array<string> = ['home', 'mobile', 'other'];
 
   public mask = '(000) 000-0000';
-  public opened = false;
+  opened = false;
+  textOpened = false;
 
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
@@ -46,11 +47,6 @@ export class RegistrationComponent implements OnInit {
     .subscribe(saving => {
         this.isSaving = saving;
       });
-    this.registrationForm.valueChanges
-    .subscribe(value => {
-        console.log('form changed');
-        this.checkForm();
-    });
   }
 
 
@@ -93,13 +89,13 @@ export class RegistrationComponent implements OnInit {
     this.canDisplay = true;
   }
 
-  checkForm() {
-    // if (this.registrationForm.valid && !this.registrationForm.errors) {
-    //   this.canSubmit = true;
-    // } else {
-    //   this.canSubmit = false;
-    // }
-  }
+  // checkForm() {
+  //   // if (this.registrationForm.valid && !this.registrationForm.errors) {
+  //   //   this.canSubmit = true;
+  //   // } else {
+  //   //   this.canSubmit = false;
+  //   // }
+  // }
 
   clearForm() {
     this.registrationForm.reset();
@@ -120,13 +116,21 @@ export class RegistrationComponent implements OnInit {
     console.log(`Dialog result: ${status}`);
     this.opened = false;
     if (status === 'yes') {
+        this.checkForText();
+    }
+  }
+
+  public textClose(status) {
+    console.log(`Dialog result: ${status}`);
+    this.textOpened = false;
+    if (status === 'yes') {
         this.registerAthlete();
     }
   }
 
-  public open() {
-    this.opened = true;
-  }
+  // public open() {
+  //   this.opened = true;
+  // }
 
   public checkForWaitList() {
     this.store.pipe(select(currentProgram))
@@ -135,8 +139,19 @@ export class RegistrationComponent implements OnInit {
       if (this.currentProgram.isWaitlist === true ) {
         this.opened = true;
       } else {
-        this.registerAthlete();
+        this.checkForText();
       }
     });
+  }
+
+  public checkForText() {
+    if (this.registrationForm.controls.canText1.value ||
+      this.registrationForm.controls.canText2.value ||
+      this.registrationForm.controls.canText3.value) {
+        this.registerAthlete();
+    } else {
+      this.textOpened = true;
+    }
+
   }
 }
