@@ -8,13 +8,15 @@ import { Create } from '@briebug/ngrx-auto-entity';
 import { savingRegistrant } from 'src/app/state/registrant.state';
 import { currentProgram } from 'src/app/state/program.state';
 import { Program } from 'src/app/models/program';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes.guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   canDisplay = false;
   showCompletion = false;
   hasUniforms = false;
@@ -153,5 +155,9 @@ export class RegistrationComponent implements OnInit {
       this.textOpened = true;
     }
 
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    return this.registrationForm.pristine;
   }
 }

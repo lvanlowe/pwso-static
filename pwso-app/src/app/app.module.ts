@@ -31,6 +31,7 @@ import { Registrant } from './models/registrant';
 import { RegistrantService } from './services/registrant.service';
 import { RegistrationCompleteComponent } from './sports/registration-complete/registration-complete.component';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { PendingChangesGuard } from './services/pending-changes.guard';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     { provide: Sport, useClass: SportService },
     { provide: Program, useClass: ProgramService },
     { provide: Registrant, useClass: RegistrantService },
+    PendingChangesGuard,
   ],
   bootstrap: [AppComponent]
 })
