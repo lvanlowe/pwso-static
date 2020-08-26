@@ -20,4 +20,6 @@ export class Registrant {
   text1: boolean;
   text2?: boolean;
   text3?: boolean;
+  sportName?: string;
+  programName?: string;
  }

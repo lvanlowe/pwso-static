@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
-import { currentSportHasUniforms } from 'src/app/state/sport.state';
+import { currentSportHasUniforms, currentSport } from 'src/app/state/sport.state';
 import { Registrant } from 'src/app/models/registrant';
 import { Create } from '@briebug/ngrx-auto-entity';
 import { savingRegistrant } from 'src/app/state/registrant.state';
@@ -10,6 +10,7 @@ import { currentProgram } from 'src/app/state/program.state';
 import { Program } from 'src/app/models/program';
 import { ComponentCanDeactivate } from 'src/app/services/pending-changes.guard';
 import { Observable } from 'rxjs';
+import { Sport } from 'src/app/models/sport';
 
 @Component({
   selector: 'app-registration',
@@ -24,6 +25,7 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   isSaving: boolean;
   registrant: Registrant;
   currentProgram: Program;
+  currentSport: Sport;
   registrationForm: FormGroup;
   public listItems: Array<string> = ['Small', 'Medium', 'Large', 'X-Large', 'XXL'];
   public phoneTypes: Array<string> = ['home', 'mobile', 'other'];
@@ -104,10 +106,14 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   }
 
   registerAthlete() {
-    // this.registrant.firstName = this.registrationForm.controls.firstName.value;
-    // this.registrant.lastName = this.registrationForm.controls.lastName.value;
-    // this.registrant = {...this.registrationForm.value};
-    // this.registrationForm.markAllAsTouched();
+
+    this.registrant = {...this.registrationForm.value};
+    this.registrant.programId = this.currentProgram.id;
+    this.registrant.programName = this.currentProgram.name;
+    this.registrant.sportId = this.currentProgram.sportid;
+    this.registrant.sportName = this.currentSport.name;
+    console.log(this.registrant);
+    this.registrationForm.markAsPristine();
 
     this.store.dispatch(new Create(Registrant, this.registrant));
     this.canDisplay  = false;
@@ -130,14 +136,14 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
     }
   }
 
-  // public open() {
-  //   this.opened = true;
-  // }
-
   public checkForWaitList() {
+    this.store.pipe(select(currentSport))
+    .subscribe(sport => {
+      this.currentSport = sport;
+    });
     this.store.pipe(select(currentProgram))
-    .subscribe(loading => {
-      this.currentProgram = loading;
+    .subscribe(program => {
+      this.currentProgram = program;
       if (this.currentProgram.isWaitlist === true ) {
         this.opened = true;
       } else {
