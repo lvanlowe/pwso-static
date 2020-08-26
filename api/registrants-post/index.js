@@ -8,7 +8,7 @@ module.exports = async function (context, req) {
   };
 
   try {
-    const newRegistrant = data.addRegistrant(registrant);
+    const newRegistrant = data.addRegistrant(req.body);
     context.res.status(201).json(newRegistrant);
   } catch (error) {
     context.res.status(500).send(error);
