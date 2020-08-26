@@ -32,6 +32,7 @@ import { RegistrantService } from './services/registrant.service';
 import { RegistrationCompleteComponent } from './sports/registration-complete/registration-complete.component';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { PendingChangesGuard } from './services/pending-changes.guard';
+import { RegistrantEffects } from './state/registrant.state';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { PendingChangesGuard } from './services/pending-changes.guard';
     HttpClientModule,
     StoreModule.forRoot(appReducer, { metaReducers: appMetaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([RegistrantEffects]),
     NgrxAutoEntityModule.forRoot(),
     ButtonsModule,
     BrowserAnimationsModule,

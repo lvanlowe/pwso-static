@@ -23,6 +23,8 @@ export class RegistrationCompleteComponent implements OnInit {
   }
 
   buildMessage(): string {
+    let message = 'The registration has been submitted for ';
+
     return 'When the registration is complete you will get an Email';
   }
 
