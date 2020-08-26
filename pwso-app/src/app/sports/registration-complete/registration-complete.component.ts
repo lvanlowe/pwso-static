@@ -18,9 +18,12 @@ export class RegistrationCompleteComponent implements OnInit {
 
   ngOnInit() {
     this.buildCompletionForm(this.formBuilder);
-    this.completionForm.controls.message.setValue('When the registration is complete you will get an Email');
+    this.completionForm.controls.message.setValue(this.buildMessage());
     this.completionForm.controls.message.disable();
+  }
 
+  buildMessage(): string {
+    return 'When the registration is complete you will get an Email';
   }
 
   buildCompletionForm(formBuilder: FormBuilder) {
