@@ -7,13 +7,13 @@
   <div *ngIf="canDisplay" class="example-wrap">
     <form class="k-form" [formGroup]="registrationForm">
         <fieldset class="k-form-fieldset">
-            <legend class="k-form-legend">Enter Athlete Information</legend>
+            <legend class="k-form-legend">Enter {{registrantType}} Information</legend>
             <mat-progress-bar mode="query" *ngIf="isSaving"></mat-progress-bar>
             <kendo-formfield>
                 <kendo-label [for]="firstName" text="First Name"></kendo-label>
                 <input formControlName="firstName" kendoTextBox #firstName/>
 
-                <kendo-formhint>Athlete first name</kendo-formhint>
+                <kendo-formhint>{{registrantType}} first name</kendo-formhint>
                 <kendo-formerror>Error: First name is required</kendo-formerror>
             </kendo-formfield>
 
@@ -21,7 +21,7 @@
                 <kendo-label [for]="lastName" text="Last Name"></kendo-label>
                 <input formControlName="lastName" kendoTextBox #lastName required/>
 
-                <kendo-formhint>Athlete last name</kendo-formhint>
+                <kendo-formhint>{{registrantType}} last name</kendo-formhint>
                 <kendo-formerror>Error: Last name is required</kendo-formerror>
             </kendo-formfield>
 
@@ -29,10 +29,10 @@
               <kendo-label [for]="nickName" text="Nick Name" [optional]="true"></kendo-label>
               <input formControlName="nickName" kendoTextBox #nickName/>
 
-              <kendo-formhint>Athlete nick name</kendo-formhint>
+              <kendo-formhint>{{registrantType}} nick name</kendo-formhint>
           </kendo-formfield>
 
-            <kendo-formfield *ngIf="hasUniforms">
+            <kendo-formfield *ngIf="displaySize">
                 <kendo-label [for]="size" text="Jersey Size"></kendo-label>
                 <kendo-dropdownlist #size formControlName="size" [data]="listItems">
                 </kendo-dropdownlist>
@@ -44,7 +44,7 @@
                 <kendo-label [for]="email1" text="Email"></kendo-label>
                 <input formControlName="email1" kendoTextBox #email1/>
 
-                <kendo-formhint>email for athlete correspondance</kendo-formhint>
+                <kendo-formhint>email for {{registrantType}} correspondance</kendo-formhint>
                 <kendo-formerror *ngIf="registrationForm.controls.email1.errors?.email">Error: Not valid email format</kendo-formerror>
                 <kendo-formerror *ngIf="registrationForm.controls.email1.errors?.required">Error: at least 1 email is required</kendo-formerror>
 
@@ -54,7 +54,7 @@
               <kendo-label [for]="email2" text="Email" [optional]="true" ></kendo-label>
               <input formControlName="email2" kendoTextBox #email2/>
 
-              <kendo-formhint>email for athlete correspondance</kendo-formhint>
+              <kendo-formhint>email for {{registrantType}} correspondance</kendo-formhint>
               <kendo-formerror>Error: Not valid email format</kendo-formerror>
           </kendo-formfield>
 
@@ -62,7 +62,7 @@
             <kendo-label [for]="email3" text="Email" [optional]="true" ></kendo-label>
             <input formControlName="email3" kendoTextBox #email3/>
 
-            <kendo-formhint>email for athlete correspondance</kendo-formhint>
+            <kendo-formhint>email for {{registrantType}} correspondance</kendo-formhint>
             <kendo-formerror>Error: Not valid email format</kendo-formerror>
         </kendo-formfield>
 
@@ -70,7 +70,7 @@
           <kendo-formfield>
             <kendo-label [for]="phone1" text="Phone"></kendo-label>
             <kendo-maskedtextbox formControlName="phone1" [mask]=mask #phone1></kendo-maskedtextbox>
-            <kendo-formhint>phone for athlete</kendo-formhint>
+            <kendo-formhint>phone for {{registrantType}}</kendo-formhint>
             <kendo-formerror>Error: Not valid phone format</kendo-formerror>
             <kendo-formerror *ngIf="registrationForm.controls.phone1.errors?.required">Error: at least 1 phone number is required</kendo-formerror>
           </kendo-formfield>
@@ -95,7 +95,7 @@
           <kendo-formfield>
             <kendo-label [for]="phone2" text="Phone" [optional]="true" ></kendo-label>
             <kendo-maskedtextbox formControlName="phone2" [mask]=mask #phone2></kendo-maskedtextbox>
-            <kendo-formhint>phone for athlete</kendo-formhint>
+            <kendo-formhint>phone for {{registrantType}}</kendo-formhint>
             <kendo-formerror>Error: Not valid phone format</kendo-formerror>
           </kendo-formfield>
 
@@ -119,7 +119,7 @@
           <kendo-formfield>
             <kendo-label [for]="phone3" text="Phone" [optional]="true" ></kendo-label>
             <kendo-maskedtextbox formControlName="phone3" [mask]=mask #phone3></kendo-maskedtextbox>
-            <kendo-formhint>phone for athlete</kendo-formhint>
+            <kendo-formhint>phone for {{registrantType}}</kendo-formhint>
             <kendo-formerror>Error: Not valid phone format</kendo-formerror>
           </kendo-formfield>
 

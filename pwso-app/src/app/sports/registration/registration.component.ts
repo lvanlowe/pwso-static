@@ -26,6 +26,7 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   registrant: Registrant;
   currentProgram: Program;
   currentSport: Sport;
+  registrantType = 'Athlete';
   registrationForm: FormGroup;
   public listItems: Array<string> = ['Small', 'Medium', 'Large', 'X-Large', 'XXL'];
   public phoneTypes: Array<string> = ['home', 'mobile', 'other'];
@@ -35,6 +36,13 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   textOpened = false;
 
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
+  get displaySize(): boolean {
+    if (this.registrantType === 'Athlete') {
+      return this.hasUniforms;
+    } else {
+      return false;
+    }
+  }
 
   ngOnInit() {
     this.buildRegistrationForm(this.formBuilder);
@@ -81,7 +89,16 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   }
 
   showScreen(canShow) {
-    this.canDisplay = canShow;
+    if (canShow === 'C' ) {
+      this.canDisplay = false;
+    } else {
+      this.canDisplay = true;
+      if (canShow === 'A') {
+        this.registrantType = 'Athlete';
+      } else {
+        this.registrantType = 'Volunteer';
+      }
+    }
   }
 
   restart(refresh) {
@@ -112,6 +129,11 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
     this.registrant.programName = this.currentProgram.name;
     this.registrant.sportId = this.currentProgram.sportid;
     this.registrant.sportName = this.currentSport.name;
+    if (this.registrantType === 'Athlete') {
+      this.registrant.isVolunteer = false;
+    } else {
+      this.registrant.isVolunteer = true;
+    }
     console.log(this.registrant);
     this.registrationForm.markAsPristine();
 

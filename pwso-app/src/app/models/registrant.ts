@@ -22,4 +22,5 @@ export class Registrant {
   text3?: boolean;
   sportName?: string;
   programName?: string;
+  isVolunteer?: boolean;
  }

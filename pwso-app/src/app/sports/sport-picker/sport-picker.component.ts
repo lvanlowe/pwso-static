@@ -61,6 +61,7 @@ export class SportPickerComponent implements OnInit {
       {
         sport: new FormControl(null, Validators.required),
         program: new FormControl(null, Validators.required),
+        isAthlete: new FormControl(true),
       }
     );
   }
@@ -117,7 +118,12 @@ export class SportPickerComponent implements OnInit {
   }
 
   clickContinue() {
-    this.sportSelected.emit(this.canContinue);
+    console.log(this.sportPickerForm.controls.isAthlete.value);
+    if (this.sportPickerForm.controls.isAthlete.value) {
+      this.sportSelected.emit('A');
+    } else {
+      this.sportSelected.emit('V');
+    }
     this.disableControls();
     this.canContinue = false;
     this.instruction = 'Press "Continue" button to continue registraion';
@@ -126,11 +132,13 @@ export class SportPickerComponent implements OnInit {
   public disableControls() {
     this.sportPickerForm.controls.sport.disable();
     this.sportPickerForm.controls.program.disable();
+    this.sportPickerForm.controls.isAthlete.disable();
   }
 
   public enableControls() {
     this.sportPickerForm.controls.sport.enable();
     this.sportPickerForm.controls.program.enable();
+    this.sportPickerForm.controls.isAthlete.enable();
   }
 
   public  clickCancel() {
@@ -145,7 +153,7 @@ export class SportPickerComponent implements OnInit {
     this.store.dispatch(new Deselect(Program));
     this.store.dispatch(new Deselect(Sport));
     this.instruction = 'Select a sport for registration';
-    this.sportSelected.emit(this.canContinue);
+    this.sportSelected.emit('C');
   }
 
 }
