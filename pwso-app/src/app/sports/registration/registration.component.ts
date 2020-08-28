@@ -124,10 +124,10 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
         phone1Type: new FormControl('', Validators.required),
         canText1: new FormControl(),
         phone2: new FormControl(),
-        phone2Type: new FormControl(),
+        phone2Type: new FormControl('', Validators.required),
         canText2: new FormControl(),
         phone3: new FormControl(),
-        phone3Type: new FormControl(),
+        phone3Type: new FormControl('', Validators.required),
         canText3: new FormControl()
       }
 
@@ -171,22 +171,18 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   checkPhone2() {
     if (this.registrationForm.controls.phone2.valid) {
       this.registrationForm.controls.phone2Type.enable();
-      this.registrationForm.controls.phone2Type.setValidators([Validators.required]);
     } else {
       this.registrationForm.controls.phone2Type.disable();
       this.registrationForm.controls.phone2Type.setValue('');
-      this.registrationForm.controls.phone2Type.clearValidators();
     }
   }
 
   checkPhone3() {
     if (this.registrationForm.controls.phone3.valid) {
       this.registrationForm.controls.phone3Type.enable();
-      this.registrationForm.controls.phone3Type.setValidators([Validators.required]);
     } else {
       this.registrationForm.controls.phone3Type.disable();
       this.registrationForm.controls.phone3Type.setValue('');
-      this.registrationForm.controls.phone3Type.clearValidators();
     }
   }
 
@@ -232,6 +228,7 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   }
 
   public checkForWaitList() {
+    this.registrationForm.markAllAsTouched();
     if (this.registrationForm.valid) {
       this.store.pipe(select(currentSport))
       .subscribe(sport => {
