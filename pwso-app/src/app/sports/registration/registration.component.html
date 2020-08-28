@@ -77,12 +77,12 @@
 
           <kendo-formfield>
               <kendo-label [for]="phone1Type"  text="type"></kendo-label>
-              <kendo-dropdownlist #phone1Type formControlName="phone1Type" [data]="phoneTypes">
+              <kendo-dropdownlist #phone1Type formControlName="phone1Type" [data]="phoneTypes" >
               </kendo-dropdownlist>
               <kendo-formerror>Error: type required when phone number entered</kendo-formerror>
           </kendo-formfield>
 
-          <kendo-formfield>
+          <kendo-formfield *ngIf=showText1>
               <div class="k-checkbox-wrap">
                   <kendo-label [for]="canText1" class="k-checkbox-label" text="I want to receive text"></kendo-label>
                   <input #canText1 type="checkbox" kendoCheckBox formControlName="canText1"/>
@@ -106,7 +106,7 @@
               <kendo-formerror>Error: type required when phone number entered</kendo-formerror>
           </kendo-formfield>
 
-          <kendo-formfield>
+          <kendo-formfield *ngIf=showText2>
               <div class="k-checkbox-wrap">
                   <kendo-label [for]="canText2" class="k-checkbox-label" text="I want to receive text"></kendo-label>
                   <input #canText2 type="checkbox" kendoCheckBox formControlName="canText2"/>
@@ -130,7 +130,7 @@
               <kendo-formerror>Error: type required when phone number entered</kendo-formerror>
           </kendo-formfield>
 
-          <kendo-formfield>
+          <kendo-formfield *ngIf=showText3>
               <div class="k-checkbox-wrap">
                   <kendo-label [for]="canText3" class="k-checkbox-label" text="I want to receive text"></kendo-label>
                   <input #canText3 type="checkbox" kendoCheckBox formControlName="canText3"/>

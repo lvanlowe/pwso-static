@@ -22,6 +22,9 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   showCompletion = false;
   hasUniforms = false;
   canRegister = true;
+  showText1 = false;
+  showText2 = false;
+  showText3 = false;
   isSaving: boolean;
   registrantSaved = false;
   registrant: Registrant;
@@ -66,6 +69,42 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
           this.showCompletion = true;
         }
       });
+
+    this.registrationForm.controls.phone1.valueChanges.subscribe(() => {
+        this.checkPhone1();
+      });
+
+    this.registrationForm.controls.phone2.valueChanges.subscribe(() => {
+        this.checkPhone2();
+      });
+
+    this.registrationForm.controls.phone3.valueChanges.subscribe(() => {
+        this.checkPhone3();
+      });
+
+    this.registrationForm.controls.phone1Type.valueChanges.subscribe(() => {
+        if (this.registrationForm.controls.phone1Type.value === 'mobile') {
+          this.showText1 = true;
+        } else {
+          this.showText1 = false;
+        }
+      });
+
+    this.registrationForm.controls.phone2Type.valueChanges.subscribe(() => {
+        if (this.registrationForm.controls.phone2Type.value === 'mobile') {
+          this.showText2 = true;
+        } else {
+          this.showText2 = false;
+        }
+      });
+
+    this.registrationForm.controls.phone3Type.valueChanges.subscribe(() => {
+        if (this.registrationForm.controls.phone3Type.value === 'mobile') {
+          this.showText3 = true;
+        } else {
+          this.showText3 = false;
+        }
+      });
   }
 
 
@@ -91,8 +130,11 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
         phone3Type: new FormControl(),
         canText3: new FormControl()
       }
-    );
 
+    );
+    this.registrationForm.controls.phone1Type.disable();
+    this.registrationForm.controls.phone2Type.disable();
+    this.registrationForm.controls.phone3Type.disable();
   }
 
   showScreen(canShow) {
@@ -117,13 +159,36 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
     this.canDisplay = true;
   }
 
-  // checkForm() {
-  //   // if (this.registrationForm.valid && !this.registrationForm.errors) {
-  //   //   this.canSubmit = true;
-  //   // } else {
-  //   //   this.canSubmit = false;
-  //   // }
-  // }
+  checkPhone1() {
+    if (this.registrationForm.controls.phone1.valid) {
+      this.registrationForm.controls.phone1Type.enable();
+    } else {
+      this.registrationForm.controls.phone1Type.disable();
+      this.registrationForm.controls.phone1Type.setValue('');
+    }
+  }
+
+  checkPhone2() {
+    if (this.registrationForm.controls.phone2.valid) {
+      this.registrationForm.controls.phone2Type.enable();
+      this.registrationForm.controls.phone2Type.setValidators([Validators.required]);
+    } else {
+      this.registrationForm.controls.phone2Type.disable();
+      this.registrationForm.controls.phone2Type.setValue('');
+      this.registrationForm.controls.phone2Type.clearValidators();
+    }
+  }
+
+  checkPhone3() {
+    if (this.registrationForm.controls.phone3.valid) {
+      this.registrationForm.controls.phone3Type.enable();
+      this.registrationForm.controls.phone3Type.setValidators([Validators.required]);
+    } else {
+      this.registrationForm.controls.phone3Type.disable();
+      this.registrationForm.controls.phone3Type.setValue('');
+      this.registrationForm.controls.phone3Type.clearValidators();
+    }
+  }
 
   clearForm() {
     this.registrationForm.reset();
@@ -131,6 +196,7 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
 
   registerAthlete() {
 
+    console.log('valid; ' + this.registrationForm.valid);
     this.registrant = {...this.registrationForm.value};
     this.registrant.programId = this.currentProgram.id;
     this.registrant.programName = this.currentProgram.name;
@@ -166,19 +232,21 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   }
 
   public checkForWaitList() {
-    this.store.pipe(select(currentSport))
-    .subscribe(sport => {
-      this.currentSport = sport;
-    });
-    this.store.pipe(select(currentProgram))
-    .subscribe(program => {
-      this.currentProgram = program;
-      if (this.currentProgram.isWaitlist === true ) {
-        this.opened = true;
-      } else {
-        this.checkForText();
-      }
-    });
+    if (this.registrationForm.valid) {
+      this.store.pipe(select(currentSport))
+      .subscribe(sport => {
+        this.currentSport = sport;
+      });
+      this.store.pipe(select(currentProgram))
+      .subscribe(program => {
+        this.currentProgram = program;
+        if (this.currentProgram.isWaitlist === true ) {
+          this.opened = true;
+        } else {
+          this.checkForText();
+        }
+      });
+    }
   }
 
   public checkForText() {
