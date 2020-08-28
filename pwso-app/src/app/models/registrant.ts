@@ -14,12 +14,12 @@ export class Registrant {
   phone1: string;
   phone2?: string;
   phone3?: string;
-  type1: string;
-  type2?: string;
-  type3?: string;
-  text1: boolean;
-  text2?: boolean;
-  text3?: boolean;
+  phoneType1: string;
+  phoneType2?: string;
+  phoneType3?: string;
+  canText1: boolean;
+  canText2?: boolean;
+  canText3?: boolean;
   sportName?: string;
   programName?: string;
   isVolunteer?: boolean;

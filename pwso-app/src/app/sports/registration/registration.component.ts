@@ -23,6 +23,7 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   hasUniforms = false;
   canRegister = true;
   isSaving: boolean;
+  registrantSaved = false;
   registrant: Registrant;
   currentProgram: Program;
   currentSport: Sport;
@@ -57,7 +58,13 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
         });
     this.store.pipe(select(savingRegistrant))
     .subscribe(saving => {
+        console.log('issaving');
         this.isSaving = saving;
+        if (!this.isSaving && this.registrantSaved) {
+          this.registrantSaved = false;
+          this.canDisplay  = false;
+          this.showCompletion = true;
+        }
       });
   }
 
@@ -138,8 +145,8 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
     this.registrationForm.markAsPristine();
 
     this.store.dispatch(new Create(Registrant, this.registrant));
-    this.canDisplay  = false;
-    this.showCompletion = true;
+    this.registrantSaved = true;
+
   }
 
   public close(status) {

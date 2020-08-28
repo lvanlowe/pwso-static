@@ -13,6 +13,7 @@ export const { initialState, selectors} = buildState(Registrant);
 
 export const {
   selectIsSaving: savingRegistrant,
+  selectCurrentEntity: currentRegistrant,
 } = selectors;
 
 export function registrantReducer(state = initialState): IEntityState<Registrant> {
