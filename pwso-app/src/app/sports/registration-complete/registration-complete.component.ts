@@ -35,19 +35,24 @@ export class RegistrationCompleteComponent implements OnInit {
     this.store.pipe(select(currentRegistrant))
     .subscribe(person => {
       console.log(person);
-      this.registrant = person;
-      if (this.registrant.isVolunteer) {
-        this.message = this.message + 'volunteer ';
+      if (person) {
+        this.registrant = person;
+        if (this.registrant.isVolunteer) {
+          this.message = this.message + 'volunteer ';
+        } else {
+          this.message = this.message + 'athlete ';
+        }
+        console.log(this.message);
+        this.message = this.buildName(this.message);
+        console.log(this.message);
+        this.message = this.buildEmail(this.message);
+        console.log(this.message);
+        this.message = this.buildText(this.message);
+        console.log(this.message);
       } else {
-        this.message = this.message + 'athlete ';
+        this.message = 'A fatal error has occurred, please try again later.';
       }
-      console.log(this.message);
-      this.message = this.buildName(this.message);
-      console.log(this.message);
-      this.message = this.buildEmail(this.message);
-      console.log(this.message);
-      this.message = this.buildText(this.message);
-      console.log(this.message);
+
     });
 
 

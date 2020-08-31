@@ -8,6 +8,7 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { SelectByKey, Deselect, LoadAll } from '@briebug/ngrx-auto-entity';
 import { availablePrograms, availableProgramsCount, loadedProgram, loadingProgram } from 'src/app/state/program.state';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class SportPickerComponent implements OnInit {
 
   @Output() sportSelected = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
+  constructor(private formBuilder: FormBuilder, private router: Router  , private store: Store<AppState>) { }
 
     sportList$: Observable<Sport[]>;
     programList$: Observable<Program[]>;
@@ -51,9 +52,30 @@ export class SportPickerComponent implements OnInit {
       }
     });
     this.store.pipe(select(loadingSport))
-      .subscribe(loading => {this.isLoadingSport = loading; });
+      .subscribe(loading => {
+        this.isLoadingSport = loading;
+        if (!loading) {
+          this.store.pipe(select(loadedSport))
+          .subscribe(loadedat => {
+            if (!loadedat) {
+              this.router.navigate(['/dashboard']);
+            }
+        });
+        }
+
+    });
     this.store.pipe(select(loadingProgram))
-      .subscribe(loading => {this.isLoadingProgram = loading; });
+      .subscribe(loading => {
+        this.isLoadingProgram = loading;
+        if (!loading) {
+          this.store.pipe(select(loadedProgram))
+          .subscribe(loadedat => {
+            if (!loadedat) {
+              this.router.navigate(['/dashboard']);
+            }
+        });
+      }
+    });
   }
 
   buildPickerForm(formBuilder: FormBuilder) {
