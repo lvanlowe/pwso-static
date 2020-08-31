@@ -1,4 +1,4 @@
-import { buildState, IEntityState, EntityAction, EntityActions, ofEntityType, EntityActionTypes, CreateSuccess, SelectByKey } from '@briebug/ngrx-auto-entity';
+import { buildState, IEntityState, EntityAction, EntityActions, ofEntityType, EntityActionTypes, CreateSuccess, SelectByKey, CreateFailure } from '@briebug/ngrx-auto-entity';
 import { Program } from '../models/program';
 import { createSelector, Action, Store } from '@ngrx/store';
 import { currentSportid } from './sport.state';
@@ -68,14 +68,14 @@ export class RegistrantEffects {
     { dispatch: false }
   );
 
-  // fundingRequestNoticeReplaceFailure$: Observable<Action> = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofEntityType(FundingRequestNotice, EntityActionTypes.ReplaceFailure),
-  //       tap((failure: ReplaceFailure<FundingRequestNotice>) => {
-  //         this.uiService.handleError(failure.error)
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // )
+  registrantCreateFailure$: Observable<Action> = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofEntityType(Registrant, EntityActionTypes.CreateFailure),
+        tap((failure: CreateFailure<Registrant>) => {
+          alert('ERROR: A fatal error has occured, try again later')
+        })
+      ),
+    { dispatch: false }
+  )
 }
