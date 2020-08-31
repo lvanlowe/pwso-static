@@ -2,7 +2,9 @@
   "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "",
-    "FUNCTIONS_WORKER_RUNTIME": "node"
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "StorageConnection": "DefaultEndpointsProtocol=https;AccountName=pwsostorage2020;AccountKey=ZrDRg0JJK1Q1+tMNYTWwZKobqcT/Z89m9+LV7CXPac2uZfbAHr/9yb0NX4EbxB4ZgyYYoB1cTGx4Gv7Vm3kZbQ==;EndpointSuffix=core.windows.net"
+ 
   },
 
     "Host": {
