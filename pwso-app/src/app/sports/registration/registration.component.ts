@@ -51,14 +51,6 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
   ngOnInit() {
     this.buildRegistrationForm(this.formBuilder);
     this.registrationForm.markAsPristine();
-    this.store.pipe(select(currentSportHasUniforms))
-      .subscribe(hasUniforms => {
-          console.log('check uniforms');
-          this.hasUniforms = hasUniforms;
-          if (hasUniforms) {
-            this.registrationForm.controls.size.setValidators([Validators.required]);
-          }
-        });
     this.store.pipe(select(savingRegistrant))
     .subscribe(saving => {
         console.log('issaving');
@@ -116,7 +108,7 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
         firstName: new FormControl('', Validators.required),
         lastName: new FormControl('', Validators.required),
         nickName: new FormControl(),
-        size: new FormControl(),
+        size: new FormControl('', Validators.required),
         email1: new FormControl('', [Validators.email, Validators.required]),
         email2: new FormControl('', Validators.email),
         email3: new FormControl('', Validators.email),
@@ -144,8 +136,19 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
       this.canDisplay = true;
       if (canShow === 'A') {
         this.registrantType = 'Athlete';
+        this.store.pipe(select(currentSportHasUniforms))
+        .subscribe(hasUniforms => {
+            console.log('check uniforms');
+            this.hasUniforms = hasUniforms;
+            if (hasUniforms) {
+              this.registrationForm.controls.size.enable();
+            } else {
+              this.registrationForm.controls.size.disable();
+            }
+          });
       } else {
         this.registrantType = 'Volunteer';
+        this.registrationForm.controls.size.disable();
       }
     }
   }
@@ -198,6 +201,7 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
     this.registrant.programName = this.currentProgram.name;
     this.registrant.sportId = this.currentProgram.sportid;
     this.registrant.sportName = this.currentSport.name;
+    this.registrant.isWaitlisted = this.currentProgram.isWaitlist;
     if (this.registrantType === 'Athlete') {
       this.registrant.isVolunteer = false;
     } else {
