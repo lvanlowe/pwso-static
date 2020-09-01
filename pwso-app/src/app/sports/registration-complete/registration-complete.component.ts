@@ -42,8 +42,10 @@ export class RegistrationCompleteComponent implements OnInit {
         } else {
           this.message = this.message + 'athlete ';
         }
+
         console.log(this.message);
         this.message = this.buildName(this.message);
+        this.message = this.message + 'in sport ' + this.registrant.sportName + '.';
         console.log(this.message);
         this.message = this.buildEmail(this.message);
         console.log(this.message);
@@ -97,7 +99,7 @@ export class RegistrationCompleteComponent implements OnInit {
       message = message + '( ' + this.registrant.nickName + ' ) ';
     }
 
-    message = message + this.registrant.lastName + '. ';
+    message = message + this.registrant.lastName + ' ';
     return message;
   }
 

@@ -23,4 +23,5 @@ export class Registrant {
   sportName?: string;
   programName?: string;
   isVolunteer?: boolean;
+  isWaitlisted?: boolean;
  }
