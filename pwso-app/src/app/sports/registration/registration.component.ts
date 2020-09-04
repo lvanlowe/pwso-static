@@ -114,13 +114,13 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
         email3: new FormControl('', Validators.email),
         phone1: new FormControl('', Validators.required),
         phone1Type: new FormControl('', Validators.required),
-        canText1: new FormControl(),
+        canText1: new FormControl(false),
         phone2: new FormControl(),
         phone2Type: new FormControl('', Validators.required),
-        canText2: new FormControl(),
+        canText2: new FormControl(false),
         phone3: new FormControl(),
         phone3Type: new FormControl('', Validators.required),
-        canText3: new FormControl()
+        canText3: new FormControl(false)
       }
 
     );
