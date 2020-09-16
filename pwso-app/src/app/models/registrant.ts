@@ -24,4 +24,5 @@ export class Registrant {
   programName?: string;
   isVolunteer?: boolean;
   isWaitlisted?: boolean;
+  sender?: string;
  }

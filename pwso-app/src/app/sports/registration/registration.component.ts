@@ -202,6 +202,7 @@ export class RegistrationComponent implements OnInit, ComponentCanDeactivate  {
     this.registrant.sportId = this.currentProgram.sportid;
     this.registrant.sportName = this.currentSport.name;
     this.registrant.isWaitlisted = this.currentProgram.isWaitlist;
+    this.registrant.sender = this.currentSport.email;
     if (this.registrantType === 'Athlete') {
       this.registrant.isVolunteer = false;
     } else {

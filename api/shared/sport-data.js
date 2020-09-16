@@ -1,14 +1,14 @@
 const data = {
     sports: [
-        { id: 1 , name: 'Bowling', canRegister: false, hasUniform: false, isTeamSport: false},
-        { id: 2 , name: 'Soccer', canRegister: true, hasUniform: true, isTeamSport: true},
-        { id: 3 , name: 'Bocce', canRegister: true, hasUniform: false, isTeamSport: false},
-        { id: 4 , name: 'Basketball', canRegister: false, hasUniform: true, isTeamSport: true},
-        { id: 5 , name: 'Floor Hockey', canRegister: false, hasUniform: true, isTeamSport: true},
-        { id: 6 , name: 'Powerlifting', canRegister: false, hasUniform: false, isTeamSport: false},
-        { id: 7 , name: 'Aquatics', canRegister: false, hasUniform: false, isTeamSport: false},
-        { id: 8 , name: 'Track', canRegister: true, hasUniform: true, isTeamSport: false},
-        { id: 9 , name: 'Tennis', canRegister: true, hasUniform: false, isTeamSport: false},
+        { id: 1 , name: 'Bowling', canRegister: false, hasUniform: false, isTeamSport: false, email:'basketballCoordinator@pwsova.org'},
+        { id: 2 , name: 'Soccer', canRegister: true, hasUniform: true, isTeamSport: true, email:'basketballCoordinator@pwsova.org'},
+        { id: 3 , name: 'Bocce', canRegister: true, hasUniform: false, isTeamSport: false, email:'basketballCoordinator@pwsova.org'},
+        { id: 4 , name: 'Basketball', canRegister: false, hasUniform: true, isTeamSport: true, email:'basketballCoordinator@pwsova.org'},
+        { id: 5 , name: 'Floor Hockey', canRegister: false, hasUniform: true, isTeamSport: true, email:'basketballCoordinator@pwsova.org'},
+        { id: 6 , name: 'Powerlifting', canRegister: false, hasUniform: false, isTeamSport: false, email:'basketballCoordinator@pwsova.org'},
+        { id: 7 , name: 'Aquatics', canRegister: false, hasUniform: false, isTeamSport: false, email:'basketballCoordinator@pwsova.org'},
+        { id: 8 , name: 'Track', canRegister: true, hasUniform: true, isTeamSport: false, email:'webmaster@pwsova.org'},
+        { id: 9 , name: 'Tennis', canRegister: true, hasUniform: false, isTeamSport: false, email:'basketballCoordinator@pwsova.org'},
     ]
 };
 
