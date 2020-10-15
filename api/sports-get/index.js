@@ -1,10 +1,10 @@
-const data = require('../shared/sport-data');
 
 module.exports = async function (context, req) {
   try {
-    const sports = data.getSports();
-    context.res.status(200).json(sports);
+    context.log('Sport entity: ' + context.bindings.sportEntity);
+    context.res.status(200).json(context.bindings.sportEntity);
   } catch (error) {
     context.res.status(500).send(error);
   }
+
 };
