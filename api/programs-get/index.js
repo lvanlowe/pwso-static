@@ -1,9 +1,8 @@
-const data = require('../shared/program-data');
 
 module.exports = async function (context, req) {
   try {
-    const programs = data.getPrograms();        
-    context.res.status(200).json(programs);
+    context.log('Program entity: ' + context.bindings.programEntity);
+    context.res.status(200).json(context.bindings.programEntity);
   } catch (error) {
     context.res.status(500).send(error);
   }
