@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegistrationComponent } from './sports/registration/registration.component';
 import { PendingChangesGuard } from './services/pending-changes.guard';
+import { MedicalAddComponent } from './medical/medical-add/medical-add.component';
 
 // const routes: Routes = [];
 
@@ -12,6 +13,11 @@ export const routes = [
   { path: 'registration',
     component: RegistrationComponent,
     text: 'Registration',
+    icon: 'k-i-wrench',
+    canDeactivate: [PendingChangesGuard] },
+  { path: 'medical',
+    component: MedicalAddComponent,
+    text: 'Medical',
     icon: 'k-i-wrench',
     canDeactivate: [PendingChangesGuard] },
   // { path: 'nursery', component: NurseryReviewComponent, text: 'Nursery', icon: 'k-i-preview' },
