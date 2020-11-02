@@ -35,6 +35,7 @@ import { PendingChangesGuard } from './services/pending-changes.guard';
 import { RegistrantEffects } from './state/registrant.state';
 import { SportEffects } from './state/sport.state';
 import { ProgramEffects } from './state/program.state';
+import { MedicalAddComponent } from './medical/medical-add/medical-add.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ProgramEffects } from './state/program.state';
     DashboardComponent,
     RegistrationComponent,
     SportPickerComponent,
-    RegistrationCompleteComponent
+    RegistrationCompleteComponent,
+    MedicalAddComponent
   ],
   imports: [
     BrowserModule,
