@@ -20,11 +20,16 @@ namespace api
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
+            string filter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "Programs");
 
-            log.LogInformation("C# HTTP trigger function processed a request.");
-            TableQuery<Programs> rangeQuery = new TableQuery<Programs>();
-            var sports = table.ExecuteQuery(rangeQuery, null);
-            return new OkObjectResult(sports);
+            TableQuery<Programs> tableQuery = new TableQuery<Programs>().Where(filter);
+
+            //TableQuery<Programs> rangeQuery = new TableQuery<Programs>();
+
+            var result = table.ExecuteQuery(tableQuery);
+
+            //var sports = table.ExecuteQuery(r/*/*a*/*/ngeQuery, null);
+            return new OkObjectResult(result);
         }
 
         public class Programs : TableEntity
