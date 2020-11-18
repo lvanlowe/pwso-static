@@ -36,6 +36,8 @@ import { RegistrantEffects } from './state/registrant.state';
 import { SportEffects } from './state/sport.state';
 import { ProgramEffects } from './state/program.state';
 import { MedicalAddComponent } from './medical/medical-add/medical-add.component';
+import { UploadModule } from '@progress/kendo-angular-upload';
+
 
 
 @NgModule({
@@ -69,6 +71,7 @@ import { MedicalAddComponent } from './medical/medical-add/medical-add.component
     LabelModule,
     DateInputsModule,
     DialogsModule,
+    UploadModule,
   ],
   providers: [
     { provide: Sport, useClass: SportService },

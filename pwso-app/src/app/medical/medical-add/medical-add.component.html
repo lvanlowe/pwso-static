@@ -1,1 +1,37 @@
 <p>medical-add works!</p>
+<form class="k-form" [formGroup]="medicalForm">
+  <fieldset class="k-form-fieldset">
+    <legend class="k-form-legend">Enter Athlete Information</legend>
+    <div class="wrap">
+      <kendo-formfield>
+        <kendo-label [for]="firstName" text="First Name"></kendo-label>
+        <input formControlName="firstName" kendoTextBox #firstName/>
+
+        <kendo-formhint>first name</kendo-formhint>
+        <kendo-formerror>Error: First name is required</kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+        <kendo-label [for]="lastName" text="Last Name"></kendo-label>
+        <input formControlName="lastName" kendoTextBox #lastName required/>
+
+        <kendo-formhint> last name</kendo-formhint>
+        <kendo-formerror>Error: Last name is required</kendo-formerror>
+    </kendo-formfield>
+
+    <kendo-formfield>
+      <kendo-label [for]="nickName" text="Nick Name" [optional]="true"></kendo-label>
+      <input formControlName="nickName" kendoTextBox #nickName/>
+
+      <kendo-formhint>nick name</kendo-formhint>
+  </kendo-formfield>
+    </div>
+  </fieldset>
+
+</form>
+<kendo-upload
+[autoUpload]="false"
+[saveUrl]="uploadSaveUrl"
+[withCredentials]="false"
+[multiple]="false">
+</kendo-upload>
