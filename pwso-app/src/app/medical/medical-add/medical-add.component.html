@@ -1,37 +1,198 @@
 <p>medical-add works!</p>
-<form class="k-form" [formGroup]="medicalForm">
-  <fieldset class="k-form-fieldset">
-    <legend class="k-form-legend">Enter Athlete Information</legend>
-    <div class="wrap">
+<div class="example-wrap">
+  <form class="k-form" [formGroup]="athleteForm">
+    <fieldset class="k-form-fieldset">
+      <legend class="k-form-legend">Enter Athlete Information</legend>
+      <div class="wrap">
+        <kendo-formfield>
+          <kendo-label [for]="firstName" text="First Name"></kendo-label>
+          <input formControlName="firstName" kendoTextBox #firstName/>
+          <kendo-formhint>first name</kendo-formhint>
+          <kendo-formerror>Error: First name is required</kendo-formerror>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label [for]="middleName" text="Middle Name" [optional]="true"></kendo-label>
+          <input formControlName="middleName" kendoTextBox #middleName/>
+          <kendo-formhint>middle name</kendo-formhint>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label [for]="lastName" text="Last Name"></kendo-label>
+          <input formControlName="lastName" kendoTextBox #lastName required/>
+          <kendo-formhint> last name</kendo-formhint>
+          <kendo-formerror>Error: Last name is required</kendo-formerror>
+        </kendo-formfield>
+      </div>
+      <div class="wrap">
+        <kendo-formfield>
+          <kendo-label [for]="birthDate" text="Date of Birth"></kendo-label>
+          <kendo-datepicker formControlName="birthDate" #birthDate required></kendo-datepicker>
+          <kendo-formhint> date of birth</kendo-formhint>
+          <kendo-formerror>Error: Date of birth is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield [orientation]="'horizontal'" >
+          <label class="k-label">Gender</label>
+
+          <ul class="k-radio-list k-list-horizontal">
+              <li class="k-radio-item">
+                  <input type="radio" #male value="male" kendoRadioButton [formControlName]="'gender'" />
+                  <kendo-label class="k-radio-label" [for]="male" text="Male"></kendo-label>
+              </li>
+
+              <li class="k-radio-item">
+                  <input type="radio" #female value="female" kendoRadioButton [formControlName]="'gender'" />
+                  <kendo-label class="k-radio-label" [for]="female" text="Female"></kendo-label>
+              </li>
+          </ul>
+
+          <kendo-formerror>Error: This field is required</kendo-formerror>
+      </kendo-formfield>
+      </div>
+      <legend class="k-form-legend">Address</legend>
+      <kendo-formfield>
+        <kendo-label [for]="street" text="Street"></kendo-label>
+        <input formControlName="street" kendoTextBox #street/>
+        <kendo-formhint>street</kendo-formhint>
+        <kendo-formerror>Error: Street is required</kendo-formerror>
+      </kendo-formfield>
+
+      <div class="wrap">
+        <kendo-formfield>
+          <kendo-label [for]="city" text="City"></kendo-label>
+          <input formControlName="city" kendoTextBox #city/>
+          <kendo-formhint>city</kendo-formhint>
+          <kendo-formerror>Error: City is required</kendo-formerror>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label [for]="state" text="State" ></kendo-label>
+          <input formControlName="state" kendoTextBox #state/>
+          <kendo-formhint>state</kendo-formhint>
+          <kendo-formerror>Error: State is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label [for]="zipCode" text="Zip Code"></kendo-label>
+          <input formControlName="zipCode" kendoTextBox #zipCode required/>
+          <kendo-formhint>zip code</kendo-formhint>
+          <kendo-formerror>Error: Zip code is required</kendo-formerror>
+        </kendo-formfield>
+      </div>
+      <span class="k-form-separator"></span>
+            <div class="wrap">
+          <kendo-formfield>
+            <kendo-label [for]="phone" text="Phone"></kendo-label>
+            <kendo-maskedtextbox formControlName="phone" [mask]=mask #phone></kendo-maskedtextbox>
+            <kendo-formhint>phone</kendo-formhint>
+            <kendo-formerror>Error: Not valid phone format</kendo-formerror>
+            <kendo-formerror *ngIf="athleteForm.controls.phone.errors?.required">Error: phone number is required</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+              <kendo-label [for]="phoneType"  text="type"></kendo-label>
+              <kendo-dropdownlist #phoneType formControlName="phoneType" [data]="phoneTypes" >
+              </kendo-dropdownlist>
+              <kendo-formerror>Error: type required</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+            <kendo-label [for]="email" text="Email"></kendo-label>
+            <input formControlName="email" kendoTextBox #email/>
+            <kendo-formhint>email </kendo-formhint>
+            <kendo-formerror *ngIf="athleteForm.controls.email.errors?.email">Error: Not valid email format</kendo-formerror>
+            <kendo-formerror *ngIf="athleteForm.controls.email.errors?.required">Error: email is required</kendo-formerror>
+
+        </kendo-formfield>
+      </div>
+    </fieldset>
+
+  </form>
+
+</div>
+  <!-- <form class="k-form" [formGroup]="athleteForm">
+    <fieldset class="k-form-fieldset">
+      <legend class="k-form-legend">Enter Athlete Information</legend>
+
       <kendo-formfield>
         <kendo-label [for]="firstName" text="First Name"></kendo-label>
         <input formControlName="firstName" kendoTextBox #firstName/>
-
         <kendo-formhint>first name</kendo-formhint>
         <kendo-formerror>Error: First name is required</kendo-formerror>
-    </kendo-formfield>
+      </kendo-formfield>
 
-    <kendo-formfield>
+      <kendo-formfield>
+        <kendo-label [for]="middleName" text="Middle Name" [optional]="true"></kendo-label>
+        <input formControlName="middleName" kendoTextBox #middleName/>
+        <kendo-formhint>middle name</kendo-formhint>
+      </kendo-formfield>
+
+      <kendo-formfield>
         <kendo-label [for]="lastName" text="Last Name"></kendo-label>
         <input formControlName="lastName" kendoTextBox #lastName required/>
-
         <kendo-formhint> last name</kendo-formhint>
         <kendo-formerror>Error: Last name is required</kendo-formerror>
-    </kendo-formfield>
+      </kendo-formfield>
 
-    <kendo-formfield>
-      <kendo-label [for]="nickName" text="Nick Name" [optional]="true"></kendo-label>
-      <input formControlName="nickName" kendoTextBox #nickName/>
+      <div class="wrap">
+      <kendo-formfield>
+        <kendo-label [for]="birthDate" text="Date of Birth"></kendo-label>
+        <kendo-datepicker formControlName="birthDate" #birthDate required></kendo-datepicker>
+        <kendo-formhint> date of birth</kendo-formhint>
+        <kendo-formerror>Error: Date of birth is required</kendo-formerror>
+      </kendo-formfield>
 
-      <kendo-formhint>nick name</kendo-formhint>
-  </kendo-formfield>
-    </div>
-  </fieldset>
+        <!-- <form [formGroup]="genderGroup">
+          <kendo-formfield>
+            <label class="k-label" [for]="male">Male</label>
+            <input type="radio" name="gender" value="Male" #male formControlName="gender" kendoRadioButton />
+          </kendo-formfield>
 
-</form>
-<kendo-upload
-[autoUpload]="false"
-[saveUrl]="uploadSaveUrl"
-[withCredentials]="false"
-[multiple]="false">
-</kendo-upload>
+          <kendo-formfield>
+            <label class="k-label" [for]="female">Female</label>
+            <input type="radio" name="gender" value="Female" #female formControlName="gender" kendoRadioButton />
+          </kendo-formfield>
+
+        </form> -->
+      <!-- </div>
+
+
+      <kendo-formfield>
+        <kendo-label [for]="street" text="Street"></kendo-label>
+        <input formControlName="street" kendoTextBox #street required/>
+        <kendo-formhint> street</kendo-formhint>
+        <kendo-formerror>Error: Street is required</kendo-formerror>
+      </kendo-formfield>
+
+      <kendo-formfield>
+        <kendo-label [for]="city" text="City"></kendo-label>
+        <input formControlName="city" kendoTextBox #city required/>
+        <kendo-formhint> city</kendo-formhint>
+        <kendo-formerror>Error: City is required</kendo-formerror>
+      </kendo-formfield>
+
+      <kendo-formfield>
+        <kendo-label [for]="state" text="State"></kendo-label>
+        <input formControlName="state" kendoTextBox #state required/>
+        <kendo-formhint> state</kendo-formhint>
+        <kendo-formerror>Error: State is required</kendo-formerror>
+      </kendo-formfield>
+
+      <kendo-formfield>
+        <kendo-label [for]="zip" text="Zip Code"></kendo-label>
+        <input formControlName="zip" kendoTextBox #zip required/>
+        <kendo-formhint> zip</kendo-formhint>
+        <kendo-formerror>Error: Zip code is required</kendo-formerror>
+      </kendo-formfield>
+
+    </fieldset>
+    <kendo-upload
+    [autoUpload]="false"
+    [saveUrl]="uploadSaveUrl"
+    [withCredentials]="false"
+    [multiple]="false">
+    </kendo-upload>
+  </form>
+
+<!-- </div> --> -->
+
+
