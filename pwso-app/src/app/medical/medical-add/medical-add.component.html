@@ -79,20 +79,13 @@
         </kendo-formfield>
       </div>
       <span class="k-form-separator"></span>
-            <div class="wrap">
+      <div class="wrap">
           <kendo-formfield>
             <kendo-label [for]="phone" text="Phone"></kendo-label>
             <kendo-maskedtextbox formControlName="phone" [mask]=mask #phone></kendo-maskedtextbox>
             <kendo-formhint>phone</kendo-formhint>
             <kendo-formerror>Error: Not valid phone format</kendo-formerror>
             <kendo-formerror *ngIf="athleteForm.controls.phone.errors?.required">Error: phone number is required</kendo-formerror>
-          </kendo-formfield>
-
-          <kendo-formfield>
-              <kendo-label [for]="phoneType"  text="type"></kendo-label>
-              <kendo-dropdownlist #phoneType formControlName="phoneType" [data]="phoneTypes" >
-              </kendo-dropdownlist>
-              <kendo-formerror>Error: type required</kendo-formerror>
           </kendo-formfield>
 
           <kendo-formfield>
@@ -104,8 +97,85 @@
 
         </kendo-formfield>
       </div>
-    </fieldset>
+      <legend class="k-form-legend">Parent / Guardian</legend>
+      <div class="wrap">
+        <kendo-formfield>
+          <kendo-label [for]="parentName" text="Parent / Guardian Name" [optional]="true"></kendo-label>
+          <input formControlName="parentName" kendoTextBox #parentName/>
+          <kendo-formhint>parent / guardian name</kendo-formhint>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label [for]="relationship" text="Relationship" [optional]="true"></kendo-label>
+          <input formControlName="relationship" kendoTextBox #relationship/>
+          <kendo-formhint>relationship</kendo-formhint>
+        </kendo-formfield>
+      </div>
+      <legend class="k-form-legend">Parent / Guardian Address</legend>
+      <kendo-formfield>
+        <kendo-label [for]="parentStreet" text="Street" [optional]="true"></kendo-label>
+        <input formControlName="parentStreet" kendoTextBox #parentStreet/>
+        <kendo-formhint>street</kendo-formhint>
+      </kendo-formfield>
 
+      <div class="wrap">
+        <kendo-formfield>
+          <kendo-label [for]="parentCity" text="City" [optional]="true"></kendo-label>
+          <input formControlName="parentCity" kendoTextBox #parentCity/>
+          <kendo-formhint>city</kendo-formhint>
+        </kendo-formfield>
+        <kendo-formfield>
+          <kendo-label [for]="parentState" text="State" [optional]="true"></kendo-label>
+          <input formControlName="parentState" kendoTextBox #parentState/>
+          <kendo-formhint>state</kendo-formhint>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label [for]="parentZipCode" text="Zip Code"[optional]="true"></kendo-label>
+          <input formControlName="parentZipCode" kendoTextBox #parentZipCode required/>
+          <kendo-formhint>zip code</kendo-formhint>
+        </kendo-formfield>
+      </div>
+      <span class="k-form-separator"></span>
+      <div class="wrap">
+          <kendo-formfield>
+            <kendo-label [for]="parentPhone" text="Phone" [optional]="true"></kendo-label>
+            <kendo-maskedtextbox formControlName="parentPhone" [mask]=mask #parentPhone></kendo-maskedtextbox>
+            <kendo-formhint>phone</kendo-formhint>
+            <kendo-formerror>Error: Not valid phone format</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+            <kendo-label [for]="parentEmail" text="Email" [optional]="true"></kendo-label>
+            <input formControlName="parentEmail" kendoTextBox #parentEmail/>
+            <kendo-formhint>email </kendo-formhint>
+            <kendo-formerror *ngIf="athleteForm.controls.parentEmail.errors?.email">Error: Not valid email format</kendo-formerror>
+        </kendo-formfield>
+      </div>
+
+      <legend class="k-form-legend">Medical</legend>
+      <div class="wrap">
+        <kendo-formfield>
+          <kendo-label [for]="medicalDate" text="Medical Date"></kendo-label>
+          <kendo-datepicker formControlName="medicalDate" #medicalDate required></kendo-datepicker>
+          <kendo-formhint>Medical Date</kendo-formhint>
+          <kendo-formerror>Error: Medical date is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label [for]="medicalExpirationDate" text="Medical Expiration Date"></kendo-label>
+          <kendo-datepicker formControlName="medicalExpirationDate" #medicalExpirationDate required></kendo-datepicker>
+          <kendo-formhint>Medical Expiration Date</kendo-formhint>
+          <kendo-formerror>Error: Medical expiration date is required</kendo-formerror>
+        </kendo-formfield>
+      </div>
+    </fieldset>
+    <kendo-upload
+    formControlName="medicalForm"
+    [autoUpload]="false"
+    [saveUrl]="uploadSaveUrl"
+    [withCredentials]="false"
+    [multiple]="false">
+    </kendo-upload>
   </form>
 
 </div>
