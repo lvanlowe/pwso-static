@@ -37,6 +37,9 @@ import { SportEffects } from './state/sport.state';
 import { ProgramEffects } from './state/program.state';
 import { MedicalAddComponent } from './medical/medical-add/medical-add.component';
 import { UploadModule } from '@progress/kendo-angular-upload';
+import { AthleteEffects } from './state/athlete.state';
+import { Athlete } from './models/athlete';
+import { AthleteService } from './services/athlete.service';
 
 
 
@@ -55,7 +58,7 @@ import { UploadModule } from '@progress/kendo-angular-upload';
     HttpClientModule,
     StoreModule.forRoot(appReducer, { metaReducers: appMetaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([RegistrantEffects, SportEffects, ProgramEffects]),
+    EffectsModule.forRoot([RegistrantEffects, SportEffects, ProgramEffects, AthleteEffects]),
     NgrxAutoEntityModule.forRoot(),
     ButtonsModule,
     BrowserAnimationsModule,
@@ -77,6 +80,7 @@ import { UploadModule } from '@progress/kendo-angular-upload';
     { provide: Sport, useClass: SportService },
     { provide: Program, useClass: ProgramService },
     { provide: Registrant, useClass: RegistrantService },
+    { provide: Athlete, useClass: AthleteService },
     PendingChangesGuard,
   ],
   bootstrap: [AppComponent]
