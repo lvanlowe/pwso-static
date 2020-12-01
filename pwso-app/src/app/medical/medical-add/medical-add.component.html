@@ -1,7 +1,16 @@
 <p>medical-add works!</p>
+
 <div class="example-wrap">
+
   <form class="k-form" [formGroup]="athleteForm">
-    <fieldset class="k-form-fieldset">
+    <kendo-stepper
+    [steps]="steps"
+    [stepType]="stepType"
+    [(currentStep)]="current"
+    [style.width.px]="570">
+    </kendo-stepper>
+    <fieldset class="k-form-fieldset"  *ngIf="current == 1">
+
       <legend class="k-form-legend">Enter Athlete Information</legend>
       <div class="wrap">
         <kendo-formfield>
@@ -131,7 +140,7 @@
 
         <kendo-formfield>
           <kendo-label [for]="parentZipCode" text="Zip Code"[optional]="true"></kendo-label>
-          <input formControlName="parentZipCode" kendoTextBox #parentZipCode required/>
+          <input formControlName="parentZipCode" kendoTextBox #parentZipCode/>
           <kendo-formhint>zip code</kendo-formhint>
         </kendo-formfield>
       </div>
@@ -168,14 +177,20 @@
           <kendo-formerror>Error: Medical expiration date is required</kendo-formerror>
         </kendo-formfield>
       </div>
+      <div class="k-form-buttons">
+        <button class="k-button k-primary" (click)="saveAthlete()">Save</button>
+        <!-- <button class="k-button" (click)="clearForm()">Clear</button> -->
+      </div>
     </fieldset>
-    <kendo-upload
-    formControlName="medicalForm"
-    [autoUpload]="false"
-    [saveUrl]="uploadSaveUrl"
-    [withCredentials]="false"
-    [multiple]="false">
-    </kendo-upload>
+    <div *ngIf="current == 2">
+      <kendo-upload
+      formControlName="medicalForm"
+      [autoUpload]="false"
+      [saveUrl]="uploadSaveUrl"
+      [withCredentials]="false"
+      [multiple]="false">
+      </kendo-upload>
+    </div>
   </form>
 
 </div>
