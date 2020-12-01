@@ -8,6 +8,8 @@ import { Program } from '../models/program';
 import { programReducer } from './program.state';
 import { Registrant } from '../models/registrant';
 import { registrantReducer } from './registrant.state';
+import { Athlete } from '../models/athlete';
+import { athleteReducer } from './athlete.state';
 // import { Deacon } from '../models/deacon';
 // import { deaconReducer } from './deacon.state';
 
@@ -17,6 +19,7 @@ export interface IAppState {
     sport: IEntityState<Sport>;
     program: IEntityState<Program>;
     registrant: IEntityState<Registrant>;
+    athlete: IEntityState<Athlete>;
 }
 
 export type AppState = IAppState;
@@ -25,7 +28,8 @@ export const appReducer: ActionReducerMap<AppState> = {
     userInfo: userInfoReducer,
     sport: sportReducer,
     program: programReducer,
-    registrant: registrantReducer
+    registrant: registrantReducer,
+    athlete: athleteReducer
 };
 
 export const appMetaReducers: MetaReducer<AppState>[] = [debug];
