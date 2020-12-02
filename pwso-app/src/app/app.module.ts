@@ -40,6 +40,7 @@ import { UploadModule } from '@progress/kendo-angular-upload';
 import { AthleteEffects } from './state/athlete.state';
 import { Athlete } from './models/athlete';
 import { AthleteService } from './services/athlete.service';
+import { AthleteInformationComponent } from './medical/athlete-information/athlete-information.component';
 
 
 
@@ -50,7 +51,8 @@ import { AthleteService } from './services/athlete.service';
     RegistrationComponent,
     SportPickerComponent,
     RegistrationCompleteComponent,
-    MedicalAddComponent
+    MedicalAddComponent,
+    AthleteInformationComponent
   ],
   imports: [
     BrowserModule,
