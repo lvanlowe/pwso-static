@@ -38,11 +38,11 @@ export class AthleteInformationComponent implements OnInit {
   }
 
   enableNextButton() {
-    if (this.athleteInformationForm.valid && !this.athleteInformationForm.errors) {
+    // if (this.athleteInformationForm.valid && !this.athleteInformationForm.errors) {
       this.enableNext = true;
-    } else {
-      this.enableNext = false;
-    }
+    // } else {
+    //   this.enableNext = false;
+    // }
   }
 
   nextStep() {

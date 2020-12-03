@@ -22,7 +22,7 @@ export class MedicalAddComponent implements OnInit {
   athlete: Athlete;
   public stepType = 'full';
   public stepTypes: Array<string> = ['indicator', 'label', 'full'];
-  public current = 2;
+  public current = 0;
   public phoneTypes: Array<string> = ['home', 'mobile', 'other'];
 
   public steps = [
@@ -81,6 +81,11 @@ export class MedicalAddComponent implements OnInit {
         this.athleteSaved = true;
       }
     }
+
+    public showParent(athlete) {
+      this.current = 1;
+    }
+
     canDeactivate(): Observable<boolean> | boolean {
       return this.athleteForm.pristine;
     }

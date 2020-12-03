@@ -1,15 +1,15 @@
 <p>medical-add works!</p>
 
 <div class="example-wrap">
-
+  <kendo-stepper
+  [steps]="steps"
+  [stepType]="stepType"
+  [(currentStep)]="current"
+  [style.width.px]="570">
+  </kendo-stepper>
   <form class="k-form" [formGroup]="athleteForm">
-    <kendo-stepper
-    [steps]="steps"
-    [stepType]="stepType"
-    [(currentStep)]="current"
-    [style.width.px]="570">
-    </kendo-stepper>
-    <fieldset class="k-form-fieldset"  *ngIf="current == 1">
+
+    <!-- <fieldset class="k-form-fieldset"  *ngIf="current == 1">
 
       <legend class="k-form-legend">Enter Athlete Information</legend>
       <div class="wrap">
@@ -179,9 +179,10 @@
       </div>
       <div class="k-form-buttons">
         <button class="k-button k-primary" (click)="saveAthlete()">Save</button>
-        <!-- <button class="k-button" (click)="clearForm()">Clear</button> -->
-      </div>
-    </fieldset>
+        <button class="k-button" (click)="clearForm()">Clear</button> -->
+        <div *ngIf="current == 0">
+          <app-athlete-information (informationEntered) = 'showParent($event)'> </app-athlete-information>
+        </div>
     <div *ngIf="current == 2">
       <kendo-upload
       formControlName="medicalForm"

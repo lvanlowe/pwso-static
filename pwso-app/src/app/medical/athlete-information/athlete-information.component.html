@@ -84,15 +84,15 @@
           <kendo-maskedtextbox formControlName="phone" [mask]=mask #phone></kendo-maskedtextbox>
           <kendo-formhint>phone</kendo-formhint>
           <kendo-formerror>Error: Not valid phone format</kendo-formerror>
-          <kendo-formerror *ngIf="athleteForm.controls.phone.errors?.required">Error: phone number is required</kendo-formerror>
+          <kendo-formerror *ngIf="athleteInformationForm.controls.phone.errors?.required">Error: phone number is required</kendo-formerror>
         </kendo-formfield>
 
         <kendo-formfield>
           <kendo-label [for]="email" text="Email"></kendo-label>
           <input formControlName="email" kendoTextBox #email/>
           <kendo-formhint>email </kendo-formhint>
-          <kendo-formerror *ngIf="athleteForm.controls.email.errors?.email">Error: Not valid email format</kendo-formerror>
-          <kendo-formerror *ngIf="athleteForm.controls.email.errors?.required">Error: email is required</kendo-formerror>
+          <kendo-formerror *ngIf="athleteInformationForm.controls.email.errors?.email">Error: Not valid email format</kendo-formerror>
+          <kendo-formerror *ngIf="athleteInformationForm.controls.email.errors?.required">Error: email is required</kendo-formerror>
 
       </kendo-formfield>
     </div>
