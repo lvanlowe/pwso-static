@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-athlete-parent',
@@ -9,9 +9,25 @@ import { FormGroup } from '@angular/forms';
 export class AthleteParentComponent implements OnInit {
 
   athleteParentForm: FormGroup;
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.buildAthleteParentForm(this.formBuilder);
+  }
+
+  buildAthleteParentForm(formBuilder: FormBuilder) {
+    this.athleteParentForm = formBuilder.group(
+      {
+        parentName: new FormControl(),
+        relationship: new FormControl(),
+        parentStreet: new FormControl(''),
+        parentCity: new FormControl(''),
+        parentState: new FormControl(''),
+        parentZipCode: new FormControl(''),
+        parentPhone: new FormControl(''),
+        parentEmail: new FormControl('', Validators.email),
+      }
+    );
   }
 
 }

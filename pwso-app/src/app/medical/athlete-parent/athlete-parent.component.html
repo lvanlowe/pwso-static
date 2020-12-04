@@ -1,4 +1,57 @@
 <p>athlete-parent works!</p>
 <form class="k-form" [formGroup]="athleteParentForm">
+  <fieldset class="k-form-fieldset">
+    <legend class="k-form-legend">Enter Parent / Guardian Information</legend>
+    <div class="wrap">
+      <kendo-formfield>
+        <kendo-label [for]="parentName" text="Parent / Guardian Name" [optional]="true"></kendo-label>
+        <input formControlName="parentName" kendoTextBox #parentName/>
+        <kendo-formhint>parent / guardian name</kendo-formhint>
+      </kendo-formfield>
+      <kendo-formfield>
+        <kendo-label [for]="relationship" text="Relationship" [optional]="true"></kendo-label>
+        <input formControlName="relationship" kendoTextBox #relationship/>
+        <kendo-formhint>relationship</kendo-formhint>
+      </kendo-formfield>
+    </div>
+    <legend class="k-form-legend">Parent / Guardian Address</legend>
+    <kendo-formfield>
+      <kendo-label [for]="parentStreet" text="Street" [optional]="true"></kendo-label>
+      <input formControlName="parentStreet" kendoTextBox #parentStreet/>
+      <kendo-formhint>street</kendo-formhint>
+    </kendo-formfield>
+    <div class="wrap">
+      <kendo-formfield>
+        <kendo-label [for]="parentCity" text="City" [optional]="true"></kendo-label>
+        <input formControlName="parentCity" kendoTextBox #parentCity/>
+        <kendo-formhint>city</kendo-formhint>
+      </kendo-formfield>
+      <kendo-formfield>
+        <kendo-label [for]="parentState" text="State" [optional]="true"></kendo-label>
+        <input formControlName="parentState" kendoTextBox #parentState/>
+        <kendo-formhint>state</kendo-formhint>
+      </kendo-formfield>
+      <kendo-formfield>
+        <kendo-label [for]="parentZipCode" text="Zip Code"[optional]="true"></kendo-label>
+        <input formControlName="parentZipCode" kendoTextBox #parentZipCode/>
+        <kendo-formhint>zip code</kendo-formhint>
+      </kendo-formfield>
+    </div>
+    <span class="k-form-separator"></span>
+    <div class="wrap">
+      <kendo-formfield>
+        <kendo-label [for]="parentPhone" text="Phone" [optional]="true"></kendo-label>
+        <kendo-maskedtextbox formControlName="parentPhone" [mask]=mask #parentPhone></kendo-maskedtextbox>
+        <kendo-formhint>phone</kendo-formhint>
+        <kendo-formerror>Error: Not valid phone format</kendo-formerror>
+      </kendo-formfield>
+      <kendo-formfield>
+        <kendo-label [for]="parentEmail" text="Email" [optional]="true"></kendo-label>
+        <input formControlName="parentEmail" kendoTextBox #parentEmail/>
+        <kendo-formhint>email </kendo-formhint>
+        <kendo-formerror *ngIf="athleteParentForm.controls.parentEmail.errors?.email">Error: Not valid email format</kendo-formerror>
+    </kendo-formfield>
+    </div>
+  </fieldset>
 
 </form>
