@@ -86,6 +86,9 @@ export class MedicalAddComponent implements OnInit {
       this.current = 1;
     }
 
+    public showFormDates(athlete) {
+      this.current = 2;
+    }
     canDeactivate(): Observable<boolean> | boolean {
       return this.athleteForm.pristine;
     }

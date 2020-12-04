@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Athlete } from 'src/app/models/athlete';
 
 @Component({
   selector: 'app-athlete-parent',
@@ -7,6 +8,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./athlete-parent.component.scss']
 })
 export class AthleteParentComponent implements OnInit {
+
+  @Output() informationEntered = new EventEmitter();
 
   athleteParentForm: FormGroup;
   constructor(private formBuilder: FormBuilder) { }
@@ -30,4 +33,10 @@ export class AthleteParentComponent implements OnInit {
     );
   }
 
+  nextStep() {
+    const athlete: Athlete = {
+      ...this.athleteParentForm.value
+    };
+    this.informationEntered.emit(athlete);
+  }
 }
