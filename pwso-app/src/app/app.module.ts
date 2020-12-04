@@ -41,6 +41,7 @@ import { AthleteEffects } from './state/athlete.state';
 import { Athlete } from './models/athlete';
 import { AthleteService } from './services/athlete.service';
 import { AthleteInformationComponent } from './medical/athlete-information/athlete-information.component';
+import { AthleteParentComponent } from './medical/athlete-parent/athlete-parent.component';
 
 
 
@@ -52,7 +53,8 @@ import { AthleteInformationComponent } from './medical/athlete-information/athle
     SportPickerComponent,
     RegistrationCompleteComponent,
     MedicalAddComponent,
-    AthleteInformationComponent
+    AthleteInformationComponent,
+    AthleteParentComponent
   ],
   imports: [
     BrowserModule,
