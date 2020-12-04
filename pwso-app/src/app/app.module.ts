@@ -42,6 +42,7 @@ import { Athlete } from './models/athlete';
 import { AthleteService } from './services/athlete.service';
 import { AthleteInformationComponent } from './medical/athlete-information/athlete-information.component';
 import { AthleteParentComponent } from './medical/athlete-parent/athlete-parent.component';
+import { MedicalInformationComponent } from './medical/medical-information/medical-information.component';
 
 
 
@@ -54,7 +55,8 @@ import { AthleteParentComponent } from './medical/athlete-parent/athlete-parent.
     RegistrationCompleteComponent,
     MedicalAddComponent,
     AthleteInformationComponent,
-    AthleteParentComponent
+    AthleteParentComponent,
+    MedicalInformationComponent
   ],
   imports: [
     BrowserModule,
