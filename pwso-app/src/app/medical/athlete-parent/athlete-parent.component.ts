@@ -11,6 +11,7 @@ export class AthleteParentComponent implements OnInit {
 
   @Output() informationEntered = new EventEmitter();
 
+  public mask = '(000) 000-0000';
   athleteParentForm: FormGroup;
   constructor(private formBuilder: FormBuilder) { }
 

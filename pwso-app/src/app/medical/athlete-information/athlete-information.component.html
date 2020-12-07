@@ -71,9 +71,11 @@
 
       <kendo-formfield>
         <kendo-label [for]="zipCode" text="Zip Code"></kendo-label>
-        <input formControlName="zipCode" kendoTextBox #zipCode required/>
+        <kendo-maskedtextbox formControlName="zipCode" [mask]=zipmask #zipCode required></kendo-maskedtextbox>
         <kendo-formhint>zip code</kendo-formhint>
-        <kendo-formerror>Error: Zip code is required</kendo-formerror>
+        <kendo-formerror>Error: not valid zipCode</kendo-formerror>
+        <kendo-formerror *ngIf="athleteInformationForm.controls.zipCode.errors?.required">Error: zipcode is required</kendo-formerror>
+
       </kendo-formfield>
     </div>
     <span class="k-form-separator"></span>
@@ -96,8 +98,8 @@
       </kendo-formfield>
     </div>
     <div class="k-form-buttons">
-      <!-- <button class="k-button k-primary" [disabled]="!enableNext"  (click)="nextStep()">Next</button> -->
-      <button class="k-button k-primary" (click)="nextStep()">Next</button>
+      <button class="k-button k-primary" [disabled]="!enableNext"  (click)="nextStep()">Next</button>
+      <!-- <button class="k-button k-primary" (click)="nextStep()">Next</button> -->
     </div>
   </fieldset>
 </form>

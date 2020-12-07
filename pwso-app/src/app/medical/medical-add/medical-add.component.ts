@@ -83,6 +83,7 @@ export class MedicalAddComponent implements OnInit {
     }
 
     public showParent(athlete) {
+      this.athlete = {...athlete};
       this.current = 1;
     }
 

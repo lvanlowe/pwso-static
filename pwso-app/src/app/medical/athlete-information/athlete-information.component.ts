@@ -11,12 +11,15 @@ export class AthleteInformationComponent implements OnInit {
   @Output() informationEntered = new EventEmitter();
 
   enableNext: boolean;
+  public mask = '(000) 000-0000';
+  public zipmask = '00000';
   athleteInformationForm: FormGroup;
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.buildAthleteInformationForm(this.formBuilder);
-    this.athleteInformationForm.valueChanges.subscribe(value => this.enableNextButton);
+    this.athleteInformationForm.markAsPristine();
+    this.athleteInformationForm.valueChanges.subscribe(() => {this.enableNextButton(); } );
   }
 
   buildAthleteInformationForm(formBuilder: FormBuilder) {
@@ -35,14 +38,15 @@ export class AthleteInformationComponent implements OnInit {
         phone: new FormControl('', Validators.required),
       }
     );
+    this.athleteInformationForm.controls.state.setValue('VA');
   }
 
   enableNextButton() {
-    // if (this.athleteInformationForm.valid && !this.athleteInformationForm.errors) {
+    if (this.athleteInformationForm.valid && !this.athleteInformationForm.errors) {
       this.enableNext = true;
-    // } else {
-    //   this.enableNext = false;
-    // }
+    } else {
+      this.enableNext = false;
+    }
   }
 
   nextStep() {
