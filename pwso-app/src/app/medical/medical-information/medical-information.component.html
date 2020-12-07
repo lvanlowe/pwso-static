@@ -1,1 +1,23 @@
 <p>medical-information works!</p>
+<form class="k-form" [formGroup]="medicalInformationForm">
+  <fieldset class="k-form-fieldset">
+    <legend class="k-form-legend">Enter Medical Form Information</legend>
+    <div class="wrap">
+      <kendo-formfield>
+        <kendo-label [for]="medicalDate" text="Medical Date"></kendo-label>
+        <kendo-datepicker formControlName="medicalDate" #medicalDate required></kendo-datepicker>
+        <kendo-formhint>Medical Date</kendo-formhint>
+        <kendo-formerror>Error: Medical date is required</kendo-formerror>
+      </kendo-formfield>
+      <kendo-formfield>
+        <kendo-label [for]="medicalExpirationDate" text="Medical Expiration Date"></kendo-label>
+        <kendo-datepicker formControlName="medicalExpirationDate" #medicalExpirationDate required></kendo-datepicker>
+        <kendo-formhint>Medical Expiration Date</kendo-formhint>
+        <kendo-formerror>Error: Medical expiration date is required</kendo-formerror>
+      </kendo-formfield>
+    </div>
+    <div class="k-form-buttons">
+      <button class="k-button k-primary" (click)="nextStep()">Next</button>
+    </div>
+  </fieldset>
+</form>
