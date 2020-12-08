@@ -11,12 +11,15 @@ export class AthleteParentComponent implements OnInit {
 
   @Output() informationEntered = new EventEmitter();
 
+  enableNext: boolean;
   public mask = '(000) 000-0000';
   athleteParentForm: FormGroup;
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.buildAthleteParentForm(this.formBuilder);
+    this.athleteParentForm.markAsPristine();
+    this.athleteParentForm.valueChanges.subscribe(() => {this.enableNextButton(); } );
   }
 
   buildAthleteParentForm(formBuilder: FormBuilder) {
@@ -34,6 +37,13 @@ export class AthleteParentComponent implements OnInit {
     );
   }
 
+  enableNextButton() {
+    if (this.athleteParentForm.valid && !this.athleteParentForm.errors) {
+      this.enableNext = true;
+    } else {
+      this.enableNext = false;
+    }
+  }
   nextStep() {
     const athlete: Athlete = {
       ...this.athleteParentForm.value
