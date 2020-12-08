@@ -1,1 +1,15 @@
 <p>medical-form works!</p>
+<form class="k-form" [formGroup]="medicalUploadForm">
+  <fieldset class="k-form-fieldset">
+    <legend class="k-form-legend">Upload Medical Form</legend>
+    <div>
+      <kendo-upload
+      formControlName="medicalForm"
+      [autoUpload]="false"
+      [saveUrl]="uploadSaveUrl"
+      [withCredentials]="false"
+      [multiple]="false">
+      </kendo-upload>
+    </div>
+  </fieldset>
+</form>
