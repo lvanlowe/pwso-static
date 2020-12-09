@@ -15,8 +15,7 @@ export class MedicalAddComponent implements OnInit {
 
   uploadSaveUrl = `http://localhost:7071/api/UploadMedicalFunc`; // should represent an actual API endpoint
   athleteForm: FormGroup;
-  genderGroup: FormGroup;
-  public mask = '(000) 000-0000';
+
   canSave = true;
   athleteSaved = false;
   athlete: Athlete;
@@ -26,10 +25,10 @@ export class MedicalAddComponent implements OnInit {
   public phoneTypes: Array<string> = ['home', 'mobile', 'other'];
 
   public steps = [
-    { label: 'Start', isValid: true },
-    { label: 'Enter Info', isValid: false },
-    { label: 'Upload Form', isValid: true },
-    { label: 'Finish', isValid: true }
+    { label: 'Athlete', isValid: true },
+    { label: 'Parent', isValid: false },
+    { label: 'Medical Dates', isValid: true },
+    { label: 'Medical Form', isValid: true }
 ];
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
@@ -41,33 +40,9 @@ export class MedicalAddComponent implements OnInit {
   buildRegistrationForm(formBuilder: FormBuilder) {
     this.athleteForm = formBuilder.group(
       {
-        firstName: new FormControl('', Validators.required),
-        lastName: new FormControl('', Validators.required),
-        middleName: new FormControl(),
-        birthDate: new FormControl('', Validators.required),
-        email: new FormControl('', [Validators.email, Validators.required]),
-        gender: new FormControl('', Validators.required),
-        street: new FormControl('', Validators.required),
-        city: new FormControl('', Validators.required),
-        state: new FormControl('', Validators.required),
-        zipCode: new FormControl('', Validators.required),
-        phone: new FormControl('', Validators.required),
-        parentName: new FormControl(),
-        relationship: new FormControl(),
-        parentStreet: new FormControl(''),
-        parentCity: new FormControl(''),
-        parentState: new FormControl(''),
-        parentZipCode: new FormControl(''),
-        parentPhone: new FormControl(''),
-        parentEmail: new FormControl('', Validators.email),
-        medicalDate: new FormControl('', Validators.required),
-        medicalForm: new FormControl(),
-        medicalExpirationDate: new FormControl('', Validators.required),
+
       }
       );
-      // this.athleteForm.controls.phone1Type.disable();
-      // this.athleteForm.controls.phone2Type.disable();
-      // this.athleteForm.controls.phone3Type.disable();
 
     }
 
@@ -87,7 +62,8 @@ export class MedicalAddComponent implements OnInit {
       this.current = 1;
     }
 
-    public showFormDates(athlete) {
+    public showFormDates(athleteParent) {
+      this.athlete = {...this.athlete, parentInformation: athleteParent};
       this.current = 2;
     }
 

@@ -13,6 +13,13 @@ export class Athlete {
   city?: string;
   state?: string;
   zipCode?: string;
+  parentInformation: AthleteParent[];
+  medicalDate?: Date;
+  medicalExpirationDate?: Date;
+  medicalFormId?: string;
+}
+
+export class AthleteParent {
   parentName?: string;
   relationship?: string;
   parentStreet?: string;
@@ -21,7 +28,4 @@ export class Athlete {
   parentZipCode?: string;
   parentPhone?: string;
   parentEmail?: string;
-  medicalDate?: Date;
-  medicalExpirationDate?: Date;
-  medicalFormId?: string;
 }

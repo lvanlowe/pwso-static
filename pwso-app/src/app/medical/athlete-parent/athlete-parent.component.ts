@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Athlete } from 'src/app/models/athlete';
+import { Athlete, AthleteParent } from 'src/app/models/athlete';
 
 @Component({
   selector: 'app-athlete-parent',
@@ -45,7 +45,7 @@ export class AthleteParentComponent implements OnInit {
     }
   }
   nextStep() {
-    const athlete: Athlete = {
+    const athlete: AthleteParent = {
       ...this.athleteParentForm.value
     };
     this.informationEntered.emit(athlete);

@@ -18,15 +18,6 @@
         <div *ngIf="current == 3">
           <app-medical-form (informationEntered) = 'showFormUpload($event)'></app-medical-form>
         </div>
-    <div *ngIf="current == 4">
-      <kendo-upload
-      formControlName="medicalForm"
-      [autoUpload]="false"
-      [saveUrl]="uploadSaveUrl"
-      [withCredentials]="false"
-      [multiple]="false">
-      </kendo-upload>
-    </div>
   </form>
 
 </div>
