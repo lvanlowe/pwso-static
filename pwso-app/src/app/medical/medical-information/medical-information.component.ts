@@ -16,7 +16,8 @@ export class MedicalInformationComponent implements OnInit {
 
   ngOnInit() {
     this.buildMedicalInformationForm(this.formBuilder);
-    this.medicalInformationForm.valueChanges.subscribe(value => this.enableNextButton);
+    this.medicalInformationForm.markAsPristine();
+    this.medicalInformationForm.valueChanges.subscribe(() => {this.enableNextButton(); } );
   }
 
   buildMedicalInformationForm(formBuilder: FormBuilder) {
@@ -29,11 +30,11 @@ export class MedicalInformationComponent implements OnInit {
   }
 
   enableNextButton() {
-    // if (this.athleteInformationForm.valid && !this.athleteInformationForm.errors) {
+    if (this.medicalInformationForm.valid && !this.medicalInformationForm.errors) {
       this.enableNext = true;
-    // } else {
-    //   this.enableNext = false;
-    // }
+    } else {
+      this.enableNext = false;
+    }
   }
 
   nextStep() {

@@ -17,7 +17,7 @@
       </kendo-formfield>
     </div>
     <div class="k-form-buttons">
-      <button class="k-button k-primary" (click)="nextStep()">Next</button>
+      <button class="k-button k-primary" [disabled]="!enableNext"  (click)="nextStep()">Next</button>
     </div>
   </fieldset>
 </form>

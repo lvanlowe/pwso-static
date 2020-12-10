@@ -67,7 +67,8 @@ export class MedicalAddComponent implements OnInit {
       this.current = 2;
     }
 
-    public showFormUpload(athlete) {
+    public showFormUpload(athlete : Athlete) {
+      this.athlete = {...this.athlete, medicalDate: athlete.medicalDate, medicalExpirationDate: athlete.medicalExpirationDate};
       this.current = 3;
     }
     canDeactivate(): Observable<boolean> | boolean {
