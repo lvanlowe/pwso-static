@@ -28,7 +28,8 @@ export class MedicalAddComponent implements OnInit {
     { label: 'Athlete', isValid: true },
     { label: 'Parent', isValid: false },
     { label: 'Medical Dates', isValid: true },
-    { label: 'Medical Form', isValid: true }
+    { label: 'Medical Form', isValid: true },
+    { label: 'Complete', isValid: true }
 ];
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
@@ -59,11 +60,13 @@ export class MedicalAddComponent implements OnInit {
 
     public showParent(athlete) {
       this.athlete = {...athlete};
+      this.athleteForm.markAsDirty();
       this.current = 1;
     }
 
     public showFormDates(athleteParent) {
       this.athlete = {...this.athlete, parentInformation: athleteParent};
+      this.athleteForm.markAsDirty();
       this.current = 2;
     }
 
@@ -71,6 +74,7 @@ export class MedicalAddComponent implements OnInit {
       this.athlete = {...this.athlete, medicalDate: athlete.medicalDate, medicalExpirationDate: athlete.medicalExpirationDate};
       this.current = 3;
     }
+
     canDeactivate(): Observable<boolean> | boolean {
       return this.athleteForm.pristine;
     }

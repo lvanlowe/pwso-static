@@ -18,6 +18,9 @@
         <div *ngIf="current == 3">
           <app-medical-form (informationEntered) = 'showFormUpload($event)'></app-medical-form>
         </div>
+        <div *ngIf="current == 4">
+          <app-medical-complete ></app-medical-complete>
+        </div>
   </form>
 
 </div>
