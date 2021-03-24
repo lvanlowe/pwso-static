@@ -45,6 +45,8 @@ import { AthleteParentComponent } from './medical/athlete-parent/athlete-parent.
 import { MedicalInformationComponent } from './medical/medical-information/medical-information.component';
 import { MedicalFormComponent } from './medical/medical-form/medical-form.component';
 import { MedicalCompleteComponent } from './medical/medical-complete/medical-complete.component';
+import { MedicalDashboradComponent } from './medical/medical-dashborad/medical-dashborad.component';
+import { AthleteListComponent } from './medical/athlete-list/athlete-list.component';
 
 
 
@@ -60,7 +62,9 @@ import { MedicalCompleteComponent } from './medical/medical-complete/medical-com
     AthleteParentComponent,
     MedicalInformationComponent,
     MedicalFormComponent,
-    MedicalCompleteComponent
+    MedicalCompleteComponent,
+    MedicalDashboradComponent,
+    AthleteListComponent
   ],
   imports: [
     BrowserModule,

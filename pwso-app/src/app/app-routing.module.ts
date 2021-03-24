@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegistrationComponent } from './sports/registration/registration.component';
 import { PendingChangesGuard } from './services/pending-changes.guard';
 import { MedicalAddComponent } from './medical/medical-add/medical-add.component';
+import { MedicalDashboradComponent } from './medical/medical-dashborad/medical-dashborad.component';
 
 // const routes: Routes = [];
 
@@ -16,19 +17,12 @@ export const routes = [
     icon: 'k-i-wrench',
     canDeactivate: [PendingChangesGuard] },
   { path: 'medical',
-    component: MedicalAddComponent,
+    component: MedicalDashboradComponent,
     text: 'Medical',
-    icon: 'k-i-wrench',
-    canDeactivate: [PendingChangesGuard] },
-  // { path: 'nursery', component: NurseryReviewComponent, text: 'Nursery', icon: 'k-i-preview' },
-  // { path: 'usher', component: UsherReviewComponent, text: 'Usher', icon: 'k-i-gears' },
-  // {
-  //   path: 'products',
-  //   loadChildren: () =>
-  //     import('./products/products.module').then((m) => m.ProductsModule),
-  // },
-  // { path: 'discounts', component: DiscountComponent },
-  // { path: '**', component: NotFoundComponent },
+    icon: 'k-i-myspace',
+    // canDeactivate: [PendingChangesGuard]
+  },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
