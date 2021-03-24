@@ -1,10 +1,14 @@
 <p>medical-dashborad works!</p>
 <div class="example-wrap">
   <form class="k-form" [formGroup]="medicalDashboardForm">
-    <div>
+    <div class="k-form-buttons" >
+      <button class="k-button k-primary" [disabled]="!canAdd"  (click)="clickAdd()">Add</button>
+      <button class="k-button" [disabled]="!canCancel"  (click)="clickCancel()">Cancel</button>
+    </div>
+    <div *ngIf=displayList>
       <app-athlete-list></app-athlete-list>
     </div>
-    <div>
+    <div *ngIf=!displayList>
       <app-medical-add></app-medical-add>
     </div>
   </form>
