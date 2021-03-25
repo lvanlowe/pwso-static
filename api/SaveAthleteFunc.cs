@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using pwsoProcesses.Models;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace api
@@ -44,30 +45,4 @@ namespace api
         }
     }
 
-    public class AthleteDb
-    { 
-        public string id { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string middleName { get; set; }
-        public DateTime birthDate { get; set; }
-        public string gender { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public string street { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public string zipCode { get; set; }
-        public string parentName { get; set; }
-        public string relationship { get; set; }
-        public string parentStreet { get; set; }
-        public string parentCity { get; set; }
-        public string parentState { get; set; }
-        public string parentZipCode { get; set; }
-        public string parentPhone { get; set; }
-        public string parentEmail { get; set; }
-        public DateTime medicalDate { get; set; }
-        public DateTime medicalExpirationDate { get; set; }
-        public string medicalFormId { get; set; }
-    }
 }
