@@ -13,6 +13,10 @@ export const { initialState, selectors} = buildState(Athlete);
 export const {
   selectIsSaving: savingAthlete,
   selectCurrentEntity: currentAthlete,
+  selectAll: allAthletes,
+  selectLoadedAt: loadedAthlete,
+  selectIsLoading: loadingAthlete,
+  selectSavedAt: savedAthlete,
 } = selectors;
 
 export function athleteReducer(state = initialState): IEntityState<Athlete> {

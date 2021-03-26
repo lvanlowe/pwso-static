@@ -20,18 +20,29 @@ export class AthleteService implements IAutoEntityService<Athlete> {
   //   );
   // }
 
-  // loadAll(entityInfo: IEntityInfo): Observable<Sport[]> {
-  //   return this.http.get<Sport[]>(
-  //     `http://localhost:7071/api/sports`
-  //   );
-  // }
+  loadAll(entityInfo: IEntityInfo): Observable<Athlete[]> {
+    return this.http.get<Athlete[]>(
+
+    // ********* for testing
+    //
+    `http://localhost:7071/api/GetAthleteFunc`
+    //
+    // **********
+    // ********* for production
+    //
+    // `api/GetAthleteFunc`
+    //
+    // **********
+
+    );
+  }
 
   create(entityInfo: IEntityInfo, entity: Athlete): Observable<Athlete> {
     return this.http.post<Athlete>(
 
     // ********* for testing
     //
-    `http://localhost:7071/api/athletes`,
+    `http://localhost:7071/api/SaveAthleteFunc`,
     entity
     //
     // **********
