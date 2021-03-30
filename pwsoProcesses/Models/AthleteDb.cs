@@ -21,6 +21,7 @@ namespace pwsoProcesses.Models
         public DateTime medicalDate { get; set; }
         public DateTime medicalExpirationDate { get; set; }
         public string medicalFormId { get; set; }
+        public string medicalFormEndDate => medicalExpirationDate.ToShortDateString();
         public List<AthleteParentDb> parentInformation { get; set; }
     }
 }
