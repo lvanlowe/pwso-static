@@ -47,6 +47,8 @@ import { MedicalFormComponent } from './medical/medical-form/medical-form.compon
 import { MedicalCompleteComponent } from './medical/medical-complete/medical-complete.component';
 import { MedicalDashboradComponent } from './medical/medical-dashborad/medical-dashborad.component';
 import { AthleteListComponent } from './medical/athlete-list/athlete-list.component';
+import { GridModule } from '@progress/kendo-angular-grid';
+
 
 
 
@@ -89,6 +91,7 @@ import { AthleteListComponent } from './medical/athlete-list/athlete-list.compon
     DateInputsModule,
     DialogsModule,
     UploadModule,
+    GridModule,
   ],
   providers: [
     { provide: Sport, useClass: SportService },

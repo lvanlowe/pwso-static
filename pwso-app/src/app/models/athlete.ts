@@ -17,6 +17,7 @@ export class Athlete {
   medicalDate?: Date;
   medicalExpirationDate?: Date;
   medicalFormId?: string;
+  medicalFormEndDate?: string;
 }
 
 export class AthleteParent {
