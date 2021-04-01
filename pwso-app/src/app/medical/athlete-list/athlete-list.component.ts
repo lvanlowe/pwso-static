@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { LoadAll } from '@briebug/ngrx-auto-entity';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { LoadAll, SelectByKey } from '@briebug/ngrx-auto-entity';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Athlete } from 'src/app/models/athlete';
@@ -13,6 +13,7 @@ import { allAthletes, loadedAthlete, loadingAthlete } from 'src/app/state/athlet
 })
 export class AthleteListComponent implements OnInit {
 
+  @Output() editAthleteItem = new EventEmitter();
   isLoadingAthlete: boolean;
   view: Observable<Athlete[]>;
 
@@ -30,6 +31,11 @@ export class AthleteListComponent implements OnInit {
         this.isLoadingAthlete = loading;
         this.view = this.store.pipe(select(allAthletes));
       });
+  }
+
+  editHandler({sender, rowIndex, dataItem}){
+    this.store.dispatch(new SelectByKey(Athlete, dataItem.id ));
+    this.editAthleteItem.emit(dataItem.id);
   }
 
 }

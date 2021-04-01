@@ -5,11 +5,11 @@
       <button class="k-button k-primary" [disabled]="!canAdd"  (click)="clickAdd()">Add</button>
       <button class="k-button" [disabled]="!canCancel"  (click)="clickCancel()">Cancel</button>
     </div>
-    <div *ngIf=displayList>
-      <app-athlete-list></app-athlete-list>
+    <div *ngIf='medicalScreen === 1'>
+      <app-athlete-list (editAthleteItem) = 'showAthlete($event)'></app-athlete-list>
     </div>
-    <div *ngIf=!displayList>
-      <app-medical-add></app-medical-add>
+    <div *ngIf='medicalScreen === 2'>
+      <app-medical-add ></app-medical-add>
     </div>
   </form>
 </div>
