@@ -30,18 +30,21 @@ namespace api
                 PropertyNameCaseInsensitive = true,
             };
             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var athleteDb = JsonSerializer.Deserialize<AthleteDb>(requestBody, options);
+            var athlete = JsonSerializer.Deserialize<AthleteDb>(requestBody, options);
             try
             {
-                athleteDb.id = Guid.NewGuid().ToString();
-                await athleteDocuments.AddAsync(athleteDb);
+                if (athlete.id == null)
+                {
+                    athlete.id = Guid.NewGuid().ToString();
+                }
+                await athleteDocuments.AddAsync(athlete);
             }
             catch (Exception e)
             {
                 log.LogInformation(e.ToString());
             }
 
-            return new OkObjectResult(athleteDb);
+            return new OkObjectResult(athlete);
         }
     }
 

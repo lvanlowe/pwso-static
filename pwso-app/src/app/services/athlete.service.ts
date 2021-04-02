@@ -55,12 +55,23 @@ export class AthleteService implements IAutoEntityService<Athlete> {
     );
   }
 
-  // update(entityInfo: IEntityInfo, entity: any): Observable<any> {
-  //   return this.http.patch<any>(
-  //     `${environment.rootUrl}/${entityInfo.modelName}/${entity.id}`,
-  //      entity
-  //   );
-  // }
+  update(entityInfo: IEntityInfo, entity: Athlete): Observable<Athlete> {
+    return this.http.post<Athlete>(
+
+    // ********* for testing
+    //
+    `http://localhost:7071/api/SaveAthleteFunc`,
+    entity
+    //
+    // **********
+        // ********* for production
+    //
+    // `/api/athletes`, entity
+    //
+    // **********
+
+    );
+  }
 
   // delete(entityInfo: IEntityInfo, entity: any): Observable<any> {
   //   return this.http.delete<any>(

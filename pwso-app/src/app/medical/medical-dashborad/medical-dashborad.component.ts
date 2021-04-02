@@ -53,6 +53,6 @@ export class MedicalDashboradComponent implements OnInit {
     this.displayList = false;
     this.canAdd = false;
     this.athleteid = id;
-    this.medicalScreen = MedicalParts.Add
+    this.medicalScreen = MedicalParts.EditAthlete
   }
 }

@@ -1,6 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Update } from '@briebug/ngrx-auto-entity';
+import { select, Store } from '@ngrx/store';
 import { Athlete } from 'src/app/models/athlete';
+import { AppState } from 'src/app/state/app.state';
+import { currentAthlete } from 'src/app/state/athlete.state';
 
 @Component({
   selector: 'app-athlete-information',
@@ -10,16 +14,26 @@ import { Athlete } from 'src/app/models/athlete';
 export class AthleteInformationComponent implements OnInit {
   @Output() informationEntered = new EventEmitter();
 
+  @Input() isAdd: boolean;
+
   enableNext: boolean;
   public mask = '(000) 000-0000';
   public zipmask = '00000';
+  action: string;
   athleteInformationForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
   ngOnInit() {
     this.buildAthleteInformationForm(this.formBuilder);
     this.athleteInformationForm.markAsPristine();
     this.athleteInformationForm.valueChanges.subscribe(() => {this.enableNextButton(); } );
+    if (this.isAdd) {
+      this.action = 'Next';
+    }
+    else {
+      this.action = 'Save';
+      this.fillInForm();
+    }
   }
 
   buildAthleteInformationForm(formBuilder: FormBuilder) {
@@ -41,6 +55,17 @@ export class AthleteInformationComponent implements OnInit {
     this.athleteInformationForm.controls.state.setValue('VA');
   }
 
+  fillInForm() {
+    let athlete = new Athlete
+    const athlete$ = this.store.pipe(select(currentAthlete));
+    athlete$.subscribe(results => { athlete = results; });
+    this.athleteInformationForm.patchValue(athlete);
+    if (athlete.birthDate !== null) {
+      this.athleteInformationForm.controls.birthDate.setValue(new Date(athlete.birthDate))
+    }
+    this.enableNext = false;
+  }
+
   enableNextButton() {
     if (this.athleteInformationForm.valid && !this.athleteInformationForm.errors) {
       this.enableNext = true;
@@ -53,6 +78,13 @@ export class AthleteInformationComponent implements OnInit {
     const athlete: Athlete = {
       ...this.athleteInformationForm.value
     };
-    this.informationEntered.emit(athlete);
+    if (this.isAdd) {
+      this.informationEntered.emit(athlete);
+    }
+    else {
+      this.store.dispatch(new Update(Athlete, athlete));
+      this.enableNext = false;
+    }
+
   }
 }
