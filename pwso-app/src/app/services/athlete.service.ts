@@ -25,12 +25,12 @@ export class AthleteService implements IAutoEntityService<Athlete> {
 
     // ********* for testing
     //
-    `http://localhost:7071/api/GetAthleteFunc`
+    `http://localhost:7071/api/GetAthletesFunc`
     //
     // **********
     // ********* for production
     //
-    // `api/GetAthleteFunc`
+    // `api/GetAthletesFunc`
     //
     // **********
 
