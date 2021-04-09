@@ -23,18 +23,20 @@ namespace api
         [OpenApiParameter(name: "name", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", 
+                Route = "athletes/{partitionKey}/{id}")] HttpRequest req,
             [CosmosDB(
                 databaseName: "pwso",
                 collectionName: "athlete",
-                SqlQuery = "SELECT * FROM athlete",
-                ConnectionStringSetting = "CosmosDBConnection")]IEnumerable<AthleteDb> athleteDocuments,
+                ConnectionStringSetting = "CosmosDBConnection",
+                Id = "{id}",
+                PartitionKey = "{partitionKey}")]AthleteDb athleteDocument,
 
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            return new OkObjectResult(athleteDocuments);
+            return new OkObjectResult(athleteDocument);
         }
     }
 }
