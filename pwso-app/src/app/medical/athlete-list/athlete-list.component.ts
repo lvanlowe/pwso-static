@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LoadAll, SelectByKey } from '@briebug/ngrx-auto-entity';
+import { Load, LoadAll, SelectByKey } from '@briebug/ngrx-auto-entity';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Athlete } from 'src/app/models/athlete';
@@ -34,7 +34,7 @@ export class AthleteListComponent implements OnInit {
   }
 
   editHandler({sender, rowIndex, dataItem}){
-    this.store.dispatch(new SelectByKey(Athlete, dataItem.id ));
+    this.store.dispatch(new Load(Athlete, dataItem.id, dataItem.lastName));
     this.editAthleteItem.emit(dataItem.id);
   }
 

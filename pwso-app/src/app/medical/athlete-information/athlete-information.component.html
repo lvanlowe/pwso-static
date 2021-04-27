@@ -1,6 +1,8 @@
 <form class="k-form" [formGroup]="athleteInformationForm">
+
   <fieldset class="k-form-fieldset">
     <legend class="k-form-legend">Enter Athlete Information</legend>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoadingAthlete"></mat-progress-bar>
     <div class="wrap">
       <kendo-formfield>
         <kendo-label [for]="firstName" text="First Name"></kendo-label>
@@ -24,7 +26,7 @@
     <div class="wrap">
       <kendo-formfield>
         <kendo-label [for]="birthDate" text="Date of Birth"></kendo-label>
-        <kendo-datepicker formControlName="birthDate" #birthDate required></kendo-datepicker>
+        <kendo-datepicker formControlName="birthDte" #birthDate required></kendo-datepicker>
         <kendo-formhint> date of birth</kendo-formhint>
         <kendo-formerror>Error: Date of birth is required</kendo-formerror>
       </kendo-formfield>

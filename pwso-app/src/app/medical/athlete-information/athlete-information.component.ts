@@ -4,7 +4,7 @@ import { Update } from '@briebug/ngrx-auto-entity';
 import { select, Store } from '@ngrx/store';
 import { Athlete } from 'src/app/models/athlete';
 import { AppState } from 'src/app/state/app.state';
-import { currentAthlete } from 'src/app/state/athlete.state';
+import { currentAthlete, loadingAthlete } from 'src/app/state/athlete.state';
 
 @Component({
   selector: 'app-athlete-information',
@@ -21,9 +21,11 @@ export class AthleteInformationComponent implements OnInit {
   public zipmask = '00000';
   action: string;
   athleteInformationForm: FormGroup;
+  isLoadingAthlete: boolean;
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
   ngOnInit() {
+    this.isLoadingAthlete = false;
     this.buildAthleteInformationForm(this.formBuilder);
     this.athleteInformationForm.markAsPristine();
     this.athleteInformationForm.valueChanges.subscribe(() => {this.enableNextButton(); } );
@@ -32,7 +34,16 @@ export class AthleteInformationComponent implements OnInit {
     }
     else {
       this.action = 'Save';
-      this.fillInForm();
+      this.store.pipe(select(loadingAthlete))
+      .subscribe(async loading => {
+        this.isLoadingAthlete = loading;
+        console.log(this.isLoadingAthlete)
+        if (!loading) {
+          await this.delay(10);
+          this.fillInForm();
+        }
+      });
+
     }
   }
 
@@ -42,7 +53,7 @@ export class AthleteInformationComponent implements OnInit {
         firstName: new FormControl('', Validators.required),
         lastName: new FormControl('', Validators.required),
         middleName: new FormControl(),
-        birthDate: new FormControl('', Validators.required),
+        birthDte: new FormControl('', Validators.required),
         email: new FormControl('', [Validators.email, Validators.required]),
         gender: new FormControl('', Validators.required),
         street: new FormControl('', Validators.required),
@@ -59,10 +70,14 @@ export class AthleteInformationComponent implements OnInit {
     let athlete = new Athlete
     const athlete$ = this.store.pipe(select(currentAthlete));
     athlete$.subscribe(results => { athlete = results; });
-    this.athleteInformationForm.patchValue(athlete);
-    if (athlete.birthDate !== null) {
-      this.athleteInformationForm.controls.birthDate.setValue(new Date(athlete.birthDate))
+    console.log(athlete)
+    if (athlete) {
+      this.athleteInformationForm.patchValue(athlete);
+      if (athlete.birthDate !== null) {
+        this.athleteInformationForm.controls.birthDte.setValue(new Date(athlete.birthDate))
+      }
     }
+
     this.enableNext = false;
   }
 
@@ -87,4 +102,10 @@ export class AthleteInformationComponent implements OnInit {
     }
 
   }
+
+  delay(ms: number) {
+      return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+
 }

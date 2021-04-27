@@ -14,13 +14,27 @@ export class AthleteService implements IAutoEntityService<Athlete> {
   constructor(private http: HttpClient) {
   }
 
-  // load(entityInfo: IEntityInfo, id: any): Observable<any> {
-  //   return this.http.get<any>(
-  //     `${environment.rootUrl}/${entityInfo.modelName}/${id}`
-  //   );
-  // }
+
+  load(entityInfo: IEntityInfo, id: string, criteria?: string): Observable<Athlete> {
+    return this.http.get<Athlete>(
+    // ********* for testing
+    //
+    `http://localhost:7071/api/${entityInfo.modelName}/${criteria}/${id}`
+    //
+    // **********
+    // ********* for production
+    //
+    // `api/GetAthletesFunc/${entityInfo.uriName}/${criteria}/${id}`
+    //
+    // **********
+
+      // `http://localhost:7071/api//GetAthletesFunc/${entityInfo.uriName}/${criteria}/${id}`
+
+    );
+  }
 
   loadAll(entityInfo: IEntityInfo): Observable<Athlete[]> {
+    console.log(entityInfo.modelName);
     return this.http.get<Athlete[]>(
 
     // ********* for testing
@@ -35,6 +49,7 @@ export class AthleteService implements IAutoEntityService<Athlete> {
     // **********
 
     );
+
   }
 
   create(entityInfo: IEntityInfo, entity: Athlete): Observable<Athlete> {

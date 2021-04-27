@@ -1,5 +1,5 @@
 // tslint:disable-next-line: max-line-length
-import { buildState, IEntityState, ofEntityType, EntityActionTypes, CreateSuccess, SelectByKey, CreateFailure } from '@briebug/ngrx-auto-entity';
+import { buildState, IEntityState, ofEntityType, EntityActionTypes, CreateSuccess, SelectByKey, CreateFailure, LoadSuccess } from '@briebug/ngrx-auto-entity';
 import { Action, Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -47,6 +47,17 @@ export class AthleteEffects {
         ofEntityType(Athlete, EntityActionTypes.CreateFailure),
         tap((failure: CreateFailure<Athlete>) => {
           alert('ERROR: A fatal error has occured, try again later')
+        })
+      ),
+    { dispatch: false }
+  );
+
+  athleteLoadSuccess$: Observable<Action> = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofEntityType(Athlete, EntityActionTypes.LoadSuccess),
+        tap((success: LoadSuccess<Athlete>) => {
+          this.store.dispatch(new SelectByKey(Athlete, success.entity.id ));
         })
       ),
     { dispatch: false }
