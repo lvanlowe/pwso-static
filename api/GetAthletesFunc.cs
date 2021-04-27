@@ -27,8 +27,8 @@ namespace api
             [CosmosDB(
                 databaseName: "pwso",
                 collectionName: "athlete",
-                SqlQuery = "SELECT * FROM athlete",
-                ConnectionStringSetting = "CosmosDBConnection")]IEnumerable<AthleteDb> athleteDocuments,
+                SqlQuery = "SELECT a.firstName, a.lastName, a.gender, a.medicalExpirationDate FROM athlete a",
+                ConnectionStringSetting = "CosmosDBConnection")]IEnumerable<AthleteSearchResultsDb> athleteDocuments,
 
             ILogger log)
         {
