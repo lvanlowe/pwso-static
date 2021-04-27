@@ -24,7 +24,7 @@ namespace api
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", 
-                Route = "athletes/{partitionKey}/{id}")] HttpRequest req,
+                Route = "athlete/{partitionKey}/{id}")] HttpRequest req,
             [CosmosDB(
                 databaseName: "pwso",
                 collectionName: "athlete",
