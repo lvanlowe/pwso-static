@@ -14,6 +14,7 @@ import { allAthletes, loadedAthlete, loadingAthlete } from 'src/app/state/athlet
 export class AthleteListComponent implements OnInit {
 
   @Output() editAthleteItem = new EventEmitter();
+  @Output() editParentItem = new EventEmitter();
   isLoadingAthlete: boolean;
   view: Observable<Athlete[]>;
 
@@ -38,4 +39,8 @@ export class AthleteListComponent implements OnInit {
     this.editAthleteItem.emit(dataItem.id);
   }
 
+  removeHandler({sender, rowIndex, dataItem}){
+    this.store.dispatch(new Load(Athlete, dataItem.id, dataItem.lastName));
+    this.editParentItem.emit(dataItem.id);
+  }
 }

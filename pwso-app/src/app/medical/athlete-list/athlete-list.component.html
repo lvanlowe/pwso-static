@@ -4,6 +4,7 @@
   [data]="view | async"
   [height]="410"
   (edit)="editHandler($event)"
+  (remove)="removeHandler($event)"
   >
   <kendo-grid-column field="firstName" title="First Name" width="100">
   </kendo-grid-column>

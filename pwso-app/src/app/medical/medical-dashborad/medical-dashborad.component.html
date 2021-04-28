@@ -6,13 +6,16 @@
       <button class="k-button" [disabled]="!canCancel"  (click)="clickCancel()">Cancel</button>
     </div>
     <div *ngIf='medicalScreen === 1'>
-      <app-athlete-list (editAthleteItem) = 'showAthlete($event)'></app-athlete-list>
+      <app-athlete-list (editAthleteItem) = 'showAthlete($event)' (editParentItem) = 'showParent($event)'></app-athlete-list>
     </div>
     <div *ngIf='medicalScreen === 2'>
       <app-medical-add ></app-medical-add>
     </div>
     <div *ngIf='medicalScreen === 3'>
       <app-athlete-information></app-athlete-information>
+    </div>
+    <div *ngIf='medicalScreen === 4'>
+      <app-athlete-parent></app-athlete-parent>
     </div>
   </form>
 </div>

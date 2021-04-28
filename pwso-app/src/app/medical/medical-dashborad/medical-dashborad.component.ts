@@ -55,4 +55,12 @@ export class MedicalDashboradComponent implements OnInit {
     this.athleteid = id;
     this.medicalScreen = MedicalParts.EditAthlete
   }
+
+  showParent(id: string){
+    this.canCancel = true;
+    this.displayList = false;
+    this.canAdd = false;
+    this.athleteid = id;
+    this.medicalScreen = MedicalParts.EditParent;
+  }
 }
