@@ -1,6 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Update } from '@briebug/ngrx-auto-entity';
+import { select, Store } from '@ngrx/store';
 import { Athlete, AthleteParent } from 'src/app/models/athlete';
+import { AppState } from 'src/app/state/app.state';
+import { currentAthlete, loadingAthlete } from 'src/app/state/athlete.state';
 
 @Component({
   selector: 'app-athlete-parent',
@@ -11,15 +15,38 @@ export class AthleteParentComponent implements OnInit {
 
   @Output() informationEntered = new EventEmitter();
 
+  @Input() isAdd: boolean;
+
   enableNext: boolean;
   public mask = '(000) 000-0000';
+  action: string;
   athleteParentForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
+  isLoadingAthlete: boolean;
+  currentAthlete: Athlete;
+
+  constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
   ngOnInit() {
+    this.isLoadingAthlete = false;
     this.buildAthleteParentForm(this.formBuilder);
     this.athleteParentForm.markAsPristine();
     this.athleteParentForm.valueChanges.subscribe(() => {this.enableNextButton(); } );
+    if (this.isAdd) {
+      this.action = 'Next';
+    }
+    else {
+      this.action = 'Save';
+      this.store.pipe(select(loadingAthlete))
+      .subscribe(async loading => {
+        this.isLoadingAthlete = loading;
+        console.log(this.isLoadingAthlete)
+        if (!loading) {
+          await this.delay(10);
+          this.fillInForm();
+        }
+      });
+
+    }
   }
 
   buildAthleteParentForm(formBuilder: FormBuilder) {
@@ -37,6 +64,17 @@ export class AthleteParentComponent implements OnInit {
     );
   }
 
+  fillInForm() {
+    const athlete$ = this.store.pipe(select(currentAthlete));
+    athlete$.subscribe(results => { this.currentAthlete = results; });
+    console.log(this.currentAthlete)
+    if (this.currentAthlete.parentInformation[0]) {
+      this.athleteParentForm.patchValue(this.currentAthlete.parentInformation[0]);
+    }
+
+    this.enableNext = false;
+  }
+
   enableNextButton() {
     if (this.athleteParentForm.valid && !this.athleteParentForm.errors) {
       this.enableNext = true;
@@ -44,10 +82,21 @@ export class AthleteParentComponent implements OnInit {
       this.enableNext = false;
     }
   }
+
   nextStep() {
     const athlete: AthleteParent = {
       ...this.athleteParentForm.value
     };
-    this.informationEntered.emit(athlete);
+    if (this.isAdd) {
+      this.informationEntered.emit(athlete);
+    }
+    else {
+      this.store.dispatch(new Update(Athlete, this.currentAthlete));
+      this.enableNext = false;
+    }
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }
