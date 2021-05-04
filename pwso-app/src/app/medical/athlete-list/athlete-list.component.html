@@ -3,8 +3,6 @@
 <kendo-grid
   [data]="view | async"
   [height]="410"
-  (edit)="editHandler($event)"
-  (remove)="removeHandler($event)"
   >
   <kendo-grid-column field="firstName" title="First Name" width="100">
   </kendo-grid-column>
@@ -15,10 +13,10 @@
   <kendo-grid-column field="medicalFormEndDate" title="Renewal Date" width="75" >
   </kendo-grid-column>
   <kendo-grid-command-column title="command" width="150" >
-    <ng-template kendoGridCellTemplate let-isNew="isNew">
-        <button kendoGridEditCommand>Athlete</button>
-        <button kendoGridRemoveCommand>Parent</button>
-        <button kendoGridAddCommand>Form</button>
+    <ng-template kendoGridCellTemplate let-dataItem>
+        <button type="button" class="k-button" (click)="showAthleteScreen(dataItem)">Athlete</button>
+        <button type="button" class="k-button" (click)="showParentScreen(dataItem)">Parent</button>
+        <button type="button" class="k-button" (click)="showFormScreen(dataItem)">Form</button>
     </ng-template>
   </kendo-grid-command-column>
 </kendo-grid>

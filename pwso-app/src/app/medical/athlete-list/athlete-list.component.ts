@@ -15,6 +15,7 @@ export class AthleteListComponent implements OnInit {
 
   @Output() editAthleteItem = new EventEmitter();
   @Output() editParentItem = new EventEmitter();
+  @Output() editFormItem = new EventEmitter();
   isLoadingAthlete: boolean;
   view: Observable<Athlete[]>;
 
@@ -34,13 +35,19 @@ export class AthleteListComponent implements OnInit {
       });
   }
 
-  editHandler({sender, rowIndex, dataItem}){
+  showAthleteScreen(dataItem){
     this.store.dispatch(new Load(Athlete, dataItem.id, dataItem.lastName));
     this.editAthleteItem.emit(dataItem.id);
   }
 
-  removeHandler({sender, rowIndex, dataItem}){
+  showParentScreen(dataItem){
     this.store.dispatch(new Load(Athlete, dataItem.id, dataItem.lastName));
     this.editParentItem.emit(dataItem.id);
+  }
+
+  showFormScreen(dataItem){
+    console.log(dataItem);
+    this.store.dispatch(new Load(Athlete, dataItem.id, dataItem.lastName));
+    this.editFormItem.emit(dataItem.id);
   }
 }
