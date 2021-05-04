@@ -13,7 +13,7 @@
           <app-athlete-parent (informationEntered) = 'showFormDates($event)' isAdd=true></app-athlete-parent>
         </div>
         <div *ngIf="current == 2">
-          <app-medical-information (informationEntered) = 'showFormUpload($event)'></app-medical-information>
+          <app-medical-information (informationEntered) = 'showFormUpload($event)' isAdd=true></app-medical-information>
         </div>
         <div *ngIf="current == 3">
           <app-medical-form (informationEntered) = 'showFormUpload($event)'></app-medical-form>
