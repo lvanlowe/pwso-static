@@ -22,6 +22,7 @@ export class AthleteInformationComponent implements OnInit {
   action: string;
   athleteInformationForm: FormGroup;
   isLoadingAthlete: boolean;
+  currentAthlete: Athlete;
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
   ngOnInit() {
@@ -67,14 +68,13 @@ export class AthleteInformationComponent implements OnInit {
   }
 
   fillInForm() {
-    let athlete = new Athlete
     const athlete$ = this.store.pipe(select(currentAthlete));
-    athlete$.subscribe(results => { athlete = results; });
-    console.log(athlete)
-    if (athlete) {
-      this.athleteInformationForm.patchValue(athlete);
-      if (athlete.birthDate !== null) {
-        this.athleteInformationForm.controls.birthDte.setValue(new Date(athlete.birthDate))
+    athlete$.subscribe(results => { this.currentAthlete = results; });
+    console.log(this.currentAthlete)
+    if (this.currentAthlete) {
+      this.athleteInformationForm.patchValue(this.currentAthlete);
+      if (this.currentAthlete.birthDate !== null) {
+        this.athleteInformationForm.controls.birthDte.setValue(new Date(this.currentAthlete.birthDate))
       }
     }
 
@@ -91,6 +91,7 @@ export class AthleteInformationComponent implements OnInit {
 
   nextStep() {
     const athlete: Athlete = {
+      ...this.currentAthlete,
       ...this.athleteInformationForm.value
     };
     if (this.isAdd) {
