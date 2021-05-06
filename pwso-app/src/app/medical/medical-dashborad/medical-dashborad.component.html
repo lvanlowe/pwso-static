@@ -12,7 +12,7 @@
       <app-medical-add ></app-medical-add>
     </div>
     <div *ngIf='medicalScreen === 3'>
-      <app-athlete-information></app-athlete-information>
+      <app-athlete-information (informationSaved) = 'showList($event)'></app-athlete-information>
     </div>
     <div *ngIf='medicalScreen === 4'>
       <app-athlete-parent></app-athlete-parent>

@@ -71,4 +71,11 @@ export class MedicalDashboradComponent implements OnInit {
     this.athleteid = id;
     this.medicalScreen = MedicalParts.UpdateForm;
   }
+
+  showList(id: string){
+    this.canCancel = false;
+    this.displayList = true;
+    this.canAdd = true;
+    this.medicalScreen = MedicalParts.List;
+  }
 }

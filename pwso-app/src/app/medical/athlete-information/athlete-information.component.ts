@@ -13,6 +13,8 @@ import { currentAthlete, loadingAthlete } from 'src/app/state/athlete.state';
 })
 export class AthleteInformationComponent implements OnInit {
   @Output() informationEntered = new EventEmitter();
+  @Output() informationSaved = new EventEmitter();
+
 
   @Input() isAdd: boolean;
 
@@ -100,6 +102,7 @@ export class AthleteInformationComponent implements OnInit {
     else {
       this.store.dispatch(new Update(Athlete, athlete));
       this.enableNext = false;
+      this.informationSaved.emit();
     }
 
   }
