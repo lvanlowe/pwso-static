@@ -76,6 +76,7 @@ export class AthleteParentComponent implements OnInit {
   }
 
   enableNextButton() {
+    this.noErrorFound();
     if (this.athleteParentForm.valid && !this.athleteParentForm.errors) {
       this.enableNext = true;
     } else {
@@ -96,7 +97,22 @@ export class AthleteParentComponent implements OnInit {
     }
   }
 
+  noErrorFound(): boolean {
+    if (this.athleteParentForm.controls.relationship.value) {
+      if (this.athleteParentForm.controls.parentName.value) {
+        return true;
+      }
+      else {
+        this.athleteParentForm.controls.parentName.setErrors({ parentRequired: true });
+        return false;
+      }
+    }
+    return true;
+  }
+
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
+
+
 }
