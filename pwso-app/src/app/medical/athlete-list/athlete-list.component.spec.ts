@@ -4,19 +4,11 @@ import { AthleteListComponent } from './athlete-list.component';
 
 describe('AthleteListComponent', () => {
   let component: AthleteListComponent;
-  let fixture: ComponentFixture<AthleteListComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AthleteListComponent ]
-    })
-    .compileComponents();
-  }));
+  let mockStore
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AthleteListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    mockStore = jasmine.createSpyObj('store', ['dispatch', 'pipe']);
+    component = new AthleteListComponent(mockStore);
   });
 
   it('should create', () => {

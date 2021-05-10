@@ -4,19 +4,13 @@ import { AthleteParentComponent } from './athlete-parent.component';
 
 describe('AthleteParentComponent', () => {
   let component: AthleteParentComponent;
-  let fixture: ComponentFixture<AthleteParentComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AthleteParentComponent ]
-    })
-    .compileComponents();
-  }));
+  let mockFormBuilder;
+  let mockStore
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AthleteParentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    mockFormBuilder = jasmine.createSpyObj('formBuilder', ['group']);
+    mockStore = jasmine.createSpyObj('store', ['dispatch', 'pipe']);
+    component = new AthleteParentComponent(mockFormBuilder, mockStore);
   });
 
   it('should create', () => {

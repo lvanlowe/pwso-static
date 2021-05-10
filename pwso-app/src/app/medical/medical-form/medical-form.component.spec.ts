@@ -4,19 +4,11 @@ import { MedicalFormComponent } from './medical-form.component';
 
 describe('MedicalFormComponent', () => {
   let component: MedicalFormComponent;
-  let fixture: ComponentFixture<MedicalFormComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MedicalFormComponent ]
-    })
-    .compileComponents();
-  }));
+  let mockFormBuilder;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MedicalFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    mockFormBuilder = jasmine.createSpyObj('formBuilder', ['group']);
+    component = new MedicalFormComponent(mockFormBuilder);
   });
 
   it('should create', () => {

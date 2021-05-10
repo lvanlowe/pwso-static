@@ -4,19 +4,14 @@ import { MedicalInformationComponent } from './medical-information.component';
 
 describe('MedicalInformationComponent', () => {
   let component: MedicalInformationComponent;
-  let fixture: ComponentFixture<MedicalInformationComponent>;
+  let mockFormBuilder;
+  let mockStore
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MedicalInformationComponent ]
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MedicalInformationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    mockFormBuilder = jasmine.createSpyObj('formBuilder', ['group']);
+    mockStore = jasmine.createSpyObj('store', ['dispatch', 'pipe']);
+    component = new MedicalInformationComponent(mockFormBuilder, mockStore);
   });
 
   it('should create', () => {
