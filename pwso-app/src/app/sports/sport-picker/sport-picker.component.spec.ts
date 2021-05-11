@@ -7,7 +7,8 @@ import { of } from 'rxjs';
 describe('SportPickerComponent', () => {
   let component: SportPickerComponent;
   let mockFormBuilder;
-  let mockStore;
+  let mockStore
+  let mockRouter
   let selectedSport: Sport;
 
 
@@ -15,11 +16,12 @@ describe('SportPickerComponent', () => {
   beforeEach(() => {
     mockFormBuilder = jasmine.createSpyObj('formBuilder', ['group']);
     mockStore = jasmine.createSpyObj('store', ['dispatch', 'pipe']);
-    component = new SportPickerComponent(mockFormBuilder, mockStore);
+    mockRouter = jasmine.createSpyObj('router', ['dispatch', 'navigate']);
+    component = new SportPickerComponent(mockFormBuilder, mockRouter, mockStore);
     const mockSportName = jasmine.createSpyObj('sportName', ['setValue']);
-    component.sportName = mockSportName;
+    // component.sportName = mockSportName;
     const mockProgramName = jasmine.createSpyObj('programName', ['setValue']);
-    component.programName = mockProgramName;
+    // component.programName = mockProgramName;
   });
 
   it('should create', () => {
@@ -31,6 +33,8 @@ describe('SportPickerComponent', () => {
     beforeEach(() => {
       spyOn(component, 'enableContinueButton').and.returnValue(null);
       spyOn(component, 'getProgramsForSport').and.returnValue(3);
+      spyOn(component, 'setSportControl').and.returnValue(null);
+      spyOn(component, 'setProgramControl').and.returnValue(null);
       selectedSport = {id: 1, canRegister: true, hasUniform: false, isTeamSport: false, name: 'Bowling'};
    });
 
@@ -67,7 +71,9 @@ describe('SportPickerComponent', () => {
       spyOn(component, 'enableContinueButton').and.returnValue(null);
       spyOn(component, 'getProgramsForSport').and.returnValue(1);
       spyOn(component, 'setProgram').and.returnValue(null);
-      component.sportName = mockSportName;
+      spyOn(component, 'setSportControl').and.returnValue(null);
+      spyOn(component, 'setProgramControl').and.returnValue(null);
+      // component.sportName = mockSportName;
       selectedSport = {id: 1, canRegister: true, hasUniform: false, isTeamSport: false, name: 'Bowling'};
       // component.programList = [{id: 1, name: 'Woodbrige', sportid: 4 }]
 
@@ -87,6 +93,7 @@ describe('SportPickerComponent', () => {
     beforeEach(() => {
       component.canContinue = true;
       spyOn(component, 'disableControls').and.returnValue(null);
+      spyOn(component, 'emitValue').and.returnValue(null);
     });
 
     it('should hide contiue button', () => {
@@ -105,7 +112,7 @@ describe('SportPickerComponent', () => {
     it('should disply registration message', () => {
       component.clickContinue();
 
-      expect(component.instruction).toBe('Press "Submit" button to complete registration');
+      expect(component.instruction).toBe('Press "Continue" button to continue registraion');
     });
 
   });
@@ -118,7 +125,8 @@ describe('SportPickerComponent', () => {
       component.showProgram = true;
       component.selectedSport = {id: 1, canRegister: true, hasUniform: false, isTeamSport: false, name: 'Bowling'};
       spyOn(component, 'enableControls').and.returnValue(null);
-
+      spyOn(component, 'setSportControl').and.returnValue(null);
+      spyOn(component, 'setProgramControl').and.returnValue(null);
     });
 
     it('should hide program dropdown', () => {
@@ -176,8 +184,8 @@ describe('SportPickerComponent', () => {
       const mockSportName = jasmine.createSpyObj('sportName', ['setValue']);
       spyOn(component, 'enableContinueButton').and.returnValue(null);
       spyOn(component, 'getProgramsForSport').and.returnValue(1);
-      // spyOn(component, 'setProgram').and.returnValue(null);
-      component.sportName = mockSportName;
+      spyOn(component, 'setProgramControl').and.returnValue(null);
+      // component.sportName = mockSportName;
       selectedSport = {id: 1, canRegister: true, hasUniform: false, isTeamSport: false, name: 'Bowling'};
       component.programList$ = of([{id: 1, name: 'Woodbrige', sportid: 4 }])
 

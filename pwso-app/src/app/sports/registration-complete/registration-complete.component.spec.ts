@@ -4,19 +4,16 @@ import { RegistrationCompleteComponent } from './registration-complete.component
 
 describe('RegistrationCompleteComponent', () => {
   let component: RegistrationCompleteComponent;
-  let fixture: ComponentFixture<RegistrationCompleteComponent>;
+  let mockFormBuilder;
+  let mockStore
+  let mockRouter
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ RegistrationCompleteComponent ]
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegistrationCompleteComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    mockFormBuilder = jasmine.createSpyObj('formBuilder', ['group']);
+    mockStore = jasmine.createSpyObj('store', ['dispatch', 'pipe']);
+    mockRouter = jasmine.createSpyObj('router', ['dispatch', 'navigate']);
+    component = new RegistrationCompleteComponent(mockFormBuilder, mockRouter, mockStore);
   });
 
   it('should create', () => {
