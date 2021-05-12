@@ -98,7 +98,14 @@ export class AthleteParentComponent implements OnInit {
   }
 
   noErrorFound(): boolean {
-    if (this.athleteParentForm.controls.relationship.value) {
+
+    if (this.athleteParentForm.controls.relationship.value ||
+        this.athleteParentForm.controls.parentStreet.value ||
+        this.athleteParentForm.controls.parentCity.value ||
+        this.athleteParentForm.controls.parentState.value ||
+        this.athleteParentForm.controls.parentZipCode.value ||
+        this.athleteParentForm.controls.parentPhone.value ||
+        this.athleteParentForm.controls.parentEmail.value) {
       if (this.athleteParentForm.controls.parentName.value) {
         return true;
       }
@@ -108,6 +115,19 @@ export class AthleteParentComponent implements OnInit {
       }
     }
     return true;
+  }
+
+  parentValidationRequired() {
+    if ((this.athleteParentForm.controls.relationship.value ||
+         this.athleteParentForm.controls.parentStreet.value ||
+         this.athleteParentForm.controls.parentCity.value ||
+         this.athleteParentForm.controls.parentState.value ||
+         this.athleteParentForm.controls.parentZipCode.value ||
+         this.athleteParentForm.controls.parentPhone.value ||
+         this.athleteParentForm.controls.parentEmail.value) &&
+        !this.athleteParentForm.controls.parentName.value) {
+          this.athleteParentForm.controls.parentName.setErrors({ parentRequired: true });
+        }
   }
 
   delay(ms: number) {
