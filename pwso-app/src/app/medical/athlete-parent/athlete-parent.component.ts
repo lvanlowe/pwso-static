@@ -130,6 +130,24 @@ export class AthleteParentComponent implements OnInit {
         }
   }
 
+  addressValidationComplete(){
+    if ((this.athleteParentForm.controls.parentStreet.value &&
+      this.athleteParentForm.controls.parentCity.value &&
+      this.athleteParentForm.controls.parentZipCode.value &&
+      this.athleteParentForm.controls.parentState.value) ||
+      (!this.athleteParentForm.controls.parentStreet.value &&
+        !this.athleteParentForm.controls.parentCity.value &&
+        !this.athleteParentForm.controls.parentZipCode.value &&
+        !this.athleteParentForm.controls.parentState.value)) {
+    } else {
+      this.athleteParentForm.controls.parentStreet.setErrors({ addressComplete: true });
+      this.athleteParentForm.controls.parentCity.setErrors({ addressComplete: true });
+      this.athleteParentForm.controls.parentState.setErrors({ addressComplete: true });
+      this.athleteParentForm.controls.parentZipCode.setErrors({ addressComplete: true });
+    }
+  }
+
+
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }

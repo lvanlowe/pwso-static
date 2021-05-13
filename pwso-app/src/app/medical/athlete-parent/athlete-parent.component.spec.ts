@@ -19,75 +19,152 @@ fdescribe('AthleteParentComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('validate parent name', () => {
+  describe('validate', () => {
 
     beforeEach(() => {
       component.buildAthleteParentForm(formBuilder)
     });
 
-    it('when relationship and no parent then parent required error', () => {
+    describe('parent name', () => {
 
-      component.athleteParentForm.controls.relationship.setValue("mother")
-      component.parentValidationRequired();
+      it('when relationship and no parent then parent required error', () => {
 
-      expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
-    });
+        component.athleteParentForm.controls.relationship.setValue("mother")
+        component.parentValidationRequired();
 
-    it('when street and no parent then parent required error', () => {
+        expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
+      });
 
-      component.athleteParentForm.controls.parentStreet.setValue("123 Main Street")
-      component.parentValidationRequired();
+      it('when street and no parent then parent required error', () => {
 
-      expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
-    });
+        component.athleteParentForm.controls.parentStreet.setValue("123 Main Street")
+        component.parentValidationRequired();
 
-    it('when city and no parent then parent required error', () => {
+        expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
+      });
 
-      component.athleteParentForm.controls.parentCity.setValue("Gotham City")
-      component.parentValidationRequired();
+      it('when city and no parent then parent required error', () => {
 
-      expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
-    });
+        component.athleteParentForm.controls.parentCity.setValue("Gotham City")
+        component.parentValidationRequired();
 
-    it('when state and no parent then parent required error', () => {
+        expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
+      });
 
-      component.athleteParentForm.controls.parentState.setValue("Gotham City")
-      component.parentValidationRequired();
+      it('when state and no parent then parent required error', () => {
 
-      expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
-    });
+        component.athleteParentForm.controls.parentState.setValue("Gotham City")
+        component.parentValidationRequired();
 
-    it('when zip code and no parent then parent required error', () => {
+        expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
+      });
 
-      component.athleteParentForm.controls.parentZipCode.setValue("10456")
-      component.parentValidationRequired();
+      it('when zip code and no parent then parent required error', () => {
 
-      expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
-    });
+        component.athleteParentForm.controls.parentZipCode.setValue("10456")
+        component.parentValidationRequired();
 
-    it('when phone and no parent then parent required error', () => {
+        expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
+      });
 
-      component.athleteParentForm.controls.parentPhone.setValue("2125551212")
-      component.parentValidationRequired();
+      it('when phone and no parent then parent required error', () => {
 
-      expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
-    });
+        component.athleteParentForm.controls.parentPhone.setValue("2125551212")
+        component.parentValidationRequired();
 
-    it('when email and no parent then parent required error', () => {
+        expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
+      });
 
-      component.athleteParentForm.controls.parentEmail.setValue("www@gmail.com")
-      component.parentValidationRequired();
+      it('when email and no parent then parent required error', () => {
 
-      expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
-    });
+        component.athleteParentForm.controls.parentEmail.setValue("www@gmail.com")
+        component.parentValidationRequired();
 
-    it('when relationship and parent then no parent required error', () => {
+        expect(component.athleteParentForm.controls.parentName.errors).toEqual({ parentRequired: true });
+      });
 
-      component.athleteParentForm.controls.relationship.setValue("mother")
-      component.athleteParentForm.controls.parentName.setValue("Lois Lane")
-      component.parentValidationRequired();
+      it('when relationship and parent then no parent required error', () => {
 
-      expect(component.athleteParentForm.controls.parentName.errors).not.toEqual({ parentRequired: true });
-    });
+        component.athleteParentForm.controls.relationship.setValue("mother")
+        component.athleteParentForm.controls.parentName.setValue("Lois Lane")
+        component.parentValidationRequired();
+
+        expect(component.athleteParentForm.controls.parentName.errors).not.toEqual({ parentRequired: true });
+      });
+
+    })
+
+    describe('address', () => {
+      it('when street and no city then street has address complete error', () => {
+
+        component.athleteParentForm.controls.parentStreet.setValue("123 Main Street")
+        component.addressValidationComplete();
+
+        expect(component.athleteParentForm.controls.parentStreet.errors).toEqual({ addressComplete: true });
+      });
+
+      it('when street and no city then city has address complete error', () => {
+
+        component.athleteParentForm.controls.parentStreet.setValue("123 Main Street")
+        component.addressValidationComplete();
+
+        expect(component.athleteParentForm.controls.parentCity.errors).toEqual({ addressComplete: true });
+      });
+
+      it('when street and no state then street has address complete error', () => {
+
+        component.athleteParentForm.controls.parentStreet.setValue("123 Main Street")
+        component.athleteParentForm.controls.parentCity.setValue("Gotham City")
+        component.addressValidationComplete();
+
+        expect(component.athleteParentForm.controls.parentStreet.errors).toEqual({ addressComplete: true });
+      });
+
+      it('when street and no state then state has address complete error', () => {
+
+        component.athleteParentForm.controls.parentStreet.setValue("123 Main Street")
+        component.athleteParentForm.controls.parentCity.setValue("Gotham City")
+        component.addressValidationComplete();
+
+        expect(component.athleteParentForm.controls.parentState.errors).toEqual({ addressComplete: true });
+      });
+
+      it('when street and no zip then zip has address complete error', () => {
+
+        component.athleteParentForm.controls.parentStreet.setValue("123 Main Street")
+        component.athleteParentForm.controls.parentCity.setValue("Gotham City")
+        component.addressValidationComplete();
+
+        expect(component.athleteParentForm.controls.parentZipCode.errors).toEqual({ addressComplete: true });
+      });
+
+      it('when city and no zip then state has address complete error', () => {
+
+        component.athleteParentForm.controls.parentStreet.setValue("123 Main Street")
+        component.athleteParentForm.controls.parentCity.setValue("Gotham City")
+        component.addressValidationComplete();
+
+        expect(component.athleteParentForm.controls.parentState.errors).toEqual({ addressComplete: true });
+      });
+
+      it('when no street and no city then street has no address complete error', () => {
+
+        component.addressValidationComplete();
+
+        expect(component.athleteParentForm.controls.parentStreet.errors).not.toEqual({ addressComplete: true });
+      });
+
+      it('when street and city then street has no address complete error', () => {
+
+        component.athleteParentForm.controls.parentStreet.setValue("123 Main Street")
+        component.athleteParentForm.controls.parentCity.setValue("Gotham City")
+        component.athleteParentForm.controls.parentState.setValue("VA")
+        component.athleteParentForm.controls.parentZipCode.setValue("10456")
+        component.addressValidationComplete();
+
+        expect(component.athleteParentForm.controls.parentStreet.errors).not.toEqual({ addressComplete: true });
+      });
+    })
+
   })
 });
