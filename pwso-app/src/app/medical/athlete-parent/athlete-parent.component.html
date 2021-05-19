@@ -20,6 +20,7 @@
       <kendo-label [for]="parentStreet" text="Street" [optional]="true"></kendo-label>
       <input formControlName="parentStreet" kendoTextBox #parentStreet/>
       <kendo-formhint>street</kendo-formhint>
+      <kendo-formerror *ngIf="athleteParentForm.controls.parentStreet.errors?.addressComplete">Error: street address mudt be complete if entered</kendo-formerror>
     </kendo-formfield>
     <div class="wrap">
       <kendo-formfield>
