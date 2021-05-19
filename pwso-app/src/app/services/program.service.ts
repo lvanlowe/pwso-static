@@ -22,12 +22,13 @@ export class ProgramService implements IAutoEntityService<Program> {
     return this.http.get<Program[]>(
     // ********* for testing
     //
+    `http://localhost:7071/api/GetProgramFunc`
     // `http://localhost:7071/api/programs`
     //
     // **********
     // ********* for production
     //
-    `/api/programs`
+    // `/api/programs`
     //
     // **********
     );

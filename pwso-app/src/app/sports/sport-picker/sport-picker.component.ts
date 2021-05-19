@@ -89,7 +89,7 @@ export class SportPickerComponent implements OnInit {
   }
 
   public selectionSport(value: Sport): void {
-    this.sportPickerForm.controls.sport.setValue(value);
+    this.setSportControl(value);
     this.store.dispatch(new SelectByKey(Sport, value.id ));
     this.programList$  = this.store.pipe(select(availablePrograms));
     this.canCancel = true;
@@ -99,6 +99,10 @@ export class SportPickerComponent implements OnInit {
       this.setProgram();
     }
     this.enableContinueButton();
+  }
+
+  public setSportControl(value: Sport): void {
+    this.sportPickerForm.controls.sport.setValue(value);
   }
 
   public getProgramsForSport(value: number): number {
@@ -118,15 +122,19 @@ export class SportPickerComponent implements OnInit {
   public setProgram(){
     this.programList$.subscribe(programs => {this.selectedProgram = programs[0]});
     this.isWaitlist = this.selectedProgram.isWaitlist;
-    this.sportPickerForm.controls.program.setValue(this.selectedProgram);
+    this.setProgramControl(this.selectedProgram);
     this.store.dispatch(new SelectByKey(Program, this.selectedProgram.id) );
     this.showProgram = false;
+  }
+
+  public setProgramControl(value: Program): void {
+    this.sportPickerForm.controls.program.setValue(value);
   }
 
   public selectionProgram(value: Program): void {
     this.store.dispatch(new SelectByKey(Program, value.id ));
     this.isWaitlist = value.isWaitlist;
-    this.sportPickerForm.controls.program.setValue(value);
+    this.setProgramControl(value);
     this.enableContinueButton();
   }
 
@@ -140,15 +148,18 @@ export class SportPickerComponent implements OnInit {
   }
 
   clickContinue() {
-    console.log(this.sportPickerForm.controls.isAthlete.value);
+    this.emitValue();
+    this.disableControls();
+    this.canContinue = false;
+    this.instruction = 'Press "Continue" button to continue registraion';
+  }
+
+  public emitValue() {
     if (this.sportPickerForm.controls.isAthlete.value) {
       this.sportSelected.emit('A');
     } else {
       this.sportSelected.emit('V');
     }
-    this.disableControls();
-    this.canContinue = false;
-    this.instruction = 'Press "Continue" button to continue registraion';
   }
 
   public disableControls() {
@@ -170,8 +181,8 @@ export class SportPickerComponent implements OnInit {
     this.selectedProgram = null;
     this.canContinue = false;
     this.canCancel = false;
-    this.sportPickerForm.controls.sport.setValue(null);
-    this.sportPickerForm.controls.program.setValue(null);
+    this.setSportControl(null);
+    this.setProgramControl(null);
     this.store.dispatch(new Deselect(Program));
     this.store.dispatch(new Deselect(Sport));
     this.instruction = 'Select a sport for registration';

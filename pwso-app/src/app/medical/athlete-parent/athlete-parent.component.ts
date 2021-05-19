@@ -68,7 +68,7 @@ export class AthleteParentComponent implements OnInit {
     const athlete$ = this.store.pipe(select(currentAthlete));
     athlete$.subscribe(results => { this.currentAthlete = results; });
     console.log(this.currentAthlete)
-    if (this.currentAthlete.parentInformation[0]) {
+    if (this.currentAthlete.parentInformation) {
       this.athleteParentForm.patchValue(this.currentAthlete.parentInformation[0]);
     }
 
@@ -76,7 +76,8 @@ export class AthleteParentComponent implements OnInit {
   }
 
   enableNextButton() {
-    this.noErrorFound();
+    this.parentValidationRequired();
+    this.addressValidationComplete();
     if (this.athleteParentForm.valid && !this.athleteParentForm.errors) {
       this.enableNext = true;
     } else {

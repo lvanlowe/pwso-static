@@ -22,12 +22,13 @@ export class SportService implements IAutoEntityService<Sport> {
     return this.http.get<Sport[]>(
     // ********* for testing
     //
+    `http://localhost:7071/api/GetSportFunc`
     // `http://localhost:7071/api/sports`
     //
     // **********
     // ********* for production
     //
-    `/api/sports`
+    // `/api/sports`
     //
     // **********
     );

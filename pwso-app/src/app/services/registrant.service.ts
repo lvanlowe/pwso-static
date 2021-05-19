@@ -30,13 +30,13 @@ export class RegistrantService implements IAutoEntityService<Registrant> {
 
     // ********* for testing
     //
-    // `http://localhost:7071/api/registrants`,
-    // entity
+    `http://localhost:7071/api/registrants`,
+    entity
     //
     // **********
         // ********* for production
     //
-    `/api/registrants`, entity
+    // `/api/registrants`, entity
     //
     // **********
 
