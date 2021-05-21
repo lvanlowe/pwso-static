@@ -23,6 +23,7 @@ export class AthleteParentComponent implements OnInit {
   athleteParentForm: FormGroup;
   isLoadingAthlete: boolean;
   currentAthlete: Athlete;
+  canAddParent: boolean;
 
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
@@ -31,6 +32,7 @@ export class AthleteParentComponent implements OnInit {
     this.buildAthleteParentForm(this.formBuilder);
     this.athleteParentForm.markAsPristine();
     this.athleteParentForm.valueChanges.subscribe(() => {this.enableNextButton(); } );
+    this.canAddParent = false;
     if (this.isAdd) {
       this.action = 'Next';
     }
@@ -80,9 +82,17 @@ export class AthleteParentComponent implements OnInit {
     this.addressValidationComplete();
     if (this.athleteParentForm.valid && !this.athleteParentForm.errors) {
       this.enableNext = true;
+      this.checkForNewParent()
     } else {
       this.enableNext = false;
     }
+  }
+
+  checkForNewParent() {
+    // if (this.athleteParentForm.controls.parentName.value)
+    // {
+    //   this.canAddParent = true;
+    // }
   }
 
   nextStep() {
@@ -98,25 +108,25 @@ export class AthleteParentComponent implements OnInit {
     }
   }
 
-  noErrorFound(): boolean {
+  // noErrorFound(): boolean {
 
-    if (this.athleteParentForm.controls.relationship.value ||
-        this.athleteParentForm.controls.parentStreet.value ||
-        this.athleteParentForm.controls.parentCity.value ||
-        this.athleteParentForm.controls.parentState.value ||
-        this.athleteParentForm.controls.parentZipCode.value ||
-        this.athleteParentForm.controls.parentPhone.value ||
-        this.athleteParentForm.controls.parentEmail.value) {
-      if (this.athleteParentForm.controls.parentName.value) {
-        return true;
-      }
-      else {
-        this.athleteParentForm.controls.parentName.setErrors({ parentRequired: true });
-        return false;
-      }
-    }
-    return true;
-  }
+  //   if (this.athleteParentForm.controls.relationship.value ||
+  //       this.athleteParentForm.controls.parentStreet.value ||
+  //       this.athleteParentForm.controls.parentCity.value ||
+  //       this.athleteParentForm.controls.parentState.value ||
+  //       this.athleteParentForm.controls.parentZipCode.value ||
+  //       this.athleteParentForm.controls.parentPhone.value ||
+  //       this.athleteParentForm.controls.parentEmail.value) {
+  //     if (this.athleteParentForm.controls.parentName.value) {
+  //       return true;
+  //     }
+  //     else {
+  //       this.athleteParentForm.controls.parentName.setErrors({ parentRequired: true });
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
 
   parentValidationRequired() {
     if ((this.athleteParentForm.controls.relationship.value ||
